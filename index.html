@@ -506,6 +506,9 @@
   #modGecis button{border:none;background:none;padding:3px 12px;border-radius:7px;font-size:13px;color:var(--soluk);display:flex;align-items:center;gap:6px}
   #modGecis button:hover{color:var(--yazi)}
   #modGecis button.secili{background:var(--kart);color:var(--yazi);box-shadow:0 1px 3px var(--golge);font-weight:500}
+  #dlBulutBtn{position:relative;margin-right:6px}
+  #dlBulutBtn i{position:absolute;right:4px;top:4px;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--bg)}
+  body:not(.mod-devlog) #dlBulutBtn{display:none!important}
   #dlBaslik{display:none;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   body.mod-devlog #dlBaslik{display:inline}
   body.mod-devlog #baslik,body.mod-devlog #yan,body.mod-devlog main,body.mod-devlog #panel,
@@ -582,6 +585,11 @@
   /* Sürüm kartı */
   .dl-surum{background:var(--kart);border:1px solid var(--cizgi);border-radius:16px;padding:22px 26px;margin-bottom:16px}
   .dl-surum .ust{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .dl-surum .ok{color:var(--soluk);display:inline-flex;transition:transform .15s;margin-left:-6px}
+  .dl-surum.kapali .ok{transform:rotate(-90deg)}
+  .dl-surum.kapali .icerik{display:none}
+  .dl-surum.kapali{padding-top:16px;padding-bottom:16px}
+  .dl-dc-rozet{background:#5865F222!important;color:#7983f5!important;display:inline-flex;align-items:center;gap:4px}
   .dl-surum .no{font:normal 30px Georgia,serif;color:#D97757}
   .dl-surum .ad{font:normal 20px Georgia,serif}
   .dl-surum .tarih{color:var(--soluk);font-size:13px}
@@ -711,7 +719,8 @@
   .dl-dc .ust a{cursor:pointer;color:#dbdee1}
   .dl-dc .govde{display:flex;align-items:center;gap:14px;padding:4px 18px 14px}
   .dl-dc .ikon{width:52px;height:52px;border-radius:16px;background:#5865F2;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;overflow:hidden;flex-shrink:0}
-  .dl-dc .ikon img{width:100%;height:100%}
+  .dl-dc .ikon.resimli{background:none}
+  .dl-dc .ikon img{width:100%;height:100%;object-fit:cover;display:block}
   .dl-dc .bilgi{flex:1;min-width:0}
   .dl-dc .ad{font-size:19px;font-weight:600;color:#fff}
   .dl-dc .alt{font-size:12.5px;color:#949ba4}
@@ -853,7 +862,8 @@
   </div>
   <div class="ub-orta"><span id="baslik" class="gizle"></span><span id="dlBaslik"></span></div>
   <button class="ikon" id="esitBtn" onclick="esitleDugme()" title="Eşitle"></button>
-  <div class="gizle"><div id="modGecis" title="Ctrl+1 / Ctrl+2">
+  <div class="gizle"><button class="ikon gizle" id="dlBulutBtn" onclick="dlBulutTikla()" oncontextmenu="event.preventDefault();ayarlariAc('dl_bulut')"></button>
+  <div id="modGecis" title="Ctrl+1 / Ctrl+2">
     <button id="modFocus" class="secili" onclick="modGec('focus')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Focus</button>
     <button id="modDevlog" onclick="modGec('devlog')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Devlog</button>
   </div>
@@ -1332,7 +1342,8 @@ const ISLEM={
     const r=duzenle(metin,pr().categories); for(const s of r.sections) kategoriEkle(pr().categories,s.category);
     const veri={version:v,title:title.trim(),date:tarihBul(date)||date.trim(),kind,sections:r.sections,summary:summary.trim()};
     for(const k of ['todos','bugs']) for(const it of pr()[k]) if((bagla||[]).includes(it.id)) it.released_in=v;
-    if(id) guncelle('releases',id,veri); else ekle('releases',veri);
+    if(id){ const e=bul('releases',id); if(e&&!esit([e.title||'',e.summary||'',e.sections||[]],[veri.title,veri.summary,veri.sections])) veri.translations={}; guncelle('releases',id,veri); }
+    else ekle('releases',veri);
   },
   markup:({id})=>durumPaketi({markup:isaretle(bul('releases',id)?.sections||[])}),
   adaylar:({version,id,metin=''})=>{
@@ -1617,11 +1628,27 @@ function dlYanCiz(){
     }
   }
   h+='<div class="dl-grup"></div>'+
-     '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+'Çöp kutusu'+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>'+
-     (DL.s.bulut?.aktif&&DL.s.bulut.token_var?'<div class="nav" onclick="ayarlariAc(\'dl_bulut\')" title="'+dlK(DL.s.bulut.hata||'Son eşitleme: '+(DL.s.bulut.son||'—'))+'">'+
-       '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 7 19Z"/></svg>'+
-       (DL.s.bulut.durum==='hata'?'Eşitlenemedi':'Eşitlendi')+'<span class="dl-bot-nokta" style="background:'+(DL.s.bulut.durum==='hata'?'#F23F43':'#23A55A')+'"></span></div>':'');
+     '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+'Çöp kutusu'+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>';
   $('dlNav').innerHTML=h;
+  dlBulutGoster();
+}
+// Üst çubuktaki bulut simgesi: eşitleme durumu (telefondakiyle aynı). Tıklayınca hemen eşitler.
+let dlBulutDonuyor=false;
+function dlBulutGoster(){
+  const b=$('dlBulutBtn'), u=DL.s?.bulut; if(!b) return;
+  const acik=!!(u&&u.aktif&&u.token_var); b.classList.toggle('gizle',!acik); if(!acik) return;
+  const renk=u.durum==='hata'?'#F23F43':(dlBulutDonuyor||u.durum==='bekliyor')?'#F0B232':'#23A55A';
+  b.innerHTML=(dlBulutDonuyor?'<span class="donen"></span>':'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 0 0 4.5 12.5 3.5 3.5 0 0 0 7 19Z"/></svg>')+
+    '<i style="background:'+renk+'"></i>';
+  b.title=u.durum==='hata'?'Eşitlenemedi: '+u.hata+' (ayarlar için sağ tık)':'Eşitlendi · son: '+(u.son||'—')+(u.bekleyen_gorsel?' · '+u.bekleyen_gorsel+' görsel yükleniyor':'')+'\nTıkla: şimdi eşitle · Sağ tık: ayarlar';
+}
+async function dlBulutTikla(){
+  const u=DL.s?.bulut;
+  if(u?.durum==='hata'){ alertBilgi('Eşitlenemedi: '+u.hata+'\n\nTekrar deneniyor. Sorun sürerse Ayarlar > Devlog > Bulut ve telefon\'a bak.'); }
+  dlBulutDonuyor=true; dlBulutGoster();
+  await dl('bulut_simdi',{},{cizme:true,sessiz:true});
+  setTimeout(async()=>{ await dl('durum',{},{cizme:true,sessiz:true}); dlBulutDonuyor=false; dlBulutGoster();
+    if(DL.s?.bulut?.durum!=='hata') tost('Eşitlendi ✓'); },3500);
 }
 function dlSayfaAc(s,gecmistenMi){
   if(s==='settings'){ ayarlariAc('dl_proje'); return; }
@@ -1910,21 +1937,37 @@ function dlSurumlerCiz(){
   let h=dlBaslik('Sürüm notları','Oyunun her sürümünde neler değişti',sag);
   if(!rs.length) return h+'<div class="dl-bos"><div class="buyuk">Henüz sürüm notu yok</div>“Yeni sürüm”e bas, notlarını karışık yaz; Devlog kategorilere ayırır.<br>Eski notların varsa “İçe aktar” ile hepsini birden ekleyebilirsin.</div>';
   if(DL.surumSec!=='Tümü'&&!rs.some(r=>r.version===DL.surumSec)) DL.surumSec='Tümü';
-  h+='<div class="dl-arac"><select class="dl-secim" onchange="DL.surumSec=this.value;dlSayfaCiz()"><option value="Tümü">Tüm sürümler ('+rs.length+')</option>'+
+  const hepsiAcik=rs.length&&rs.every(r=>dlSurumAcik(r.id,r.id===rs[0].id));
+  h+='<div class="dl-arac">'+(rs.length>1&&DL.surumSec==='Tümü'?'<button class="dl-dugme kucuk" onclick="dlTumSurumler('+(hepsiAcik?'false':'true')+')">'+(hepsiAcik?'Tümünü kapat':'Tümünü aç')+'</button>':'')+
+     '<select class="dl-secim" onchange="DL.surumSec=this.value;dlSayfaCiz()"><option value="Tümü">Tüm sürümler ('+rs.length+')</option>'+
      rs.map(r=>'<option value="'+dlK(r.version)+'"'+(DL.surumSec===r.version?' selected':'')+'>'+dlK(dlV(r.version))+(r.title?' — '+dlK(r.title):'')+'</option>').join('')+'</select></div>';
   for(const orj of rs.filter(r=>DL.surumSec==='Tümü'||r.version===DL.surumSec)){
     const {r,dil,asil}=dlGosterilen(orj), diger=asil==='tr'?'en':'tr';
     const goster=dil||asil;
-    h+='<div class="dl-surum"><div class="ust"><span class="no">'+dlK(dlV(r.version))+'</span><span class="ad">'+dlK(dlSurumBasligi(r,dil))+'</span>'+dlRozet(r.kind)+
+    const acik=DL.surumSec!=='Tümü'||dlSurumAcik(orj.id,orj.id===rs[0].id), ps=(orj.discord_paylasim||[])[0];
+    h+='<div class="dl-surum'+(acik?'':' kapali')+'"><div class="ust" onclick="if(!event.target.closest(\'button,.dl-dil\'))dlSurumAcKapa(\''+orj.id+'\')" style="cursor:pointer">'+
+       '<span class="ok">'+dlI('asagi',16)+'</span><span class="no">'+dlK(dlV(r.version))+'</span><span class="ad">'+dlK(dlSurumBasligi(r,dil))+'</span>'+dlRozet(r.kind)+
+       (ps?'<span class="dl-rozet dl-dc-rozet" title="'+dlK((orj.discord_paylasim||[]).map(x=>dlGunYaz(x.zaman)+' '+x.zaman.slice(11)+(x.kanal&&x.kanal!=='webhook'?' · #'+x.kanal:'')).join('\n'))+'"'+
+         (ps.link?' onclick="event.stopPropagation();linkAc(\''+dlK(ps.link)+'\')" style="cursor:pointer"':'')+'>'+dlI('discord',12)+' Discord\'da paylaşıldı'+((orj.discord_paylasim||[]).length>1?' · '+orj.discord_paylasim.length+' kez':'')+'</span>':'')+
        '<div class="alt-arac"><div class="dl-dil"><button class="'+(goster==='tr'?'secili':'')+'" onclick="dlDilSec(\''+r.id+'\',\'tr\',this)">TR</button><button class="'+(goster==='en'?'secili':'')+'" onclick="dlDilSec(\''+r.id+'\',\'en\',this)">EN</button></div>'+
        '<button class="dl-dugme kucuk" onclick="dlPaylasMenusu(event,\''+r.id+'\')">'+dlI('paylas',14)+'Paylaş</button>'+
-       '<button class="dl-uc" style="opacity:1" onclick="dlMenuAc(event,dlSecenek(\'kalem\',\'Düzenle\',&quot;dlSurumDuzenle(\''+r.id+'\')&quot;)+dlSecenek(\'sil\',\'Sil\',&quot;dlSil(\'releases\',\''+r.id+'\')&quot;))">'+dlI('uc',16)+'</button></div></div>'+
+       '<button class="dl-uc" style="opacity:1" onclick="dlMenuAc(event,dlSecenek(\'kalem\',\'Düzenle\',&quot;dlSurumDuzenle(\''+r.id+'\')&quot;)+dlSecenek(\'yenile\',\'Çeviriyi yenile\',&quot;dlCeviriYenile(\''+r.id+'\')&quot;)+dlSecenek(\'sil\',\'Sil\',&quot;dlSil(\'releases\',\''+r.id+'\')&quot;))">'+dlI('uc',16)+'</button></div></div>'+
        '<div class="tarih">'+(r.date?dlK(dlGunYaz(r.date,true))+' · '+dlK(dlGoreli(r.date)):'Tarih yok')+' · '+(r.sections||[]).reduce((n,s)=>n+s.items.filter(i=>!i.startsWith('### ')).length,0)+' değişiklik'+
        ((orj.translations||{})[diger]?' · '+(diger==='en'?'İngilizcesi':'Türkçesi')+' hazır':'')+'</div>'+
-       dlKategoriOzeti(r.sections,r.id)+
-       (r.summary?'<div class="ozet">'+dlK(r.summary)+'</div>':'')+dlBolumlerHtml((r.sections||[]).filter(x=>!DL.katSec[r.id]||x.category===DL.katSec[r.id]))+'</div>';
+       '<div class="icerik">'+dlKategoriOzeti(r.sections,r.id)+
+       (r.summary?'<div class="ozet">'+dlK(r.summary)+'</div>':'')+dlBolumlerHtml((r.sections||[]).filter(x=>!DL.katSec[r.id]||x.category===DL.katSec[r.id]))+'</div></div>';
   }
   return h;
+}
+// Sürüm kartları açılır/kapanır: varsayılan olarak sadece en yeni sürüm açık. Tercih bu cihazda hatırlanır.
+function dlSurumAcikHali(){ try{ return JSON.parse(localStorage.getItem('dlSurumAcik')||'{}'); }catch(e){ return {}; } }
+function dlSurumAcik(id,varsayilan){ const a=dlSurumAcikHali(); return id in a?a[id]:varsayilan; }
+function dlSurumAcKapa(id){ const rs=dlP().releases, a=dlSurumAcikHali(); a[id]=!dlSurumAcik(id,id===(rs[0]||{}).id); try{ localStorage.setItem('dlSurumAcik',JSON.stringify(a)); }catch(e){} dlSayfaCiz(); }
+function dlTumSurumler(ac){ const a={}; dlP().releases.forEach(r=>a[r.id]=ac); try{ localStorage.setItem('dlSurumAcik',JSON.stringify(a)); }catch(e){} dlSayfaCiz(); }
+async function dlCeviriYenile(id){
+  const asil=(DL.s.dil_haritasi||{})[id]||'tr', d=asil==='tr'?'en':'tr';
+  tost((d==='en'?'İngilizce':'Türkçe')+' çeviri yenileniyor…');
+  if(await dl('cevir',{id,dil:d},{cizme:true})){ DL.dil[id]=d; dlSayfaCiz(); tost('Çeviri güncellendi'); }
 }
 async function dlDilSec(id,d,btn){
   const r=dlBul('releases',id), asil=DL.s.dil_haritasi[id]||'tr';
@@ -2685,12 +2728,12 @@ function dlSunucuCiz(){
   const dcFikir=dlP().ideas.filter(i=>i.discord_id), haftalik=dcFikir.filter(i=>{ const d=dlTarih(i.created); return d&&d>=bas; }).length;
   // Son 30 günün üye sayısı: küçük çizgi grafik
   let grafik='';
-  if(uyeler.length>1){ const mn=Math.min(...uyeler), mx=Math.max(...uyeler), W=220, H=46;
+  if(uyeler.length>2&&new Set(uyeler).size>1){ const mn=Math.min(...uyeler), mx=Math.max(...uyeler), W=220, H=46;
     const nk=uyeler.map((v,i)=>[(W*i/(uyeler.length-1)).toFixed(1),(H-4-(mx===mn?H/2:(H-8)*(v-mn)/(mx-mn))).toFixed(1)]);
     grafik='<svg viewBox="0 0 '+W+' '+H+'" class="dc-grafik"><path d="M'+nk.map(n=>n.join(',')).join(' L')+' L'+W+','+H+' L0,'+H+'Z" fill="#5865F233"/><polyline points="'+nk.map(n=>n.join(',')).join(' ')+'" fill="none" stroke="#5865F2" stroke-width="2"/></svg>'; }
   const kutu=(e,d,a)=>'<div class="dc-sayi"><div class="e">'+e+'</div><div class="d">'+d+'</div>'+(a?'<div class="a">'+a+'</div>':'')+'</div>';
   return '<div class="dl-dc"><div class="ust"><span>DISCORD · SUNUCU</span><span>güncellendi: '+dlK((s.fetched||'').slice(11,16))+' · <a onclick="dlSunucuTazele(true)">↻</a></span></div>'+
-    '<div class="govde"><div class="ikon">'+(s.ikon?'<img src="'+dlK(s.ikon)+'">':dlK((s.ad||'?')[0]))+'</div>'+
+    '<div class="govde"><div class="ikon'+(s.ikon?' resimli':'')+'">'+(s.ikon?'<img src="'+dlK(s.ikon)+'" onerror="this.parentNode.classList.remove(\'resimli\');this.replaceWith(\''+dlK((s.ad||'?')[0])+'\')">':dlK((s.ad||'?')[0]))+'</div>'+
     '<div class="bilgi"><div class="ad">'+dlK(s.ad)+'</div><div class="alt">'+(s.seviye?'Boost seviyesi '+s.seviye+' · ':'')+s.kanal+' metin, '+s.ses+' ses kanalı · '+s.rol+' rol</div></div>'+grafik+'</div>'+
     '<div class="sayilar">'+kutu('Üyeler',(s.uye??'—').toLocaleString('tr-TR'),gun.length>1?(fark>=0?'<b class="art">+'+fark+'</b>':'<b class="az">'+fark+'</b>')+' son '+gun.length+' günde':'')+
     kutu('<i class="cv"></i>Çevrimiçi',(s.cevrimici??'—').toLocaleString('tr-TR'),s.uye?'%'+Math.round(100*(s.cevrimici||0)/s.uye)+' üye':'')+
