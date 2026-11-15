@@ -42,6 +42,28 @@
   #govde{flex:1;display:flex;min-height:0}
 
   /* --- Sol panel --- */
+  #comfy{display:none;flex:1;min-width:0;min-height:0;flex-direction:column;background:var(--bg);color:var(--yazi)}
+  body.mod-comfy #comfy{display:flex}
+  body.mod-comfy main,body.mod-comfy #panel,body.mod-comfy #kopyalaBtn,body.mod-comfy #panelBtn{display:none!important}
+  body.mod-comfy #comfyNav{background:var(--aktif);font-weight:500}
+  .comfy-ust{height:48px;display:flex;align-items:center;gap:10px;padding:0 14px;border-bottom:1px solid var(--cizgi);background:var(--yan);flex-shrink:0}
+  .comfy-ust .marka{font-size:16px}
+  .comfy-hap{font-size:12px;padding:2px 9px;border-radius:99px;border:1px solid var(--cizgi);color:var(--soluk);background:var(--kart)}
+  .comfy-hap.iyi{border-color:#2f8f5555;color:#2f9e5b;background:#2e9e5b14}
+  .comfy-hap.sari{border-color:#d08a1a55;color:#c07a10;background:#d08a1a14}
+  .comfy-govde{flex:1;position:relative;display:flex;min-height:0;background:var(--bg)}
+  #comfyFrame{width:100%;height:100%;border:none;background:#111}
+  .comfy-bos{margin:auto;max-width:480px;width:92%;background:var(--kart);border:1px solid var(--cizgi);border-radius:16px;padding:26px 28px;box-shadow:0 10px 30px var(--golge)}
+  .comfy-bos h2{margin:0 0 6px;font:normal 24px Georgia,serif}
+  .comfy-bos p{margin:0 0 16px;font-size:14px;color:var(--soluk);line-height:1.5}
+  .comfy-bos label{display:block;font-size:12.5px;color:var(--soluk);margin:12px 0 4px}
+  .comfy-bos input{width:100%;border:1px solid var(--cizgi);border-radius:8px;padding:8px 10px;font:inherit;font-size:13.5px;background:var(--bg);color:inherit;outline:none}
+  .comfy-bos input:focus{border-color:var(--vurgu)}
+  .comfy-eylem{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+  .comfy-eylem .ana{background:var(--vurgu);color:var(--vurgu-yazi);border-color:var(--vurgu)}
+  .comfy-ayar{position:absolute;top:10px;right:14px;width:min(420px,92vw);background:var(--kart);border:1px solid var(--cizgi);border-radius:14px;padding:16px 18px;box-shadow:0 14px 36px var(--golge);z-index:5}
+  .comfy-ayar label{display:block;font-size:12.5px;color:var(--soluk);margin:10px 0 4px}
+  .comfy-ayar input{width:100%;border:1px solid var(--cizgi);border-radius:8px;padding:7px 10px;font:inherit;font-size:13.5px;background:var(--bg);color:inherit;outline:none}
   nav{padding:10px 8px 6px}
   .cc-rozet{margin-left:auto;font:600 10px Consolas,monospace;padding:1px 5px;border-radius:4px;background:#0b0f0c;color:#39ff88;letter-spacing:.05em}
   #cc{position:fixed;inset:0;z-index:35;display:flex;flex-direction:column;background:#060807;color:#b9f5c8;
