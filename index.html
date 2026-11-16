@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Devlog"><meta name="theme-color" content="#1f1e1d">
+<meta name="apple-mobile-web-app-title" content="Devlog"><meta name="theme-color" content="#18191e">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="ikon-180.png"><link rel="icon" href="ikon-192.png">
 <style>
@@ -12,9 +12,9 @@
   :root{--bg:#ffffff;--yan:#f8f8f7;--kart:#ffffff;--yazi:#1f1f1e;--soluk:#73726c;--vurgu:#1f1f1e;--vurgu-yazi:#ffffff;--cizgi:#e6e5e1;
         --uzerinde:#f0f0ee;--aktif:#ebeae6;--sen:#f0f0ee;--kodsatir:#f0efec;--golge:#0000000f;--perde:#00000055;
         --izin-bg:#fff8eb;--izin-cizgi:#f0d49a;--bilgi:#f5f5f3;--kodblok:#1e1e1e;--kodcizgi:#1e1e1e}
-  [data-tema=koyu]{--bg:#1f1e1d;--yan:#181817;--kart:#2a2927;--yazi:#ecebe8;--vurgu:#ecebe8;--vurgu-yazi:#1f1e1d;--soluk:#9b9a95;--cizgi:#3a3936;
-        --uzerinde:#2e2d2b;--aktif:#353431;--sen:#33322f;--kodsatir:#363531;--golge:#00000040;--perde:#000000a0;
-        --izin-bg:#3a3122;--izin-cizgi:#6b5530;--bilgi:#292826;--kodblok:#141413;--kodcizgi:#3a3936}
+  [data-tema=koyu]{--bg:#0d0e11;--yan:#121317;--kart:#17191e;--yazi:#eceef2;--vurgu:#eceef2;--vurgu-yazi:#0d0e11;--soluk:#8b929e;--cizgi:#252830;
+        --uzerinde:#1d2026;--aktif:#252932;--sen:#1d2026;--kodsatir:#22262e;--golge:#00000060;--perde:#000000b5;
+        --izin-bg:#221e17;--izin-cizgi:#524428;--bilgi:#16181d;--kodblok:#0a0b0d;--kodcizgi:#252830}
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--yazi);font:16px/1.65 "Segoe UI",system-ui,sans-serif;height:100vh;display:flex;flex-direction:column;
        user-select:none;-webkit-user-select:none;overflow:hidden}
@@ -151,7 +151,8 @@
   #profilMenu .kisayol{margin-left:auto;font-size:12px;color:var(--soluk)}
   #profil{margin:8px;padding:8px 10px;border-radius:10px;display:flex;align-items:center;gap:10px;cursor:pointer}
   #profil:hover{background:var(--uzerinde)}
-  .avatar{width:32px;height:32px;border-radius:50%;background:var(--yazi);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0}
+  .avatar{width:32px;height:32px;border-radius:50%;background:var(--yazi);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:600;flex-shrink:0;overflow:hidden}
+  .avatar img{width:100%;height:100%;object-fit:cover;display:block}
   #profil .alt{font-size:12px;color:var(--soluk)}
   #profil .bilgi{flex:1;line-height:1.3;overflow:hidden}
   #profilAd{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:14px;font-weight:500}
@@ -799,9 +800,9 @@
 
 
   /* ===================== TELEFON ===================== */
-  html,body{height:100%;overscroll-behavior:none}
-  body.mobil{height:100dvh;padding-top:env(safe-area-inset-top);user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
-  body.mobil #ustbar{height:50px}
+  html,body{height:100%;overscroll-behavior:none;background:var(--bg)}
+  body.mobil{position:fixed;inset:0;width:100%;height:100%;margin:0;padding:0;display:flex;flex-direction:column;overflow:hidden;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent}
+  body.mobil #ustbar{height:calc(50px + env(safe-area-inset-top));padding-top:env(safe-area-inset-top);background:var(--yan)}
   body.mobil .ub-sol{width:auto;background:none;border:none;padding:0 4px 0 8px;gap:6px}
   body.mobil .ub-sol .marka{font-size:18px}
   body.mobil .ub-sol .marka svg{width:24px;height:24px}
@@ -810,10 +811,10 @@
   #esitBtn{margin-right:8px;position:relative}
   #esitBtn .nk{position:absolute;right:5px;top:5px;width:7px;height:7px;border-radius:50%}
   body.mobil #dl{display:flex}
-  body.mobil .dl-ana{padding-bottom:calc(64px + env(safe-area-inset-bottom));-webkit-overflow-scrolling:touch}
+  body.mobil .dl-ana{padding-bottom:16px;-webkit-overflow-scrolling:touch}
   body.mobil .dl-uc{opacity:1}
   #dlKaplama{display:none}
-  #altMenu{position:fixed;left:0;right:0;bottom:0;z-index:30;display:flex;background:var(--yan);border-top:1px solid var(--cizgi);padding-bottom:env(safe-area-inset-bottom)}
+  #altMenu{flex-shrink:0;z-index:30;display:flex;background:var(--yan);border-top:1px solid var(--cizgi);padding-bottom:env(safe-area-inset-bottom)}
   #altMenu button{flex:1;border:none;border-radius:0;background:none;padding:7px 0 6px;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10.5px;color:var(--soluk)}
   #altMenu button.secili{color:var(--yazi)}
   #altMenu button.secili svg{color:#D97757}
@@ -922,21 +923,46 @@
 <nav id="altMenu"></nav>
 <div id="perde" class="perde gizle"><div class="pencere" id="pencere"></div></div>
 <div id="kurulum" class="gizle"></div>
-<script>const AYAR0={"repo": "zombiaofficial/zombia-devlog", "ad": "", "surum": "1.0.0", "sabit": {"bolumler": {"releases": {"title": "Sürüm Notları", "icon": "◆", "singular": "sürüm", "main": "version", "subtitle": "Oyunun her sürümünde neler değişti", "filter": null, "fields": [["version", "Sürüm numarası", "entry", null], ["title", "Başlık", "entry", null], ["date", "Tarih", "entry", null], ["kind", "Tür", "choice", ["Major", "Minor", "Yama", "Test"]]]}, "todos": {"title": "Görevler", "icon": "☐", "singular": "görev", "main": "title", "subtitle": "Sırada bekleyen işler", "filter": "status", "fields": [["title", "Görev", "entry", null], ["priority", "Öncelik", "choice", ["Düşük", "Orta", "Yüksek"]], ["status", "Durum", "choice", ["Yapılacak", "Devam ediyor", "Bitti"]], ["category", "Kategori", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["version", "Sürüm  (hangi sürümde çıkacak / kapandı)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Detaylar", "text", null]]}, "bugs": {"title": "Buglar", "icon": "⚑", "singular": "bug", "main": "title", "subtitle": "Bulunan hatalar ve durumları", "filter": "status", "fields": [["title", "Bug başlığı", "entry", null], ["severity", "Önem", "choice", ["Düşük", "Orta", "Yüksek", "Kritik"]], ["status", "Durum", "choice", ["Açık", "İnceleniyor", "Çözüldü"]], ["version", "Sürüm  (görüldüğü / çözüleceği)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["steps", "Nasıl oluşuyor? (adımlar)", "text", null], ["images", "Ekran görüntüleri", "images", null]]}, "ideas": {"title": "Fikirler", "icon": "✦", "singular": "fikir", "main": "title", "subtitle": "Aklına gelenleri kaybetme", "filter": null, "fields": [["title", "Fikir", "entry", null], ["tag", "Alan", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Açıklama", "text", null], ["link", "Bağlantı", "entry", null], ["images", "Görseller", "images", null]]}, "press": {"title": "Basın materyali", "icon": "▣", "singular": "materyal", "main": "title", "subtitle": "Ekran görüntüsü, trailer, GIF: hangisi hazır, hangisi eskidi", "filter": "status", "fields": [["title", "Materyal", "entry", null], ["type", "Tür", "choice", ["Ekran görüntüsü", "Trailer", "GIF", "Logo", "Kapak görseli", "Basın bülteni", "Diğer"]], ["status", "Durum", "choice", ["Planlandı", "Hazırlanıyor", "Hazır", "Eskidi"]], ["version", "İlgili sürüm", "version", null], ["link", "Dosya yolu ya da bağlantı", "entry", null], ["notes", "Notlar", "text", null]]}, "social": {"title": "İçerik takvimi", "icon": "◫", "singular": "paylaşım", "main": "title", "subtitle": "Ne zaman, nerede, ne paylaşılacak", "filter": "status", "fields": [["title", "İçerik", "entry", null], ["platform", "Platform", "choice", ["X / Twitter", "Instagram", "TikTok", "YouTube", "Reddit", "Discord", "Steam", "Diğer"]], ["date", "Tarih (YYYY-AA-GG)", "date", null], ["status", "Durum", "choice", ["Planlandı", "Hazır", "Paylaşıldı"]], ["notes", "Metin / notlar", "text", null]]}, "learning": {"title": "Öğrenme günlüğü", "icon": "✎", "singular": "kayıt", "main": "title", "subtitle": "Öğrendiğin teknikler, tutorial'lar ve dokümanlar", "filter": "kind", "fields": [["title", "Konu", "entry", null], ["kind", "Tür", "choice", ["Tutorial", "Doküman", "Video", "Kurs", "Kendi notum"]], ["link", "Bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Ne öğrendim?", "text", null]]}, "references": {"title": "Referans oyunlar", "icon": "★", "singular": "oyun", "main": "title", "subtitle": "İlham aldığın ve analiz ettiğin oyunlar", "filter": null, "fields": [["title", "Oyun", "entry", null], ["genre", "Tür", "entry", null], ["rating", "Puanım", "choice", ["★", "★★", "★★★", "★★★★", "★★★★★"]], ["link", "Steam / bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Neyi beğendim, ne alabilirim?", "text", null]]}}, "sayfalar": {"dashboard": ["⌂", "Panel"], "roadmap": ["➚", "Yol haritası"], "timeline": ["◷", "Zaman çizelgesi"], "stats": ["▤", "İstatistikler"], "checklist": ["☑", "Yayın kontrol listesi"], "discord": ["◎", "Discord"], "imggen": ["✦", "Görsel oluştur"], "trash": ["⌫", "Çöp kutusu"], "settings": ["☰", "Ayarlar"]}, "nav": [[null, ["dashboard"]], ["BÖLÜMLER", ["releases", "todos", "bugs", "ideas"]], ["PLANLAMA", ["roadmap", "timeline", "stats"]], ["YAYIN", ["checklist", "discord", "press", "social", "imggen"]], ["KİŞİSEL", ["learning", "references"]]], "renkler": {"Düşük": "#7A9E6B", "Orta": "#C9A227", "Yüksek": "#D97757", "Kritik": "#D0453A", "Yapılacak": "#8A8780", "Devam ediyor": "#5B8DD6", "Bitti": "#5E9E6E", "Açık": "#D0453A", "İnceleniyor": "#C9A227", "Çözüldü": "#5E9E6E", "Major": "#D97757", "Minor": "#5B8DD6", "Yama": "#5E9E6E", "Test": "#8A8780", "Planlandı": "#8A8780", "Hazırlanıyor": "#5B8DD6", "Hazır": "#5E9E6E", "Eskidi": "#D0453A", "Paylaşıldı": "#5E9E6E", "★★★★★": "#C9A227", "★★★★": "#C9A227", "★★★": "#C9A227", "★★": "#C9A227", "★": "#C9A227"}, "varsayilan_kategoriler": ["Arayüz & Grafik", "Araçlar", "Bilinen Sorunlar", "Düzeltmeler", "Etkileşim Sistemleri", "Genel", "Harita & Yapılar", "Hava & Kar Sistemi", "Kayıt Sistemi", "Optimizasyon", "Ses & Müzik", "Yeni Özellikler", "Zombi Yapay Zekası", "Çok Oyunculu"], "kontrol_listesi": ["Build yüklendi ve test edildi", "Sürüm notları hazır", "Steam sayfası güncel", "Kapak / başlık görseli hazır", "Ekran görüntüleri güncel", "Trailer / GIF hazır", "Fiyat ve çıkış tarihi ayarlandı", "Discord duyurusu atıldı", "Sosyal medya paylaşımları planlandı"], "done": {"todos": ["status", "Bitti", "Yapılacak", "Yapıldı"], "bugs": ["status", "Çözüldü", "Açık", "Çözüldü"]}, "pillow": false, "yedek_secenek": {"Kapalı": 0, "Her gün": 1, "3 günde bir": 3, "Haftada bir": 7}, "kategoriler": ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"], "varsayilan_secim": {"priority": "Orta", "severity": "Orta", "kind": "Minor"}, "cop_gun": 30}, "yeni_proje": {"project": "Yeni proje", "collapsed": {}, "cat_version": 2, "categories": [{"name": "Düzeltmeler", "tier": 1, "color": "#5E9E6E", "aliases": ["düzeltmeler", "düzeltme", "hata düzeltmeleri", "fixes", "fix", "bug fixes"], "keywords": ["düzelt", "düzeltme", "hata", "giderildi", "çözüldü", "sorun", "fix", "bug", "error", "corrected", "no longer"]}, {"name": "Yeni Özellikler", "tier": 3, "color": "#D97757", "aliases": ["yeni özellikler", "yenilikler", "new features", "features"], "keywords": ["yeni", "eklendi", "eklen", "new", "added", "introduc"]}, {"name": "Harita & Yapılar", "tier": 2, "color": "#B5835A", "aliases": ["harita & yapılar", "harita ve yapılar", "harita", "yapılar", "map", "world"], "keywords": ["harita", "kasaba", "şehir", "ev", "evler", "yapı", "bina", "işyeri", "dükkân", "dükkan", "foundation", "çit", "otopark", "yol", "kaldırım", "map", "town", "building", "house", "road", "sidewalk", "fence"]}, {"name": "Zombi Yapay Zekası", "tier": 2, "color": "#8E6BBF", "aliases": ["zombi yapay zekası", "yapay zeka", "ai", "zombi ai"], "keywords": ["zombi", "sürü", "yapay zeka", "görüş", "duyuyor", "duyma", "kovala", "tırman", "ai", "zombie", "horde", "enemy", "chase", "pursuit", "swarm"]}, {"name": "Etkileşim Sistemleri", "tier": 2, "color": "#C77D4F", "aliases": ["etkileşim sistemleri", "etkileşim", "interaction"], "keywords": ["etkileşim", "kapı", "pencere", "düğme", "ışık", "oturma", "mobilya", "interact", "door", "window", "switch"]}, {"name": "Hava & Kar Sistemi", "tier": 2, "color": "#5B8DD6", "aliases": ["hava & kar sistemi", "hava ve kar sistemi", "hava", "kar sistemi", "weather and snow system", "weather"], "keywords": ["kar", "hava", "yağmur", "fırtına", "erime", "snow", "weather", "rain", "melt"]}, {"name": "Araçlar", "tier": 2, "color": "#6B8E9E", "aliases": ["araçlar", "araç", "vehicles"], "keywords": ["araç", "araba", "sürüş", "kamyonet", "vehicle", "car", "driving"]}, {"name": "Kayıt Sistemi", "tier": 2, "color": "#7A9E6B", "aliases": ["kayıt sistemi", "kayıt", "save system"], "keywords": ["kayıt", "kaydedil", "geri yüklen", "save", "load game"]}, {"name": "Arayüz & Grafik", "tier": 2, "color": "#9E6B8E", "aliases": ["arayüz & grafik", "arayüz", "grafik", "ui", "interface"], "keywords": ["arayüz", "menü", "ayar", "gamepad", "kumanda", "çözünürlük", "grafik", "görüntü modu", "ui", "menu", "settings", "resolution"]}, {"name": "Optimizasyon", "tier": 2, "color": "#C9A227", "aliases": ["optimizasyon", "optimizasyon & motor", "performans", "optimization & engine", "optimization", "performance"], "keywords": ["optimiz", "performans", "fps", "ms", "takılma", "nanite", "tsr", "bellek", "yükleme", "gc", "performance", "stutter", "frame", "triangle", "memory", "loading", "engine"]}, {"name": "Ses & Müzik", "tier": 2, "color": "#3E9C9C", "aliases": ["ses & müzik", "ses", "müzik", "audio", "sound"], "keywords": ["ses", "müzik", "silah sesi", "audio", "sound", "gunshot", "music"]}, {"name": "Çok Oyunculu", "tier": 2, "color": "#5B6FD6", "aliases": ["çok oyunculu", "multiplayer", "co-op"], "keywords": ["multiplayer", "çok oyunculu", "co-op", "client", "host", "senkron", "online"]}, {"name": "Genel", "tier": 4, "color": "#8A8780", "aliases": ["genel", "general"], "keywords": []}, {"name": "Bilinen Sorunlar", "tier": 0, "color": "#D0453A", "aliases": ["bilinen sorunlar", "bilinen hatalar", "known issues"], "keywords": ["bilinen", "henüz", "olabilir", "görülebilir", "known issue", "may", "might", "not yet", "can appear"]}], "ai": {"url": "http://localhost:11434", "model": "qwen2.5-coder:7b", "lang": "Aynen"}, "discord_webhook": "", "goal": {"version": "", "date": ""}, "checklists": {}, "trash": [], "releases": [], "todos": [], "bugs": [], "ideas": [], "press": [], "social": [], "learning": [], "references": []}, "ay_tr": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], "ay_en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]};</script>
+<script>const AYAR0={"repo": "zombiaofficial/zombia-devlog", "ad": "", "surum": "1.0.1", "sabit": {"bolumler": {"releases": {"title": "Sürüm Notları", "icon": "◆", "singular": "sürüm", "main": "version", "subtitle": "Oyunun her sürümünde neler değişti", "filter": null, "fields": [["version", "Sürüm numarası", "entry", null], ["title", "Başlık", "entry", null], ["date", "Tarih", "entry", null], ["kind", "Tür", "choice", ["Major", "Minor", "Yama", "Test"]]]}, "todos": {"title": "Görevler", "icon": "☐", "singular": "görev", "main": "title", "subtitle": "Sırada bekleyen işler", "filter": "status", "fields": [["title", "Görev", "entry", null], ["priority", "Öncelik", "choice", ["Düşük", "Orta", "Yüksek"]], ["status", "Durum", "choice", ["Yapılacak", "Devam ediyor", "Bitti"]], ["category", "Kategori", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["version", "Sürüm  (hangi sürümde çıkacak / kapandı)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Detaylar", "text", null]]}, "bugs": {"title": "Buglar", "icon": "⚑", "singular": "bug", "main": "title", "subtitle": "Bulunan hatalar ve durumları", "filter": "status", "fields": [["title", "Bug başlığı", "entry", null], ["severity", "Önem", "choice", ["Düşük", "Orta", "Yüksek", "Kritik"]], ["status", "Durum", "choice", ["Açık", "İnceleniyor", "Çözüldü"]], ["version", "Sürüm  (görüldüğü / çözüleceği)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["steps", "Nasıl oluşuyor? (adımlar)", "text", null], ["images", "Ekran görüntüleri", "images", null]]}, "ideas": {"title": "Fikirler", "icon": "✦", "singular": "fikir", "main": "title", "subtitle": "Aklına gelenleri kaybetme", "filter": null, "fields": [["title", "Fikir", "entry", null], ["tag", "Alan", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Açıklama", "text", null], ["link", "Bağlantı", "entry", null], ["images", "Görseller", "images", null]]}, "press": {"title": "Basın materyali", "icon": "▣", "singular": "materyal", "main": "title", "subtitle": "Ekran görüntüsü, trailer, GIF: hangisi hazır, hangisi eskidi", "filter": "status", "fields": [["title", "Materyal", "entry", null], ["type", "Tür", "choice", ["Ekran görüntüsü", "Trailer", "GIF", "Logo", "Kapak görseli", "Basın bülteni", "Diğer"]], ["status", "Durum", "choice", ["Planlandı", "Hazırlanıyor", "Hazır", "Eskidi"]], ["version", "İlgili sürüm", "version", null], ["link", "Dosya yolu ya da bağlantı", "entry", null], ["notes", "Notlar", "text", null]]}, "social": {"title": "Sosyal medya", "icon": "◫", "singular": "paylaşım", "main": "title", "subtitle": "Ne zaman, nerede, ne paylaşılacak", "filter": "status", "fields": [["title", "İçerik", "entry", null], ["platform", "Platform", "choice", ["X / Twitter", "Instagram", "TikTok", "YouTube", "Reddit", "Discord", "Steam", "Diğer"]], ["date", "Tarih (YYYY-AA-GG)", "date", null], ["status", "Durum", "choice", ["Planlandı", "Hazır", "Paylaşıldı"]], ["notes", "Metin / notlar", "text", null]]}, "learning": {"title": "Öğrenme günlüğü", "icon": "✎", "singular": "kayıt", "main": "title", "subtitle": "Öğrendiğin teknikler, tutorial'lar ve dokümanlar", "filter": "kind", "fields": [["title", "Konu", "entry", null], ["kind", "Tür", "choice", ["Tutorial", "Doküman", "Video", "Kurs", "Kendi notum"]], ["link", "Bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Ne öğrendim?", "text", null]]}, "references": {"title": "Referans oyunlar", "icon": "★", "singular": "oyun", "main": "title", "subtitle": "İlham aldığın ve analiz ettiğin oyunlar", "filter": null, "fields": [["title", "Oyun", "entry", null], ["genre", "Tür", "entry", null], ["rating", "Puanım", "choice", ["★", "★★", "★★★", "★★★★", "★★★★★"]], ["link", "Steam / bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Neyi beğendim, ne alabilirim?", "text", null]]}}, "sayfalar": {"dashboard": ["⌂", "Panel"], "roadmap": ["➚", "Yol haritası"], "timeline": ["◷", "Zaman çizelgesi"], "stats": ["▤", "İstatistikler"], "checklist": ["☑", "Yayın kontrol listesi"], "discord": ["◎", "Discord"], "imggen": ["✦", "Görsel oluştur"], "trash": ["⌫", "Çöp kutusu"], "settings": ["☰", "Ayarlar"]}, "nav": [[null, ["dashboard"]], ["BÖLÜMLER", ["releases", "todos", "bugs", "ideas"]], ["PLANLAMA", ["roadmap", "timeline", "stats"]], ["YAYIN", ["discord", "press", "social", "imggen"]], ["KİŞİSEL", ["learning", "references"]]], "renkler": {"Düşük": "#7A9E6B", "Orta": "#C9A227", "Yüksek": "#D97757", "Kritik": "#D0453A", "Yapılacak": "#8A8780", "Devam ediyor": "#5B8DD6", "Bitti": "#5E9E6E", "Açık": "#D0453A", "İnceleniyor": "#C9A227", "Çözüldü": "#5E9E6E", "Major": "#D97757", "Minor": "#5B8DD6", "Yama": "#5E9E6E", "Test": "#8A8780", "Planlandı": "#8A8780", "Hazırlanıyor": "#5B8DD6", "Hazır": "#5E9E6E", "Eskidi": "#D0453A", "Paylaşıldı": "#5E9E6E", "★★★★★": "#C9A227", "★★★★": "#C9A227", "★★★": "#C9A227", "★★": "#C9A227", "★": "#C9A227"}, "varsayilan_kategoriler": ["Arayüz & Grafik", "Araçlar", "Bilinen Sorunlar", "Düzeltmeler", "Etkileşim Sistemleri", "Genel", "Harita & Yapılar", "Hava & Kar Sistemi", "Kayıt Sistemi", "Optimizasyon", "Ses & Müzik", "Yeni Özellikler", "Zombi Yapay Zekası", "Çok Oyunculu"], "kontrol_listesi": ["Build yüklendi ve test edildi", "Sürüm notları hazır", "Steam sayfası güncel", "Kapak / başlık görseli hazır", "Ekran görüntüleri güncel", "Trailer / GIF hazır", "Fiyat ve çıkış tarihi ayarlandı", "Discord duyurusu atıldı", "Sosyal medya paylaşımları planlandı"], "done": {"todos": ["status", "Bitti", "Yapılacak", "Yapıldı"], "bugs": ["status", "Çözüldü", "Açık", "Çözüldü"]}, "pillow": false, "yedek_secenek": {"Kapalı": 0, "Her gün": 1, "3 günde bir": 3, "Haftada bir": 7}, "kategoriler": ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"], "varsayilan_secim": {"priority": "Orta", "severity": "Orta", "kind": "Minor"}, "cop_gun": 30}, "yeni_proje": {"project": "Yeni proje", "collapsed": {}, "cat_version": 2, "categories": [{"name": "Düzeltmeler", "tier": 1, "color": "#5E9E6E", "aliases": ["düzeltmeler", "düzeltme", "hata düzeltmeleri", "fixes", "fix", "bug fixes"], "keywords": ["düzelt", "düzeltme", "hata", "giderildi", "çözüldü", "sorun", "fix", "bug", "error", "corrected", "no longer"]}, {"name": "Yeni Özellikler", "tier": 3, "color": "#D97757", "aliases": ["yeni özellikler", "yenilikler", "new features", "features"], "keywords": ["yeni", "eklendi", "eklen", "new", "added", "introduc"]}, {"name": "Harita & Yapılar", "tier": 2, "color": "#B5835A", "aliases": ["harita & yapılar", "harita ve yapılar", "harita", "yapılar", "map", "world"], "keywords": ["harita", "kasaba", "şehir", "ev", "evler", "yapı", "bina", "işyeri", "dükkân", "dükkan", "foundation", "çit", "otopark", "yol", "kaldırım", "map", "town", "building", "house", "road", "sidewalk", "fence"]}, {"name": "Zombi Yapay Zekası", "tier": 2, "color": "#8E6BBF", "aliases": ["zombi yapay zekası", "yapay zeka", "ai", "zombi ai"], "keywords": ["zombi", "sürü", "yapay zeka", "görüş", "duyuyor", "duyma", "kovala", "tırman", "ai", "zombie", "horde", "enemy", "chase", "pursuit", "swarm"]}, {"name": "Etkileşim Sistemleri", "tier": 2, "color": "#C77D4F", "aliases": ["etkileşim sistemleri", "etkileşim", "interaction"], "keywords": ["etkileşim", "kapı", "pencere", "düğme", "ışık", "oturma", "mobilya", "interact", "door", "window", "switch"]}, {"name": "Hava & Kar Sistemi", "tier": 2, "color": "#5B8DD6", "aliases": ["hava & kar sistemi", "hava ve kar sistemi", "hava", "kar sistemi", "weather and snow system", "weather"], "keywords": ["kar", "hava", "yağmur", "fırtına", "erime", "snow", "weather", "rain", "melt"]}, {"name": "Araçlar", "tier": 2, "color": "#6B8E9E", "aliases": ["araçlar", "araç", "vehicles"], "keywords": ["araç", "araba", "sürüş", "kamyonet", "vehicle", "car", "driving"]}, {"name": "Kayıt Sistemi", "tier": 2, "color": "#7A9E6B", "aliases": ["kayıt sistemi", "kayıt", "save system"], "keywords": ["kayıt", "kaydedil", "geri yüklen", "save", "load game"]}, {"name": "Arayüz & Grafik", "tier": 2, "color": "#9E6B8E", "aliases": ["arayüz & grafik", "arayüz", "grafik", "ui", "interface"], "keywords": ["arayüz", "menü", "ayar", "gamepad", "kumanda", "çözünürlük", "grafik", "görüntü modu", "ui", "menu", "settings", "resolution"]}, {"name": "Optimizasyon", "tier": 2, "color": "#C9A227", "aliases": ["optimizasyon", "optimizasyon & motor", "performans", "optimization & engine", "optimization", "performance"], "keywords": ["optimiz", "performans", "fps", "ms", "takılma", "nanite", "tsr", "bellek", "yükleme", "gc", "performance", "stutter", "frame", "triangle", "memory", "loading", "engine"]}, {"name": "Ses & Müzik", "tier": 2, "color": "#3E9C9C", "aliases": ["ses & müzik", "ses", "müzik", "audio", "sound"], "keywords": ["ses", "müzik", "silah sesi", "audio", "sound", "gunshot", "music"]}, {"name": "Çok Oyunculu", "tier": 2, "color": "#5B6FD6", "aliases": ["çok oyunculu", "multiplayer", "co-op"], "keywords": ["multiplayer", "çok oyunculu", "co-op", "client", "host", "senkron", "online"]}, {"name": "Genel", "tier": 4, "color": "#8A8780", "aliases": ["genel", "general"], "keywords": []}, {"name": "Bilinen Sorunlar", "tier": 0, "color": "#D0453A", "aliases": ["bilinen sorunlar", "bilinen hatalar", "known issues"], "keywords": ["bilinen", "henüz", "olabilir", "görülebilir", "known issue", "may", "might", "not yet", "can appear"]}], "ai": {"url": "http://localhost:11434", "model": "qwen2.5-coder:7b", "lang": "Aynen"}, "discord_webhook": "", "goal": {"version": "", "date": ""}, "checklists": {}, "trash": [], "releases": [], "todos": [], "bugs": [], "ideas": [], "press": [], "social": [], "learning": [], "references": []}, "ay_tr": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], "ay_en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]};</script>
 <script>
 const $=id=>document.getElementById(id);
 function kacis(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 const LOGO=document.querySelector('.marka svg').outerHTML;
 const yerelAl=(k,v)=>{ try{ const x=localStorage.getItem('dl_'+k); return x===null?v:JSON.parse(x); }catch(e){ return v; } };
 const yerelYaz=(k,v)=>{ try{ localStorage.setItem('dl_'+k,JSON.stringify(v)); }catch(e){} };
-let ayar={ad:yerelAl('ad',AYAR0.ad||''),tema:yerelAl('tema','sistem')};
+let ayar={ad:yerelAl('ad',AYAR0.ad||''),tema:yerelAl('tema','sistem'),dil:yerelAl('dil','tr'),profil_resmi:yerelAl('profil_resmi','')};
+function dilKodu(){ return ayar.dil==='en'?'en':'tr'; }
+function L(tr,en){ return dilKodu()==='en'?en:tr; }
+function profilResmiKucult(dosya,boyut=160){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onerror=()=>reject(new Error('Okuma hatası'));
+    r.onload=()=>{
+      const img=new Image();
+      img.onerror=()=>reject(new Error('Görsel hatası'));
+      img.onload=()=>{
+        const c=document.createElement('canvas'); c.width=boyut; c.height=boyut;
+        const ctx=c.getContext('2d'), m=Math.min(img.width,img.height);
+        ctx.drawImage(img,(img.width-m)/2,(img.height-m)/2,m,m,0,0,boyut,boyut);
+        resolve(c.toDataURL('image/webp',0.88));
+      };
+      img.src=String(r.result||'');
+    };
+    r.readAsDataURL(dosya);
+  });
+}
 function temaUygula(){
   const koyu=ayar.tema==='koyu'||(ayar.tema==='sistem'&&matchMedia('(prefers-color-scheme: dark)').matches);
   document.documentElement.dataset.tema=koyu?'koyu':'acik';
-  document.querySelector('meta[name=theme-color]').content=koyu?'#1f1e1d':'#ffffff';
+  document.querySelector('meta[name=theme-color]').content=koyu?'#18191e':'#ffffff';
 }
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',temaUygula); temaUygula();
-function profilGoster(){ const ad=(ayar.ad||'').trim(); $('profilAd').textContent=ad||'Profil'; $('avatar').textContent=(ad||'?')[0].toLocaleUpperCase('tr'); }
+function profilGoster(){
+  const ad=(ayar.ad||'').trim(), pr=(ayar.profil_resmi||'').trim(), av=$('avatar');
+  $('profilAd').textContent=ad||L('Profil','Profile');
+  if(pr){ av.innerHTML='<img src="'+kacis(pr)+'" alt="">'; av.style.background='none'; }
+  else { av.textContent=(ad||'?')[0].toLocaleUpperCase('tr'); av.style.background=''; }
+}
 profilGoster();
 function pencereAc(html){ $('pencere').className='pencere'; $('pencere').innerHTML=html; $('perde').classList.remove('gizle'); }
 function pencereKapat(){ $('perde').classList.add('gizle'); $('pencere').className='pencere'; }
@@ -962,7 +988,7 @@ function git(){} function okGuncelle(){}
 function profilMenusu(e){
   if(!menuAc(e,'profilMenu')) return;
   const o=(ad,is)=>'<div class="secenek" onclick="menuleriKapat();'+is+'"><span class="ad">'+ad+'</span></div>';
-  $('profilMenu').innerHTML='<div class="baslikk">'+kacis(ayar.ad||'Devlog')+'</div>'+o('Ayarlar',"ayarlariAc('mobil')")+o('Şimdi eşitle','esitleDugme()');
+  $('profilMenu').innerHTML='<div class="baslikk">'+kacis(ayar.ad||'Devlog')+'</div>'+o(L('Ayarlar','Settings'),"ayarlariAc('mobil')")+o(L('Şimdi eşitle','Sync now'),'esitleDugme()');
 }
 // ---- Ayarlar penceresi (Focus'takiyle aynı düzen) ----
 const AYAR_IKON={mobil:'<rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/>'};
@@ -983,22 +1009,33 @@ function ayarlariAc(bolum){
 function ayarBolumuCiz(){
   document.querySelectorAll('.a-oge').forEach(o=>o.classList.toggle('secili',o.dataset.b===ayarBolumu));
   const ic=$('aIcerik'); if(!ic||ayarBolumu!=='mobil') return;
-  const m=BULUT.meta||{};
-  ic.innerHTML='<h3>Bağlantı ve görünüm</h3>'+
-    ayarSatiri('Adın','Panelde selamlarken kullanılır.','<input type="text" id="mAd" class="a-girdi" value="'+kacis(ayar.ad)+'">')+
-    '<div class="a-satir dikey"><div class="a-baslik">Tema</div><div class="temalar">'+[['acik','Açık'],['koyu','Koyu'],['sistem','Sistem']].map(([t,a])=>
+  const m=BULUT.meta||{}, pr=(ayar.profil_resmi||'').trim();
+  const pOniz=pr?'<img src="'+kacis(pr)+'" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--cizgi)">':'<div class="avatar" style="width:34px;height:34px;font-size:14px">'+kacis(((ayar.ad||'').trim()||'?')[0].toLocaleUpperCase('tr'))+'</div>';
+  ic.innerHTML='<h3>'+L('Bağlantı ve görünüm','Connection & appearance')+'</h3>'+
+    ayarSatiri(L('Dil','Language'),L('Arayüz dilini seç.','Choose the interface language.'),'<select id="mDil" class="a-secim"><option value="tr">Türkçe</option><option value="en">English</option></select>')+
+    ayarSatiri(L('Adın','Your name'),L('Panelde selamlarken kullanılır.','Used to greet you on the dashboard.'),'<input type="text" id="mAd" class="a-girdi" value="'+kacis(ayar.ad)+'">')+
+    ayarSatiri(L('Profil resmi','Profile picture'),L('Sol alttaki profil alanında görünür.','Shown in the bottom-left profile area.'),'<div style="display:flex;align-items:center;gap:8px">'+pOniz+'<input type="file" id="mProfilResDosya" accept="image/*" class="gizle"><button class="a-dugme" id="mProfilResBtn">'+L('Resim seç','Choose image')+'</button>'+(pr?'<button class="a-dugme tehlike" id="mProfilResSil">'+L('Kaldır','Remove')+'</button>':'')+'</div>')+
+    '<div class="a-satir dikey"><div class="a-baslik">'+L('Tema','Theme')+'</div><div class="temalar">'+[['acik',L('Açık','Light')],['koyu',L('Koyu','Dark')],['sistem',L('Sistem','System')]].map(([t,a])=>
       '<button data-t="'+t+'"'+(ayar.tema===t?' class="secili"':'')+'>'+a+'</button>').join('')+'</div></div>'+
-    ayarSatiri('Veri reposu','<span class="kucuk-yol">'+kacis(BULUT.repo)+'</span>','')+
-    ayarSatiri('Son eşitleme',(m.son?kacis(m.son):'henüz yok')+(BULUT.hata?'<div class="hata-yazi">'+kacis(BULUT.hata)+'</div>':'')+(BULUT.bekleyen?'<br>'+BULUT.bekleyen+' görsel yüklenmeyi bekliyor':''),'<button class="a-dugme" id="mEs">Şimdi eşitle</button>')+
-    ayarSatiri('Token','<span class="kucuk-yol">'+kacis(BULUT.token?'••••••••'+BULUT.token.slice(-4):'')+'</span><br>Sadece bu telefonda saklanır.','<button class="a-dugme" id="mTk">Değiştir</button>')+
-    ayarSatiri('Uygulama sürümü',kacis(AYAR0.surum)+' · Focus\'tan “Telefon uygulamasını güncelle” deyince yenisi gelir.','<button class="a-dugme" id="mYe">Yenile</button>')+
-    ayarSatiri('Bu telefondan çık','Telefondaki kopya ve token silinir. Buluttaki verilere dokunulmaz.','<button class="a-dugme tehlike" id="mCik">Çık</button>');
+    ayarSatiri(L('Veri reposu','Data repository'),'<span class="kucuk-yol">'+kacis(BULUT.repo)+'</span>','')+
+    ayarSatiri(L('Son eşitleme','Last sync'),(m.son?kacis(m.son):L('henüz yok','not yet'))+(BULUT.hata?'<div class="hata-yazi">'+kacis(BULUT.hata)+'</div>':'')+(BULUT.bekleyen?'<br>'+BULUT.bekleyen+' '+L('görsel yüklenmeyi bekliyor','images pending upload'):''),'<button class="a-dugme" id="mEs">'+L('Şimdi eşitle','Sync now')+'</button>')+
+    ayarSatiri('Token','<span class="kucuk-yol">'+kacis(BULUT.token?'••••••••'+BULUT.token.slice(-4):'')+'</span><br>'+L('Sadece bu telefonda saklanır.','Stored only on this phone.'),'<button class="a-dugme" id="mTk">'+L('Değiştir','Change')+'</button>')+
+    ayarSatiri(L('Uygulama sürümü','App version'),kacis(AYAR0.surum)+' · '+L('Focus\'tan “Telefon uygulamasını güncelle” deyince yenisi gelir.','Updates via "Update phone app" in Focus.'),'<button class="a-dugme" id="mYe">'+L('Yenile','Refresh')+'</button>')+
+    ayarSatiri(L('Bu telefondan çık','Sign out of this phone'),L('Telefondaki kopya ve token silinir. Buluttaki verilere dokunulmaz.','Removes local copy & token. Cloud data stays intact.'),'<button class="a-dugme tehlike" id="mCik">'+L('Çık','Sign out')+'</button>');
+  $('mDil').value=dilKodu();
+  $('mDil').onchange=e=>{ ayar.dil=e.target.value; yerelYaz('dil',ayar.dil); profilGoster(); ayarBolumuCiz(); if(typeof dlCiz==='function'&&DL.s) dlCiz(); };
   $('mAd').onchange=e=>{ ayar.ad=e.target.value.trim(); yerelYaz('ad',ayar.ad); profilGoster(); if(typeof dlCiz==='function'&&DL.s) dlCiz(); };
+  $('mProfilResBtn').onclick=()=>$('mProfilResDosya').click();
+  $('mProfilResDosya').onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f) return;
+    try{ ayar.profil_resmi=await profilResmiKucult(f); yerelYaz('profil_resmi',ayar.profil_resmi); profilGoster(); ayarBolumuCiz(); }catch(err){}
+  };
+  if($('mProfilResSil')) $('mProfilResSil').onclick=()=>{ ayar.profil_resmi=''; yerelYaz('profil_resmi',''); profilGoster(); ayarBolumuCiz(); };
   ic.querySelectorAll('.temalar button').forEach(b=>b.onclick=()=>{ ayar.tema=b.dataset.t; yerelYaz('tema',ayar.tema); temaUygula(); ayarBolumuCiz(); });
   $('mEs').onclick=()=>{ esitleDugme(); setTimeout(ayarBolumuCiz,1500); };
   $('mTk').onclick=()=>{ pencereKapat(); kurulumAc(true); };
   $('mYe').onclick=()=>location.reload();
-  $('mCik').onclick=async()=>{ if(await onayla('Bu telefondan çıkılsın mı?','Telefondaki kopya ve token silinir. Buluttaki veriler kalır; tekrar giriş yapınca geri gelir.','Çık')){ await DEPO.temizle(); localStorage.clear(); location.reload(); } };
+  $('mCik').onclick=async()=>{ if(await onayla(L('Bu telefondan çıkılsın mı?','Sign out of this phone?'),L('Telefondaki kopya ve token silinir. Buluttaki veriler kalır; tekrar giriş yapınca geri gelir.','Local copy & token will be deleted. Cloud data remains.'),L('Çık','Sign out'))){ await DEPO.temizle(); localStorage.clear(); location.reload(); } };
 }
 </script>
 <script>
@@ -1340,12 +1377,21 @@ function ekle(tur,it){
 }
 function guncelle(tur,id,alanlar){ for(const it of pr()[tur]) if(it.id===id){ Object.assign(it,alanlar); it.updated=simdi(); damgala(tur,it); } if(tur==='releases') surumleriSirala(); }
 const bul=(tur,id)=>pr()[tur].find(x=>x.id===id);
+function sosyalDurum(){
+  const sa=yerelAl('sosyal_hesaplar',{});
+  return {
+    x:{bagli:false},
+    reddit:{bagli:false,kullanici:'',subreddit:''},
+    webhook:{bagli:!!(sa.webhook?.url),etiket:'Instagram / TikTok / YouTube'},
+    instagram:{bagli:!!(sa.instagram?.token)}
+  };
+}
 function durumPaketi(ek){
   const p=pr(), dil={};
   for(const r of p.releases) dil[r.id]=surumDili(r)==='English'?'en':'tr';
   return Object.assign({proje:p,proje_id:KOK.current,projeler:Object.entries(KOK.projects).map(([i,x])=>[i,x.project]),
     kok:{backup:{every_days:0},updates:{},nav_collapsed:false,todo_view:KOK.todo_view||'list',profile:KOK.profile||{},acilis:'devlog'},
-    veri_dosyasi:'GitHub: '+BULUT.repo,veri_klasoru:'',surum:AYAR0.surum,dil_haritasi:dil,bulut_surum:0,
+    veri_dosyasi:'GitHub: '+BULUT.repo,veri_klasoru:'',surum:AYAR0.surum,dil_haritasi:dil,bulut_surum:0,sosyal:sosyalDurum(),
     bot:{var:!!(p.discord_kanal||p.discord_sunucu),durum:'kapali',hata:'',ad:'Discord botu',aktif:false,durum_metni:'',kanal:p.discord_kanal||null,
          komutlar:{},komut_listesi:[],fikir_kanallari:p.discord_fikir_kanallari||[],planli:p.discord_planli||[],fikir_sayac:0,yayinla:true,maske:''}},ek||{});
 }
@@ -1412,11 +1458,77 @@ const ISLEM={
   ayar:(d)=>{
     const p=pr();
     for(const [k,v] of Object.entries(d)){
-      if(['project','discord_webhook','ai','goal','categories'].includes(k)) p[k]=v;
+      if(['project','project_icon','discord_webhook','ai','goal','categories'].includes(k)) p[k]=v;
       else if(k==='steam_appid'){ const m=String(v||'').match(/\/app\/(\d+)/)||String(v||'').match(/^\s*(\d+)\s*$/); if(v&&!m) return {hata:'Linkte /app/ sonrasındaki sayıyı bulamadım.'}; p.steam_appid=m?m[1]:''; if(!m) delete p.steam; }
       else if(k==='todo_view'||k==='nav_collapsed') KOK[k]=v;
       else if(k==='studio'){ KOK.profile=KOK.profile||{}; KOK.profile.studio=v; }
     }
+  },
+  fikir_cevir:async({id,hedef='tr'})=>{
+    const it=bul('ideas',id); if(!it) return {hata:'Fikir bulunamadı.'};
+    const cevir=async m=>{
+      m=String(m||'').trim(); if(!m) return '';
+      const r=await _fetch('https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl='+encodeURIComponent(hedef)+'&dt=t&q='+encodeURIComponent(m));
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const d=await r.json(); return (d[0]||[]).map(p=>p?.[0]||'').join('');
+    };
+    if(!('orig_title' in it)) it.orig_title=it.title||'';
+    if(!('orig_details' in it)) it.orig_details=it.details||'';
+    if(it.title) it.title=await cevir(it.title);
+    if(it.details) it.details=await cevir(it.details);
+    it.updated=simdi();
+  },
+  sosyal_ayar:({hesap,veri})=>{
+    const sa=yerelAl('sosyal_hesaplar',{});
+    if(!veri) delete sa[hesap];
+    else { const mevc=Object.assign({},sa[hesap]||{}); for(const [k,v] of Object.entries(veri)) if(String(v||'').trim()) mevc[k]=String(v).trim(); sa[hesap]=mevc; }
+    yerelYaz('sosyal_hesaplar',sa);
+  },
+  instagram_istatistik:async()=>{
+    const sa=yerelAl('sosyal_hesaplar',{}), tok=String(sa.instagram?.token||'').trim().replace(/^['"]|['"]$/g,'');
+    if(!tok) return pr().instagram_ozet||{hata:'Instagram token\'ı bağlı değil (Ayarlar > Devlog > Paylaşım\'dan ekleyebilirsin).'};
+    const kok=tok.startsWith('IG')?'https://graph.instagram.com/v22.0':'https://graph.facebook.com/v22.0';
+    let node=tok.startsWith('IG')?'me':String(sa.instagram?.ig_id||'').trim();
+    if(!node){
+      try{ const ra=await _fetch(kok+'/me/accounts?fields='+encodeURIComponent('instagram_business_account{id,username}')+'&access_token='+encodeURIComponent(tok));
+        if(ra.ok){ const da=await ra.json(); const hit=(da.data||[]).find(s=>s.instagram_business_account?.id); if(hit) node=hit.instagram_business_account.id; } }catch(e){}
+      if(!node) node='17841446431687405';
+    }
+    const rp=await _fetch(kok+'/'+node+'?fields=id,username,name,profile_picture_url,followers_count,follows_count,media_count&access_token='+encodeURIComponent(tok));
+    if(!rp.ok) return {hata:'Instagram API HTTP '+rp.status};
+    const prof=await rp.json();
+    const rm=await _fetch(kok+'/'+node+'/media?fields='+encodeURIComponent('id,caption,media_type,media_url,thumbnail_url,permalink,timestamp,like_count,comments_count,children{id,media_type,media_url,thumbnail_url}')+'&limit=12&access_token='+encodeURIComponent(tok));
+    const med=rm.ok?((await rm.json()).data||[]):[];
+    for(const m of med){
+      for(const metrik of ['views,reach','views','reach','impressions,reach','plays,reach']){
+        try{
+          const ri=await _fetch(kok+'/'+m.id+'/insights?metric='+encodeURIComponent(metrik)+'&access_token='+encodeURIComponent(tok));
+          if(!ri.ok) continue;
+          const veriler=(await ri.json()).data||[];
+          for(const dt of veriler){
+            const val=dt.values?.[0]?.value??dt.total_value?.value;
+            if(val!=null){
+              if(['views','impressions','plays'].includes(dt.name)&&m.views==null) m.views=Number(val);
+              else if(dt.name==='reach') m.reach=Number(val);
+            }
+          }
+          if(m.views!=null||m.reach!=null) break;
+        }catch(e){}
+      }
+    }
+    const ozet={profil:prof,gonderiler:med,fetched:simdi(),insights_hata:''};
+    pr().instagram_ozet=ozet;
+    return ozet;
+  },
+  instagram_yorumlar:async({media_id})=>{
+    const sa=yerelAl('sosyal_hesaplar',{}), tok=String(sa.instagram?.token||'').trim().replace(/^['"]|['"]$/g,'');
+    if(!tok||!media_id) return {yorumlar:[]};
+    const kok=tok.startsWith('IG')?'https://graph.instagram.com/v22.0':'https://graph.facebook.com/v22.0';
+    try{
+      const r=await _fetch(kok+'/'+media_id+'/comments?fields='+encodeURIComponent('id,text,username,timestamp,like_count,replies{id,text,username,timestamp}')+'&limit=50&access_token='+encodeURIComponent(tok));
+      if(!r.ok) return {yorumlar:[]};
+      return {yorumlar:(await r.json()).data||[]};
+    }catch(e){ return {yorumlar:[]}; }
   },
   kontrol:({version,liste})=>{ pr().checklists[version]=liste; },
   kontrol_sifirla:({version})=>{ delete pr().checklists[version]; },
@@ -1426,8 +1538,9 @@ const ISLEM={
   proje_gec:({id})=>{ if(id in KOK.projects){ KOK.current=id; yerelYaz('proje',id); } },
   proje_sil:({id})=>{ if(Object.keys(KOK.projects).length>1&&id in KOK.projects){ delete KOK.projects[id]; if(KOK.current===id) KOK.current=Object.keys(KOK.projects)[0]; } },
   bot_durum:()=>({bot:durumPaketi().bot}),
+  fikir_gorev_bildir:()=>({bildirildi:false}),
 };
-const YAZMAYAN=new Set(['durum','markup','duzenle','adaylar','notlara_ekle','karsilastir','metin','bot_durum','resim_yukle']);
+const YAZMAYAN=new Set(['durum','markup','duzenle','adaylar','notlara_ekle','karsilastir','metin','bot_durum','resim_yukle','sosyal_ayar','instagram_yorumlar','fikir_gorev_bildir']);
 async function yerelIslem(v){
   await HAZIR;
   const f=ISLEM[v.islem]; if(!f) return {hata:SADECE_PC};
@@ -1439,9 +1552,12 @@ async function yerelIslem(v){
 }
 // Devlog ekranı veriyi /dl/api'den ister: telefonda bunu yerelIslem karşılar
 const _fetch=window.fetch.bind(window);
-window.fetch=(url,opt)=>String(url)==='/dl/api'
-  ? yerelIslem(JSON.parse(opt?.body||'{}')).then(r=>new Response(JSON.stringify(r),{headers:{'Content-Type':'application/json'}}))
-  : _fetch(url,opt);
+window.fetch=(url,opt)=>{
+  const u=String(url);
+  if(u==='/dl/api') return yerelIslem(JSON.parse(opt?.body||'{}')).then(r=>new Response(JSON.stringify(r),{headers:{'Content-Type':'application/json'}}));
+  if(u.startsWith('/api/comfy/')) return Promise.resolve(new Response(JSON.stringify({calisiyor:false,durum:'yok',hata:'ComfyUI bilgisayardaki Focus\'ta çalışır.'}),{headers:{'Content-Type':'application/json'}}));
+  return _fetch(url,opt);
+};
 
 // ---------------- görseller ----------------
 const RESIM=new Map();       // "proje/dosya" -> blob URL (önizleme)
@@ -1469,14 +1585,40 @@ document.addEventListener('error',e=>{ const t=e.target; if(t.tagName==='IMG'&&(
 let hazirCoz; const HAZIR=new Promise(c=>hazirCoz=c);
 function kurulumAc(degistir){
   const k=$('kurulum'); k.classList.remove('gizle');
+  let profilResmi=ayar.profil_resmi||'';
+  const onizGuncelle=()=>{
+    const av=$('kAvatarOniz'), ad=($('kAd')?.value||ayar.ad||'').trim();
+    if(!av) return;
+    if(profilResmi){ av.innerHTML='<img src="'+kacis(profilResmi)+'" alt="">'; av.style.background='none'; }
+    else { av.textContent=(ad||'?')[0].toLocaleUpperCase('tr'); av.style.background=''; }
+    if($('kResSil')) $('kResSil').classList.toggle('gizle',!profilResmi);
+  };
   k.innerHTML='<div class="kutu">'+LOGO.replace('<svg ','<svg width="52" height="52" ')+'<h1>Devlog</h1>'+
     '<div class="not">Verilerin GitHub\'daki gizli reponda duruyor. Bu telefon oradan okuyup oraya yazar; bilgisayardaki Focus ile kendiliğinden eşitlenir.</div>'+
     '<label>Veri reposu</label><input id="kRepo" value="'+kacis(BULUT.repo)+'" autocapitalize="off" autocorrect="off" spellcheck="false">'+
     '<label>GitHub token</label><input id="kTok" type="password" placeholder="github_pat_…" autocomplete="off">'+
     '<div class="not">Focus\'ta kullandığın token\'ı gir (Ayarlar > Devlog > Bulut ve telefon\'da nasıl alınacağı yazıyor). Token sadece bu telefonda saklanır.</div>'+
-    '<label>Adın (isteğe bağlı)</label><input id="kAd" value="'+kacis(ayar.ad)+'">'+
+    '<label>Adın ve profil resmin (isteğe bağlı)</label>'+
+    '<div style="display:flex;align-items:center;gap:12px;margin-top:4px">'+
+      '<div id="kAvatarOniz" class="avatar" style="width:44px;height:44px;font-size:17px;cursor:pointer;border:1px solid var(--cizgi)">?</div>'+
+      '<input id="kAd" value="'+kacis(ayar.ad)+'" style="flex:1;margin:0" placeholder="Adın…">'+
+    '</div>'+
+    '<div style="display:flex;align-items:center;gap:8px;margin-top:8px">'+
+      '<input type="file" id="kResDosya" accept="image/*" class="gizle">'+
+      '<button type="button" id="kResBtn" style="font-size:13px;padding:6px 12px;border:1px solid var(--cizgi);border-radius:8px;background:var(--kart);color:inherit">Fotoğraf ekle</button>'+
+      '<button type="button" id="kResSil" class="gizle" style="font-size:13px;padding:6px 12px;border:1px solid var(--cizgi);border-radius:8px;background:none;color:var(--soluk)">Kaldır</button>'+
+    '</div>'+
     '<button class="ana" id="kOk">Giriş yap</button><div class="hata" id="kHata"></div>'+
     (degistir?'<button style="width:100%;margin-top:10px;border:none;background:none;color:var(--soluk)" onclick="$(\'kurulum\').classList.add(\'gizle\')">Vazgeç</button>':'')+'</div>';
+  onizGuncelle();
+  $('kAvatarOniz').onclick=()=>$('kResDosya').click();
+  $('kResBtn').onclick=()=>$('kResDosya').click();
+  $('kResDosya').onchange=async e=>{
+    const f=e.target.files?.[0]; if(!f) return;
+    try{ profilResmi=await profilResmiKucult(f); onizGuncelle(); }catch(err){}
+  };
+  $('kResSil').onclick=()=>{ profilResmi=''; onizGuncelle(); };
+  $('kAd').oninput=onizGuncelle;
   $('kOk').onclick=async()=>{
     const repo=$('kRepo').value.trim().replace('https://github.com/','').replace(/\/$/,''), tok=$('kTok').value.trim();
     if(!repo.includes('/')||!tok){ $('kHata').textContent='Repo (kullanıcı/repo) ve token gerekli.'; return; }
@@ -1489,7 +1631,7 @@ function kurulumAc(degistir){
       const v=await ghOku('devlog.json');
       if(v.durum!=='tamam') throw new Error('Repoda henüz veri yok. Önce bilgisayardaki Focus\'ta Ayarlar > Devlog > Bulut ve telefon\'dan bu repoyu bağla.');
       const paket=JSON.parse(v.metin);
-      yerelYaz('repo',repo); yerelYaz('token',tok); ayar.ad=$('kAd').value.trim(); yerelYaz('ad',ayar.ad); profilGoster();
+      yerelYaz('repo',repo); yerelYaz('token',tok); ayar.ad=$('kAd').value.trim(); ayar.profil_resmi=profilResmi; yerelYaz('ad',ayar.ad); yerelYaz('profil_resmi',profilResmi); profilGoster();
       const kok=Object.assign({},klon(paket.veri)); kok.current=yerelAl('proje',null);
       if(!(kok.current in kok.projects)) kok.current=Object.keys(kok.projects)[0];
       KOK=kok; BULUT.temel=klon(paket.veri); BULUT.gorseller=paket.gorseller||{};
@@ -1642,7 +1784,7 @@ function dlCiz(){
   $('dlBaslik').textContent=dlP().project+'  ·  '+dlSayfaAdi(DL.sayfa);
   dlYanCiz(); dlSayfaCiz();
 }
-const DL_EN_SAYFA={dashboard:'Dashboard',releases:'Release Notes',todos:'Tasks',bugs:'Bugs',ideas:'Ideas',roadmap:'Roadmap',timeline:'Timeline',stats:'Stats',checklist:'Launch Checklist',discord:'Discord',imggen:'Generate Image',press:'Press Kit',content:'Content Calendar',trash:'Trash',learning:'Learning',references:'References'};
+const DL_EN_SAYFA={dashboard:'Dashboard',releases:'Release Notes',todos:'Tasks',bugs:'Bugs',ideas:'Ideas',roadmap:'Roadmap',timeline:'Timeline',stats:'Stats',checklist:'Launch Checklist',discord:'Discord',imggen:'Generate Image',press:'Press Kit',social:'Social Media',trash:'Trash',learning:'Learning',references:'References'};
 const DL_EN_GRUP={BÖLÜMLER:'Sections',PLANLAMA:'Planning',YAYIN:'Publishing',KİŞİSEL:'Personal'};
 function dlSayfaAdi(s){
   if(typeof dilKodu==='function'&&dilKodu()==='en'&&DL_EN_SAYFA[s]) return DL_EN_SAYFA[s];
@@ -1650,7 +1792,10 @@ function dlSayfaAdi(s){
 }
 function dlYanCiz(){
   const p=dlP(), en=typeof dilKodu==='function'&&dilKodu()==='en';
-  $('dlProjeKutu').innerHTML='<div class="dl-proje" onclick="dlProjeMenusu(event)"><div class="kare">'+dlK((p.project||'?')[0].toLocaleUpperCase('tr'))+'</div>'+
+  const pIkon=p.project_icon
+    ?'<img src="'+dlResimUrl(p.project_icon)+'" style="width:26px;height:26px;border-radius:7px;object-fit:cover;flex-shrink:0">'
+    :'<div class="kare">'+dlK((p.project||'?')[0].toLocaleUpperCase('tr'))+'</div>';
+  $('dlProjeKutu').innerHTML='<div class="dl-proje" onclick="dlProjeMenusu(event)">'+pIkon+
     '<div class="ad">'+dlK(p.project)+'<div class="alt">'+(DL.s.projeler.length>1?DL.s.projeler.length+(en?' projects · switch':' proje · değiştir'):(en?'Project':'Proje'))+'</div></div>'+dlI('asagi',14)+'</div>';
   const sayi={todos:p.todos.filter(x=>x.status!=='Bitti').length,bugs:p.bugs.filter(x=>x.status!=='Çözüldü').length,
               ideas:p.ideas.length,releases:p.releases.length,trash:p.trash.length};
@@ -1666,8 +1811,9 @@ function dlYanCiz(){
          (s==='discord'?dlBotNokta():n?'<span class="sayi'+(kir?' kirmizi':'')+'">'+n+'</span>':'')+'</div>';
     }
   }
-  h+='<div class="dl-grup"></div>'+
-     '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+(en?'Trash':'Çöp kutusu')+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>';
+  if(sayi.trash||DL.sayfa==='trash')
+    h+='<div class="dl-grup"></div>'+
+       '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+(en?'Trash':'Çöp kutusu')+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>';
   $('dlNav').innerHTML=h;
   dlBulutGoster();
 }
@@ -1797,6 +1943,7 @@ function dlKart(tur,it,kucuk){
   if(it.discord_yazar) meta+='<span class="dl-rozet" style="background:#5865F222;color:#7983f5" title="Discord\'dan geldi">💬 '+dlK(it.discord_yazar)+'</span>';
   if(it.released_in) meta+='<span class="dl-rozet" title="Bu sürümün notlarına eklendi">'+dlK(dlV(it.released_in))+' notlarında</span>';
   if(it.link) meta+='<span class="dl-rozet" style="cursor:pointer" onclick="event.stopPropagation();dlLinkAc(\''+it.id+'\',\''+tur+'\')">↗ bağlantı</span>';
+  if(tur==='ideas') meta+='<span class="dl-rozet" style="cursor:pointer" onclick="event.stopPropagation();dlFikirCevir(\''+it.id+'\',this)">🌐 Türkçeye çevir</span>';
   meta+=(it.tags||'').split(/\s+/).filter(Boolean).map(t=>'<span class="dl-etiket" onclick="event.stopPropagation();DL.etiket=\''+dlK(t)+'\';dlSayfaCiz()">'+dlK(t)+'</span>').join(' ');
   const detay=it.details||it.steps||it.notes||'';
   const res=(it.images||[]).map(a=>'<img src="'+dlResimUrl(a)+'" onclick="event.stopPropagation();dlBuyut(this.src)">').join('');
@@ -1811,20 +1958,22 @@ function dlKart(tur,it,kucuk){
     '<button class="dl-uc" onclick="dlKartMenusu(event,\''+tur+'\',\''+it.id+'\')">'+dlI('uc',16)+'</button></div></div>';
 }
 function dlLinkAc(id,tur){ const l=dlBul(tur,id)?.link||''; if(/^https?:/i.test(l)) linkAc(l); else if(l) fetch('/dl/api',{method:'POST',body:JSON.stringify({islem:'yol_ac',yol:l})}); }
+async function dlFikirCevir(id,el){ if(el) el.textContent='🌐 Çevriliyor…'; const r=await dl('fikir_cevir',{id}); if(r) tost('Türkçeye çevrildi ✓'); }
 async function dlTikle(tur,id){ await dl('tikle',{tur,id}); const it=dlBul(tur,id); if(it&&dlBitti(tur,it)) tost(DL.sabit.done[tur][3]+' ✓'); }
 function dlKartMenusu(e,tur,id){
   const D=DL.sabit.done[tur], it=dlBul(tur,id);
   dlMenuAc(e,dlSecenek('kalem','Düzenle',"dlDuzenle('"+tur+"','"+id+"')")+
     (D?dlSecenek('tik',dlBitti(tur,it)?'Geri al':D[3],"dlTikle('"+tur+"','"+id+"')"):'')+
     dlSecenek('kopya','Başlığı kopyala',"dlKopyala(dlBul('"+tur+"','"+id+"').title||'')")+
-    (tur==='ideas'?dlSecenek('todos','Göreve dönüştür',"dlFikirdenGorev('"+id+"')"):'')+
+    (tur==='ideas'?dlSecenek('todos','Göreve dönüştür',"dlFikirdenGorev('"+id+"')")+dlSecenek('kalem','Türkçeye çevir',"dlFikirCevir('"+id+"')"):'')+
     '<div class="ayrac"></div>'+dlSecenek('sil','Sil',"dlSil('"+tur+"','"+id+"')"));
 }
 async function dlSil(tur,id){ await dl('sil',{tur,id}); tost('Çöp kutusuna taşındı (30 gün saklanır)'); }
 async function dlFikirdenGorev(id){
   const f=dlBul('ideas',id);
+  const br=await dl('fikir_gorev_bildir',{id},{cizme:true,sessiz:true});
   await dl('ekle',{tur:'todos',kayit:{title:f.title,details:f.details||'',tags:f.tags||'',priority:'Orta',status:'Yapılacak',category:DL.sabit.kategoriler.includes(f.tag)?f.tag:'Diğer'}},{cizme:true});
-  await dl('sil',{tur:'ideas',id}); tost('Görevlere eklendi');
+  await dl('sil',{tur:'ideas',id}); tost(br?.bildirildi?'Görevlere eklendi · Discord\'da bildirildi ✓':'Görevlere eklendi');
 }
 
 // ---- Sürükle-bırak ile sıralama (liste) ----
@@ -2179,10 +2328,10 @@ function dlPanelCiz(){
   const hd=dlHedef();
   let geri='';
   if(hd){
-    const yuzde=hd.toplam?Math.round(100*hd.biten/hd.toplam):0;
-    geri='<div class="dl-geri-kucuk" onclick="dlSayfaAc(\'roadmap\')" title="Yol haritasını aç · '+(hd.toplam?hd.biten+' / '+hd.toplam+' iş bitti':'Bu sürüme henüz iş atanmadı')+'">'+
-      '<div class="gun">'+(hd.kalan===null?'—':Math.abs(hd.kalan))+'</div>'+
-      '<div class="bilgi"><div class="ust">'+(hd.kalan===null?'tarih yok':hd.kalan<0?'gün geçti':hd.kalan===0?'bugün!':'gün kaldı')+'</div>'+
+    const yuzde=hd.toplam?Math.round(100*hd.biten/hd.toplam):0, gecti=hd.kalan!==null&&hd.kalan<0;
+    geri='<div class="dl-geri-kucuk"'+(gecti?' style="border-color:#d0453a88;background:rgba(208,69,58,.10)"':'')+' onclick="dlSayfaAc(\'roadmap\')" title="Yol haritasını aç · '+(hd.toplam?hd.biten+' / '+hd.toplam+' iş bitti':'Bu sürüme henüz iş atanmadı')+'">'+
+      '<div class="gun"'+(gecti?' style="color:#f06a5e"':'')+'>'+(hd.kalan===null?'—':Math.abs(hd.kalan))+'</div>'+
+      '<div class="bilgi"><div class="ust"'+(gecti?' style="color:#f06a5e;font-weight:600"':'')+'>'+(hd.kalan===null?'tarih yok':gecti?'⚠️ gün geçti · Süre doldu!':hd.kalan===0?'bugün!':'gün kaldı')+'</div>'+
       '<div class="ad">'+dlK(dlV(hd.v))+(hd.tarih?' · '+dlK(dlGunYaz(hd.tarih)):'')+'</div>'+
       '<div class="dl-cubuk" style="height:5px;margin-top:5px"><span style="width:'+yuzde+'%;background:#D97757"></span></div>'+
       '<div class="alt">%'+yuzde+' · '+hd.biten+'/'+hd.toplam+' iş</div></div>'+
@@ -2440,6 +2589,23 @@ function dlIstatistikCiz(){
       ['Ort. görev süresi',gy(ort(bitenG))],['Görev tamamlama',p.todos.length?'%'+Math.round(100*bitenG.length/p.todos.length):'—']]
       .map(([a,v])=>'<div class="dl-panel dl-sayac"><div class="etk">'+a+'</div><div class="deger" style="font-size:28px">'+v+'</div></div>').join('')+'</div>';
   const kart=(b,a,ic)=>'<div class="dl-panel" style="margin-top:14px"><h3 style="font:normal 17px Georgia,serif;margin-bottom:2px">'+b+'</h3><div class="p-not" style="margin:0 0 10px">'+a+'</div>'+ic+'</div>';
+  const dc=p.discord_sunucu, dcGec=p.discord_gecmis||{}, dcGun=Object.keys(dcGec).sort().slice(-14);
+  if(dc){
+    const dcKutular=[['Discord Üye',(dc.uye??'—').toLocaleString()],['Çevrimiçi',(dc.cevrimici??'—').toLocaleString()],
+      ['Son 7 Gün Yeni',dc.yeni_7_gun!=null?'+'+dc.yeni_7_gun:'—'],['Boost',dc.boost??0]]
+      .map(([a,v])=>'<div class="dl-panel dl-sayac"><div class="etk">'+a+'</div><div class="deger" style="font-size:24px">'+v+'</div></div>').join('');
+    const dcGraf=dcGun.length>1?dlCizgiGrafik(dcGun.map(x=>x.slice(5)),dcGun.map(x=>dcGec[x][0]||0),'#5865F2'):'';
+    h+=kart('Discord İstatistikleri',dlK(dc.ad||'Sunucu')+' · Üye ve aktiflik özeti','<div class="dl-izgara d4" style="margin-bottom:'+(dcGraf?'12px':'0')+'">'+dcKutular+'</div>'+dcGraf);
+  }
+  const ig=p.instagram_ozet;
+  if(ig?.profil){
+    const pr=ig.profil, gs=(ig.gonderiler||[]).slice(0,8).reverse(), kisaS=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(n);
+    const tIz=gs.reduce((a,x)=>a+(x.views||x.reach||0),0), tBg=gs.reduce((a,x)=>a+(x.like_count||0),0), tYr=gs.reduce((a,x)=>a+(x.comments_count||0),0);
+    const igKutular=[['Takipçi',(pr.followers_count??'—').toLocaleString()],['Görüntüleme',kisaS(tIz)],['Beğeni',kisaS(tBg)],['Yorum',kisaS(tYr)]]
+      .map(([a,v])=>'<div class="dl-panel dl-sayac"><div class="etk">'+a+'</div><div class="deger" style="font-size:24px">'+v+'</div></div>').join('');
+    const igGraf=gs.length?dlCubukGrafik(gs.map(x=>(x.timestamp||'').slice(5,10)),[['Görüntüleme','#E1306C',gs.map(x=>x.views??x.reach??0)],['Beğeni','#D97757',gs.map(x=>x.like_count||0)],['Yorum','#5B8DD6',gs.map(x=>x.comments_count||0)]]):'';
+    h+=kart('Instagram İstatistikleri','@'+dlK(pr.username||'')+' · Son gönderilerin görüntüleme, beğeni ve yorumları','<div class="dl-izgara d4" style="margin-bottom:'+(igGraf?'12px':'0')+'">'+igKutular+'</div>'+igGraf);
+  }
   h+=kart('Haftalık buglar','Bulunan ve çözülen bug sayısı',dlCubukGrafik(et,[['Bulunan','#D0453A',hafta(p.bugs,'created')],['Çözülen','#5E9E6E',hafta(p.bugs,'done_at')]]));
   h+=kart('Haftalık görevler','Eklenen ve tamamlanan görev sayısı',dlCubukGrafik(et,[['Eklenen','#5B8DD6',hafta(p.todos,'created')],['Tamamlanan','#D97757',hafta(p.todos,'done_at')]]));
   const oran=H.map(w=>{ const son=new Date(w); son.setDate(son.getDate()+7); const ek=p.todos.filter(x=>(dlTarih(x.created)||son)<son); const b=ek.filter(x=>(dlTarih(x.done_at)||son)<son); return ek.length?Math.round(100*b.length/ek.length):0; });
@@ -2571,32 +2737,95 @@ function dlIgOzetCiz(){
   const topBegeni=gs.reduce((a,x)=>a+(x.like_count||0),0), topYorum=gs.reduce((a,x)=>a+(x.comments_count||0),0);
   const topIzlenme=gs.reduce((a,x)=>a+(x.views||x.reach||0),0);
   const kisaS=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(n);
-  let h='<div class="dl-kart" style="padding:16px;margin-bottom:14px">'+
-    '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px">'+
-      '<b style="font-size:15px;margin-right:4px">Instagram · @'+dlK(pr.username||'')+'</b>'+
-      (pr.followers_count!=null?'<span class="dl-rozet">👥 '+pr.followers_count.toLocaleString()+' '+L('takipçi','followers')+'</span>':'')+
-      (pr.media_count!=null?'<span class="dl-rozet">📷 '+pr.media_count+' '+L('gönderi','posts')+'</span>':'')+
-      (topIzlenme?'<span class="dl-rozet">👁️ '+kisaS(topIzlenme)+' '+L('görüntüleme','views')+'</span>':'')+
-      '<span class="dl-rozet">❤️ '+topBegeni+'</span>'+
-      '<span class="dl-rozet">💬 '+topYorum+'</span>'+
+  const stat=(v,etik)=>'<div style="text-align:center"><div style="font-size:15px;font-weight:700;line-height:1.1">'+v+'</div><div class="dl-kucuk" style="font-size:11px">'+etik+'</div></div>';
+  const av=pr.profile_picture_url?'<img src="'+dlK(pr.profile_picture_url)+'" style="width:52px;height:52px;border-radius:50%;object-fit:cover;display:block;border:2px solid var(--bg)">':'<div style="width:52px;height:52px;border-radius:50%;background:var(--kart);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;border:2px solid var(--bg)">'+dlK((pr.username||'I')[0].toUpperCase())+'</div>';
+  let h='<div class="dl-kart" style="padding:18px;margin-bottom:14px">'+
+    '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--cizgi);margin-bottom:14px">'+
+      '<div style="padding:2.5px;border-radius:50%;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);flex-shrink:0">'+av+'</div>'+
+      '<div style="min-width:120px"><div style="font-size:15.5px;font-weight:700">@'+dlK(pr.username||'')+'</div>'+
+        (pr.name?'<div class="dl-kucuk">'+dlK(pr.name)+'</div>':'<div class="dl-kucuk">Instagram</div>')+'</div>'+
+      '<div style="display:flex;gap:18px;flex-wrap:wrap;margin-left:8px">'+
+        (pr.media_count!=null?stat(pr.media_count,L('gönderi','posts')):'')+
+        (pr.followers_count!=null?stat(pr.followers_count.toLocaleString(),L('takipçi','followers')):'')+
+        (topIzlenme?stat(kisaS(topIzlenme),L('görüntüleme','views')):'')+
+        stat(kisaS(topBegeni),L('beğeni','likes'))+
+        stat(kisaS(topYorum),L('yorum','comments'))+
+      '</div>'+
       '<span style="flex:1"></span>'+
+      (ig.insights_hata&&!topIzlenme?'<span class="dl-rozet" title="'+dlK(ig.insights_hata)+'">👁️ '+L('İzin eksik','No insights scope')+'</span>':'')+
       '<button class="dl-dugme kucuk" onclick="dlIgTazele(true)">↻ '+L('Yenile','Refresh')+'</button></div>';
   if(gs.length){
-    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">';
-    for(const m of gs.slice(0,8)){
-      const img=m.thumbnail_url||m.media_url||'', v=m.views??m.reach;
-      const turEtik=m.media_type==='VIDEO'?'REELS':m.media_type==='CAROUSEL_ALBUM'?'ALBUM':'';
-      h+='<div class="dl-kart" style="padding:10px;cursor:pointer;display:flex;flex-direction:column;gap:8px;background:var(--bg)" onclick="linkAc(\''+dlK(m.permalink||'')+'\')">'+
-        '<div style="position:relative">'+(img?'<img src="'+dlK(img)+'" style="width:100%;height:124px;object-fit:cover;border-radius:8px;display:block">':'')+
-        (turEtik?'<span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,.68);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:5px">'+turEtik+'</span>':'')+'</div>'+
-        '<div style="font-size:12.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px">'+dlK((m.caption||'').replace(/\s+/g,' ')||'('+m.media_type+')')+'</div>'+
-        '<div class="dl-kucuk" style="display:flex;align-items:center;gap:10px;padding-top:4px;border-top:1px solid var(--cizgi)">'+
+    h+='<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">';
+    for(let idx=0;idx<Math.min(gs.length,9);idx++){
+      const m=gs[idx], img=m.thumbnail_url||m.media_url||'', v=m.views??m.reach;
+      const turEtik=m.media_type==='VIDEO'?'▶ REELS':m.media_type==='CAROUSEL_ALBUM'?'❐ ALBUM':'';
+      h+='<div onclick="dlIgDetayAc('+idx+')" title="'+dlK((m.caption||'').replace(/\s+/g,' '))+'" style="position:relative;aspect-ratio:1/1;border-radius:10px;overflow:hidden;cursor:pointer;background:var(--bg);border:1px solid var(--cizgi)">'+
+        (img?'<img src="'+dlK(img)+'" style="width:100%;height:100%;object-fit:cover;display:block">':'')+
+        (turEtik?'<span style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,.65);color:#fff;font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px;letter-spacing:.3px">'+turEtik+'</span>':'')+
+        '<div style="position:absolute;inset:auto 0 0 0;padding:22px 10px 8px;background:linear-gradient(transparent,rgba(0,0,0,.82));color:#fff;display:flex;align-items:center;gap:10px;font-size:12px;white-space:nowrap">'+
           (v!=null?'<span>👁️ '+kisaS(v)+'</span>':'')+'<span>❤️ '+(m.like_count??0)+'</span><span>💬 '+(m.comments_count??0)+'</span>'+
-          '<span style="margin-left:auto;opacity:.75">'+dlK((m.timestamp||'').slice(0,10))+'</span></div></div>';
+          '<span style="margin-left:auto;opacity:.8;font-size:11px">'+dlK((m.timestamp||'').slice(5,10))+'</span></div></div>';
     }
     h+='</div>';
   }
   return h+'</div>';
+}
+
+async function dlIgDetayAc(idx){
+  const ig=dlP().instagram_ozet, pr=ig?.profil||{}, m=(ig?.gonderiler||[])[idx];
+  if(!m) return;
+  const en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  const ogeler=(m.children?.data&&m.children.data.length)?m.children.data:[{media_type:m.media_type,media_url:m.media_url,thumbnail_url:m.thumbnail_url}];
+  let si=0;
+  const kisaS=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(n);
+  const v=m.views??m.reach;
+  pencereAc('<div style="display:flex;width:100%;height:100%;overflow:hidden">'+
+    '<div id="igMedyaAlan" style="flex:1.25;background:#000;position:relative;display:flex;align-items:center;justify-content:center;min-width:0"></div>'+
+    '<div style="flex:1;display:flex;flex-direction:column;min-width:280px;max-width:400px;border-left:1px solid var(--cizgi)">'+
+      '<div style="display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--cizgi)">'+
+        '<b style="flex:1">@'+dlK(pr.username||'')+'</b>'+
+        (m.permalink?'<a class="a-link" style="font-size:12.5px" onclick="linkAc(\''+dlK(m.permalink)+'\')">Instagram ↗</a>':'')+
+        '<button class="ikon" onclick="pencereKapat()">✕</button></div>'+
+      '<div style="flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:14px">'+
+        '<div style="font-size:13.5px;line-height:1.5;white-space:pre-wrap">'+dlK(m.caption||L('(Açıklama yok)','(No caption)'))+'</div>'+
+        '<div style="display:flex;gap:12px;flex-wrap:wrap;padding:10px 0;border-top:1px solid var(--cizgi);border-bottom:1px solid var(--cizgi);font-size:13px">'+
+          (v!=null?'<span>👁️ <b>'+kisaS(v)+'</b></span>':'')+
+          '<span>❤️ <b>'+(m.like_count??0)+'</b></span>'+
+          '<span>💬 <b>'+(m.comments_count??0)+'</b></span>'+
+          '<span class="dl-kucuk" style="margin-left:auto">'+dlK((m.timestamp||'').slice(0,10))+'</span></div>'+
+        '<div><div class="a-baslik" style="margin-bottom:8px;font-size:13px">'+L('Yorumlar','Comments')+'</div>'+
+        '<div id="igYorumListe" class="dl-kucuk">'+L('Yorumlar yükleniyor…','Loading comments…')+'</div></div>'+
+      '</div></div></div>');
+  $('pencere').classList.add('genis');
+  const medyaCiz=()=>{
+    const alan=$('igMedyaAlan'); if(!alan) return;
+    const x=ogeler[si], src=x.media_url||x.thumbnail_url||'';
+    let mh=x.media_type==='VIDEO'
+      ?'<video src="'+dlK(src)+'" controls autoplay playsinline style="max-width:100%;max-height:100%;outline:none"></video>'
+      :'<img src="'+dlK(src)+'" style="max-width:100%;max-height:100%;object-fit:contain">';
+    if(ogeler.length>1){
+      mh+='<button id="igPrev" style="position:absolute;left:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:18px">‹</button>'+
+          '<button id="igNext" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;border:none;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:18px">›</button>'+
+          '<div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;padding:3px 10px;border-radius:999px;font-size:11.5px">'+(si+1)+' / '+ogeler.length+'</div>';
+    }
+    alan.innerHTML=mh;
+    if($('igPrev')) $('igPrev').onclick=()=>{ si=(si-1+ogeler.length)%ogeler.length; medyaCiz(); };
+    if($('igNext')) $('igNext').onclick=()=>{ si=(si+1)%ogeler.length; medyaCiz(); };
+  };
+  medyaCiz();
+  let yr=null;
+  try{ yr=await (await fetch('/dl/api',{method:'POST',body:JSON.stringify({islem:'instagram_yorumlar',media_id:m.id})})).json(); }catch(e){}
+  const yl=$('igYorumListe'); if(!yl) return;
+  if(yr?.hata&&!(yr.yorumlar||[]).length){ yl.innerHTML='<span class="hata-yazi">'+dlK(yr.hata)+'</span>'; return; }
+  const yorumlar=yr?.yorumlar||[];
+  if(!yorumlar.length){ yl.textContent=L('Henüz yorum yok.','No comments yet.'); return; }
+  yl.innerHTML=yorumlar.map(c=>{
+    const yanit=(c.replies?.data||[]).map(rp=>'<div style="margin:6px 0 0 14px;padding-left:8px;border-left:2px solid var(--cizgi)"><b>@'+dlK(rp.username||'?')+'</b> '+dlK(rp.text||'')+'</div>').join('');
+    return '<div style="padding:8px 0;border-bottom:1px solid var(--cizgi);font-size:13px;color:var(--yazi)">'+
+      '<div><b>@'+dlK(c.username||'?')+'</b> '+dlK(c.text||'')+'</div>'+
+      '<div class="dl-kucuk" style="margin-top:3px;display:flex;gap:10px"><span>'+dlK((c.timestamp||'').slice(0,10))+'</span>'+(c.like_count?'<span>❤️ '+c.like_count+'</span>':'')+'</div>'+yanit+'</div>';
+  }).join('');
 }
 
 function dlSosyalPaylasAc(resimYol=''){
@@ -2684,10 +2913,11 @@ async function dlIndirilenlerAc(e){
   }
   liste.innerHTML=d.ogeler.map((x,i)=>{
     const dt=new Date(x.zaman*1000).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    const mb=x.boyut!=null?(x.boyut>=1048576?(x.boyut/1048576).toFixed(2)+' MB':Math.max(1,Math.round(x.boyut/1024))+' KB'):'';
     return '<div class="di-satir" data-iac="'+i+'">'+
       '<img src="'+dlK(x.url)+'">'+
       '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+dlK(x.ad)+'</div>'+
-      '<div class="dl-kucuk">'+dt+'</div></div>'+
+      '<div class="dl-kucuk">'+dt+(mb?' · '+mb:'')+'</div></div>'+
       '<button class="ikon" style="width:28px;height:28px" data-igos="'+i+'" title="'+L('Klasörde göster','Reveal in folder')+'">'+dlI('disari',14)+'</button></div>';
   }).join('');
   liste.querySelectorAll('[data-iac]').forEach(el=>el.onclick=()=>fetch('/api/dosya-ac',{method:'POST',body:JSON.stringify({yol:d.ogeler[+el.dataset.iac].yol})}));
@@ -2782,7 +3012,9 @@ ayarBolumuCiz=async function(){
   let h='<h3>Devlog · '+(typeof t==='function'&&t('bolum')?.[B[0]]?t('bolum')[B[0]]:B[1])+'</h3>';
   if(ayarBolumu==='dl_proje'){
     const hd=dlHedef();
+    const pResimOn=p.project_icon?'<img src="'+dlResimUrl(p.project_icon)+'" style="width:32px;height:32px;border-radius:8px;object-fit:cover;border:1px solid var(--cizgi)">':'';
     h+=ayarSatiri(L('Proje adı','Project name'),L('Panelde, paylaşım görsellerinde ve Discord mesajlarında görünür.','Shown on the dashboard, share cards, and Discord posts.'),'<input type="text" id="adPAd" class="a-girdi" value="'+dlK(p.project)+'">')+
+       ayarSatiri(L('Proje resmi','Project image'),L('Devlog sol üstteki proje simgesi olarak görünür.','Shown as the project icon in the top-left of Devlog.'),'<div style="display:flex;align-items:center;gap:8px">'+pResimOn+'<input type="file" id="adPResDosya" accept="image/*" class="gizle"><button class="a-dugme" id="adPResBtn">'+L('Resim seç','Choose image')+'</button>'+(p.project_icon?'<button class="a-dugme tehlike" id="adPResSil">'+L('Kaldır','Remove')+'</button>':'')+'</div>')+
        ayarSatiri(L('Hedef sürüm','Target version'),hd?dlK(dlV(hd.v))+(hd.tarih?' · '+dlK(dlGunYaz(hd.tarih,true))+' ('+dlK(dlGoreli(hd.tarih))+')':L(' · tarih yok',' · no date')):L('Belirlenmedi. Panelde geri sayım için bir sürüm ve tarih seç.','Not set. Pick a version and date for the dashboard countdown.'),'<button class="a-dugme" id="adHedef">'+(hd?L('Değiştir','Change'):L('Belirle','Set'))+'</button>')+
        '<div class="a-satir dikey"><div class="a-baslik" style="display:flex;align-items:center"><span style="flex:1">'+L('Projeler','Projects')+'</span><button class="a-dugme birincil" id="adYeni">'+L('Yeni proje','New project')+'</button></div>'+
        '<div class="a-aciklama">'+L('Her oyunun verisi ayrı tutulur. Devlog\'da sol üstteki proje kutusundan geçiş yaparsın.','Each project keeps its own data. Switch projects from the top-left selector.')+'</div>'+
@@ -2790,6 +3022,14 @@ ayarBolumuCiz=async function(){
          (id!==DL.s.proje_id?'<button class="a-dugme" data-gec="'+id+'">'+L('Aç','Open')+'</button>':'')+(DL.s.projeler.length>1?'<button class="a-dugme tehlike" data-sil="'+id+'">'+L('Sil','Delete')+'</button>':'')+'</div>').join('')+'</div>';
     ic.innerHTML=h;
     $('adPAd').onchange=e=>e.target.value.trim()&&yaz({project:e.target.value.trim()});
+    $('adPResBtn').onclick=()=>$('adPResDosya').click();
+    $('adPResDosya').onchange=e=>{
+      const f=e.target.files?.[0]; if(!f) return;
+      const r=new FileReader();
+      r.onload=async()=>{ const y=await dl('resim_yukle',{veri:String(r.result||''),uzanti:f.name.split('.').pop()||'png'},{cizme:true}); if(y?.dosya){ await yaz({project_icon:y.dosya},true); } };
+      r.readAsDataURL(f);
+    };
+    if($('adPResSil')) $('adPResSil').onclick=()=>yaz({project_icon:''},true);
     $('adHedef').onclick=()=>dlHedefDuzenle();
     $('adYeni').onclick=()=>dlYeniProje();
     ic.querySelectorAll('[data-gec]').forEach(b=>b.onclick=async()=>{ await dl('proje_gec',{id:b.dataset.gec},{cizme:true}); if(DL.mod==='devlog') dlCiz(); ayarBolumuCiz(); });
@@ -2874,20 +3114,25 @@ ayarBolumuCiz=async function(){
     const sa=DL.s.sosyal||{webhook:{}};
     h+=ayarSatiri(L('Stüdyo adı','Studio name'),L('Discord kartının ve paylaşım görsellerinin üstünde “Stüdyo · Proje” olarak görünür. Boş bırakabilirsin.','Shown as "Studio · Project" on Discord cards and share images. Optional.'),'<input type="text" id="adSt" class="a-girdi" value="'+dlK(DL.s.kok.profile?.studio||'')+'">')+
        ayarSatiri(L('Steam mağaza sayfası','Steam store page'),p.steam_appid?'App ID: '+dlK(p.steam_appid)+(p.steam?.name?' · '+dlK(p.steam.name):''):L('Panelde fiyat, değerlendirme ve oyuncu sayısını gösterir.','Shows price, reviews, and player count on the dashboard.'),'<button class="a-dugme" id="adSteam">'+(p.steam_appid?L('Değiştir','Change'):L('Bağla','Connect'))+'</button>');
+    const whBagli=Boolean(sa.webhook?.bagli), igBagli=Boolean(sa.instagram?.bagli);
     h+='<div class="a-alt-baslik">'+L('Sosyal Medya (n8n Webhook)','Social Media (n8n Webhook)')+'</div>'+
-       '<div class="a-satir dikey"><div class="a-baslik">n8n Webhook URL '+(sa.webhook?.bagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
-       '<div class="a-aciklama">'+L('İçerik Takvimi veya Görsel Oluştur ekranından seçtiğin platformlara (X, Instagram, Reddit, YouTube, TikTok) n8n üzerinden paylaşır.','Posts to your selected platforms via n8n from Content Calendar or Generate Image.')+'</div>'+
-       '<input type="password" id="saWUrl" class="a-girdi" placeholder="http://localhost:5678/webhook/…">'+
-       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saWOk">'+L('Kaydet','Save')+'</button>'+(sa.webhook?.bagli?'<button class="a-dugme tehlike" id="saWSil">'+L('Kaldır','Disconnect')+'</button>':'')+'</div></div>';
-    h+='<div class="a-satir dikey"><div class="a-baslik">Instagram İstatistik Token\'ı '+(sa.instagram?.bagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
-       '<div class="a-aciklama">'+L('İçerik Takvimi\'nde Instagram gönderilerini ve beğeni/yorum istatistiklerini görmek için Meta Portal\'dan aldığın IGAA token\'ını gir.','Paste your Meta Instagram token (IGAA…) to display posts & stats in Content Calendar.')+'</div>'+
-       '<input type="password" id="saIgTok" class="a-girdi" placeholder="IGAA…">'+
-       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saIgOk">'+L('Kaydet','Save')+'</button>'+(sa.instagram?.bagli?'<button class="a-dugme tehlike" id="saIgSil">'+L('Kaldır','Disconnect')+'</button>':'')+'</div></div>';
+       '<div class="a-satir dikey"><div class="a-baslik">n8n Webhook URL '+(whBagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
+       '<div class="a-aciklama">'+L('Sosyal Medya veya Görsel Oluştur ekranından seçtiğin platformlara (X, Instagram, Reddit, YouTube, TikTok) n8n üzerinden paylaşır.','Posts to your selected platforms via n8n from Social Media or Generate Image.')+'</div>'+
+       '<div id="saWAlan"'+(whBagli?' class="gizle"':'')+'><input type="password" id="saWUrl" class="a-girdi" placeholder="http://localhost:5678/webhook/…">'+
+       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saWOk">'+L('Kaydet','Save')+'</button></div></div>'+
+       (whBagli?'<div id="saWBtns" style="display:flex;gap:8px;margin-top:6px"><button class="a-dugme" id="saWDeg">'+L('Değiştir','Change')+'</button><button class="a-dugme tehlike" id="saWSil">'+L('Kaldır','Disconnect')+'</button></div>':'')+'</div>';
+    h+='<div class="a-satir dikey"><div class="a-baslik">Instagram İstatistik Token\'ı '+(igBagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
+       '<div class="a-aciklama">'+L('Sosyal Medya\'da Instagram gönderilerini ve beğeni/yorum istatistiklerini görmek için Meta Portal\'dan aldığın token\'ı gir.','Paste your Meta Instagram token to display posts & stats in Social Media.')+'</div>'+
+       '<div id="saIgAlan"'+(igBagli?' class="gizle"':'')+'><input type="password" id="saIgTok" class="a-girdi" placeholder="EAA… / IGAA…">'+
+       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saIgOk">'+L('Kaydet','Save')+'</button></div></div>'+
+       (igBagli?'<div id="saIgBtns" style="display:flex;gap:8px;margin-top:6px"><button class="a-dugme" id="saIgDeg">'+L('Değiştir','Change')+'</button><button class="a-dugme tehlike" id="saIgSil">'+L('Kaldır','Disconnect')+'</button></div>':'')+'</div>';
     ic.innerHTML=h;
     $('adSt').onchange=e=>yaz({studio:e.target.value.trim()});
     $('adSteam').onclick=()=>dlSteamBagla();
+    if($('saWDeg')) $('saWDeg').onclick=()=>{ $('saWAlan').classList.remove('gizle'); $('saWBtns').classList.add('gizle'); $('saWUrl').focus(); };
     $('saWOk').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'webhook',veri:{url:$('saWUrl').value}},{cizme:true}); await dl('durum',{},{cizme:true}); tost(L('Kaydedildi','Saved')); ayarBolumuCiz(); };
     if($('saWSil')) $('saWSil').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'webhook',veri:null},{cizme:true}); await dl('durum',{},{cizme:true}); ayarBolumuCiz(); };
+    if($('saIgDeg')) $('saIgDeg').onclick=()=>{ $('saIgAlan').classList.remove('gizle'); $('saIgBtns').classList.add('gizle'); $('saIgTok').focus(); };
     $('saIgOk').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'instagram',veri:{token:$('saIgTok').value}},{cizme:true}); await dl('durum',{},{cizme:true}); tost(L('Kaydedildi','Saved')); ayarBolumuCiz(); };
     if($('saIgSil')) $('saIgSil').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'instagram',veri:null},{cizme:true}); await dl('durum',{},{cizme:true}); ayarBolumuCiz(); };
   } else if(ayarBolumu==='dl_bulut'){
@@ -2945,15 +3190,6 @@ ayarBolumuCiz=async function(){
       if(!b.dataset.onay){ b.dataset.onay='1'; b.textContent=L('Emin misin?','Are you sure?'); return; }
       if(await dl('yedek_geri',{ad:b.dataset.y},{cizme:true})){ tost(L('Yedek geri yüklendi','Backup restored')); if(DL.mod==='devlog') dlCiz(); ayarBolumuCiz(); } });
   }
-};
-// Profil menüsüne Devlog kısayolları
-const _focusProfilMenusu=profilMenusu;
-profilMenusu=function(e){
-  _focusProfilMenusu(e);
-  const ay=$('profilMenu').querySelector('.ayrac'); if(!ay) return;
-  ay.insertAdjacentHTML('beforebegin','<div class="ayrac"></div>'+
-    dlSecenek('releases',DL.mod==='devlog'?'Focus\'a geç':'Devlog\'a geç',"modGec(DL.mod==='devlog'?'focus':'devlog')",'<span class="kisayol">Ctrl+'+(DL.mod==='devlog'?'1':'2')+'</span>')+
-    dlSecenek('settings','Devlog ayarları',"ayarlariAc('dl_proje')"));
 };
 
 // =====================================================================
@@ -3367,7 +3603,7 @@ if(innerWidth<=820) $('dlYan').classList.add('gizli');
 const _dlSayfaAc=dlSayfaAc;
 dlSayfaAc=function(s,g){ _dlSayfaAc(s,g); if(innerWidth<=820&&!$('dlYan').classList.contains('gizli')) yanAcKapa(); altMenuCiz(); };
 function altMenuCiz(){
-  const o=[['dashboard','Panel'],['todos','Görevler'],['bugs','Buglar'],['releases','Sürümler'],['ideas','Fikirler']];
+  const o=[['dashboard',L('Panel','Dashboard')],['todos',L('Görevler','Tasks')],['bugs',L('Buglar','Bugs')],['releases',L('Sürümler','Releases')],['ideas',L('Fikirler','Ideas')]];
   $('altMenu').innerHTML=o.map(([s,a])=>'<button class="'+(DL.sayfa===s?'secili':'')+'" onclick="dlSayfaAc(\''+s+'\')">'+dlI(s,21)+a+'</button>').join('');
 }
 // Bilgisayara özel parçaları gizle
