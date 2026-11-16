@@ -530,10 +530,18 @@
   #modGecis button.secili{background:var(--kart);color:var(--yazi);box-shadow:0 1px 3px var(--golge);font-weight:500}
   #dlBulutBtn{position:relative;margin-right:6px}
   #dlBulutBtn i{position:absolute;right:4px;top:4px;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--bg)}
-  body:not(.mod-devlog) #dlBulutBtn{display:none!important}
+  #dlIndirBtn{margin-right:6px}
+  body:not(.mod-devlog) #dlBulutBtn,body:not(.mod-devlog) #dlIndirBtn{display:none!important}
+  #dlIndirMenu{position:fixed;top:46px;right:140px;width:350px;max-height:460px;background:var(--kart);border:1px solid var(--cizgi);border-radius:14px;box-shadow:0 12px 36px rgba(0,0,0,.35);z-index:1200;display:flex;flex-direction:column;overflow:hidden}
+  #dlIndirMenu.gizle{display:none!important}
+  #dlIndirMenu .di-ust{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid var(--cizgi);font-weight:600;font-size:14px}
+  #dlIndirMenu .di-liste{overflow-y:auto;padding:8px;display:flex;flex-direction:column;gap:4px}
+  #dlIndirMenu .di-satir{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:10px;cursor:pointer}
+  #dlIndirMenu .di-satir:hover{background:var(--uzerinde)}
+  #dlIndirMenu .di-satir img{width:38px;height:38px;object-fit:cover;border-radius:7px;flex-shrink:0;border:1px solid var(--cizgi)}
   #dlBaslik{display:none;font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   body.mod-devlog #dlBaslik{display:inline}
-  body.mod-devlog #baslik,body.mod-devlog #yan,body.mod-devlog main,body.mod-devlog #panel,
+  body.mod-devlog #baslik,body.mod-devlog #yan,body.mod-devlog main,body.mod-devlog #panel,body.mod-devlog #comfy,
   body.mod-devlog #kopyalaBtn,body.mod-devlog #panelBtn{display:none!important}
   #dl{display:none;flex:1;min-width:0;min-height:0}
   body.mod-devlog #dl{display:flex}
@@ -884,7 +892,7 @@
   </div>
   <div class="ub-orta"><span id="baslik" class="gizle"></span><span id="dlBaslik"></span></div>
   <button class="ikon" id="esitBtn" onclick="esitleDugme()" title="Eşitle"></button>
-  <div class="gizle"><button class="ikon gizle" id="dlBulutBtn" onclick="dlBulutTikla()" oncontextmenu="event.preventDefault();ayarlariAc('dl_bulut')"></button>
+  <div class="gizle"><button class="ikon" id="dlIndirBtn" onclick="dlIndirilenlerAc(event)" title="İndirilenler"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></button><div id="dlIndirMenu" class="gizle" onclick="event.stopPropagation()"></div><button class="ikon gizle" id="dlBulutBtn" onclick="dlBulutTikla()" oncontextmenu="event.preventDefault();ayarlariAc('dl_bulut')"></button>
   <div id="modGecis" title="Ctrl+1 / Ctrl+2">
     <button id="modFocus" class="secili" onclick="modGec('focus')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Focus</button>
     <button id="modDevlog" onclick="modGec('devlog')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>Devlog</button>
@@ -914,7 +922,7 @@
 <nav id="altMenu"></nav>
 <div id="perde" class="perde gizle"><div class="pencere" id="pencere"></div></div>
 <div id="kurulum" class="gizle"></div>
-<script>const AYAR0={"repo": "zombiaofficial/zombia-devlog", "ad": "", "surum": "1.0.0", "sabit": {"bolumler": {"releases": {"title": "Sürüm Notları", "icon": "◆", "singular": "sürüm", "main": "version", "subtitle": "Oyunun her sürümünde neler değişti", "filter": null, "fields": [["version", "Sürüm numarası", "entry", null], ["title", "Başlık", "entry", null], ["date", "Tarih", "entry", null], ["kind", "Tür", "choice", ["Major", "Minor", "Yama", "Test"]]]}, "todos": {"title": "Görevler", "icon": "☐", "singular": "görev", "main": "title", "subtitle": "Sırada bekleyen işler", "filter": "status", "fields": [["title", "Görev", "entry", null], ["priority", "Öncelik", "choice", ["Düşük", "Orta", "Yüksek"]], ["status", "Durum", "choice", ["Yapılacak", "Devam ediyor", "Bitti"]], ["category", "Kategori", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["version", "Sürüm  (hangi sürümde çıkacak / kapandı)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Detaylar", "text", null]]}, "bugs": {"title": "Buglar", "icon": "⚑", "singular": "bug", "main": "title", "subtitle": "Bulunan hatalar ve durumları", "filter": "status", "fields": [["title", "Bug başlığı", "entry", null], ["severity", "Önem", "choice", ["Düşük", "Orta", "Yüksek", "Kritik"]], ["status", "Durum", "choice", ["Açık", "İnceleniyor", "Çözüldü"]], ["version", "Sürüm  (görüldüğü / çözüleceği)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["steps", "Nasıl oluşuyor? (adımlar)", "text", null], ["images", "Ekran görüntüleri", "images", null]]}, "ideas": {"title": "Fikirler", "icon": "✦", "singular": "fikir", "main": "title", "subtitle": "Aklına gelenleri kaybetme", "filter": null, "fields": [["title", "Fikir", "entry", null], ["tag", "Alan", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Açıklama", "text", null], ["link", "Bağlantı", "entry", null], ["images", "Görseller", "images", null]]}, "press": {"title": "Basın materyali", "icon": "▣", "singular": "materyal", "main": "title", "subtitle": "Ekran görüntüsü, trailer, GIF: hangisi hazır, hangisi eskidi", "filter": "status", "fields": [["title", "Materyal", "entry", null], ["type", "Tür", "choice", ["Ekran görüntüsü", "Trailer", "GIF", "Logo", "Kapak görseli", "Basın bülteni", "Diğer"]], ["status", "Durum", "choice", ["Planlandı", "Hazırlanıyor", "Hazır", "Eskidi"]], ["version", "İlgili sürüm", "version", null], ["link", "Dosya yolu ya da bağlantı", "entry", null], ["notes", "Notlar", "text", null]]}, "social": {"title": "İçerik takvimi", "icon": "◫", "singular": "paylaşım", "main": "title", "subtitle": "Ne zaman, nerede, ne paylaşılacak", "filter": "status", "fields": [["title", "İçerik", "entry", null], ["platform", "Platform", "choice", ["X / Twitter", "Instagram", "TikTok", "YouTube", "Reddit", "Discord", "Steam", "Diğer"]], ["date", "Tarih (YYYY-AA-GG)", "date", null], ["status", "Durum", "choice", ["Planlandı", "Hazır", "Paylaşıldı"]], ["notes", "Metin / notlar", "text", null]]}, "learning": {"title": "Öğrenme günlüğü", "icon": "✎", "singular": "kayıt", "main": "title", "subtitle": "Öğrendiğin teknikler, tutorial'lar ve dokümanlar", "filter": "kind", "fields": [["title", "Konu", "entry", null], ["kind", "Tür", "choice", ["Tutorial", "Doküman", "Video", "Kurs", "Kendi notum"]], ["link", "Bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Ne öğrendim?", "text", null]]}, "references": {"title": "Referans oyunlar", "icon": "★", "singular": "oyun", "main": "title", "subtitle": "İlham aldığın ve analiz ettiğin oyunlar", "filter": null, "fields": [["title", "Oyun", "entry", null], ["genre", "Tür", "entry", null], ["rating", "Puanım", "choice", ["★", "★★", "★★★", "★★★★", "★★★★★"]], ["link", "Steam / bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Neyi beğendim, ne alabilirim?", "text", null]]}}, "sayfalar": {"dashboard": ["⌂", "Panel"], "roadmap": ["➚", "Yol haritası"], "timeline": ["◷", "Zaman çizelgesi"], "stats": ["▤", "İstatistikler"], "checklist": ["☑", "Yayın kontrol listesi"], "discord": ["◎", "Discord"], "trash": ["⌫", "Çöp kutusu"], "settings": ["☰", "Ayarlar"]}, "nav": [[null, ["dashboard"]], ["BÖLÜMLER", ["releases", "todos", "bugs", "ideas"]], ["PLANLAMA", ["roadmap", "timeline", "stats"]], ["YAYIN", ["checklist", "discord", "press", "social"]], ["KİŞİSEL", ["learning", "references"]]], "renkler": {"Düşük": "#7A9E6B", "Orta": "#C9A227", "Yüksek": "#D97757", "Kritik": "#D0453A", "Yapılacak": "#8A8780", "Devam ediyor": "#5B8DD6", "Bitti": "#5E9E6E", "Açık": "#D0453A", "İnceleniyor": "#C9A227", "Çözüldü": "#5E9E6E", "Major": "#D97757", "Minor": "#5B8DD6", "Yama": "#5E9E6E", "Test": "#8A8780", "Planlandı": "#8A8780", "Hazırlanıyor": "#5B8DD6", "Hazır": "#5E9E6E", "Eskidi": "#D0453A", "Paylaşıldı": "#5E9E6E", "★★★★★": "#C9A227", "★★★★": "#C9A227", "★★★": "#C9A227", "★★": "#C9A227", "★": "#C9A227"}, "varsayilan_kategoriler": ["Arayüz & Grafik", "Araçlar", "Bilinen Sorunlar", "Düzeltmeler", "Etkileşim Sistemleri", "Genel", "Harita & Yapılar", "Hava & Kar Sistemi", "Kayıt Sistemi", "Optimizasyon", "Ses & Müzik", "Yeni Özellikler", "Zombi Yapay Zekası", "Çok Oyunculu"], "kontrol_listesi": ["Build yüklendi ve test edildi", "Sürüm notları hazır", "Steam sayfası güncel", "Kapak / başlık görseli hazır", "Ekran görüntüleri güncel", "Trailer / GIF hazır", "Fiyat ve çıkış tarihi ayarlandı", "Discord duyurusu atıldı", "Sosyal medya paylaşımları planlandı"], "done": {"todos": ["status", "Bitti", "Yapılacak", "Yapıldı"], "bugs": ["status", "Çözüldü", "Açık", "Çözüldü"]}, "pillow": false, "yedek_secenek": {"Kapalı": 0, "Her gün": 1, "3 günde bir": 3, "Haftada bir": 7}, "kategoriler": ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"], "varsayilan_secim": {"priority": "Orta", "severity": "Orta", "kind": "Minor"}, "cop_gun": 30}, "yeni_proje": {"project": "Yeni proje", "collapsed": {}, "cat_version": 2, "categories": [{"name": "Düzeltmeler", "tier": 1, "color": "#5E9E6E", "aliases": ["düzeltmeler", "düzeltme", "hata düzeltmeleri", "fixes", "fix", "bug fixes"], "keywords": ["düzelt", "düzeltme", "hata", "giderildi", "çözüldü", "sorun", "fix", "bug", "error", "corrected", "no longer"]}, {"name": "Yeni Özellikler", "tier": 3, "color": "#D97757", "aliases": ["yeni özellikler", "yenilikler", "new features", "features"], "keywords": ["yeni", "eklendi", "eklen", "new", "added", "introduc"]}, {"name": "Harita & Yapılar", "tier": 2, "color": "#B5835A", "aliases": ["harita & yapılar", "harita ve yapılar", "harita", "yapılar", "map", "world"], "keywords": ["harita", "kasaba", "şehir", "ev", "evler", "yapı", "bina", "işyeri", "dükkân", "dükkan", "foundation", "çit", "otopark", "yol", "kaldırım", "map", "town", "building", "house", "road", "sidewalk", "fence"]}, {"name": "Zombi Yapay Zekası", "tier": 2, "color": "#8E6BBF", "aliases": ["zombi yapay zekası", "yapay zeka", "ai", "zombi ai"], "keywords": ["zombi", "sürü", "yapay zeka", "görüş", "duyuyor", "duyma", "kovala", "tırman", "ai", "zombie", "horde", "enemy", "chase", "pursuit", "swarm"]}, {"name": "Etkileşim Sistemleri", "tier": 2, "color": "#C77D4F", "aliases": ["etkileşim sistemleri", "etkileşim", "interaction"], "keywords": ["etkileşim", "kapı", "pencere", "düğme", "ışık", "oturma", "mobilya", "interact", "door", "window", "switch"]}, {"name": "Hava & Kar Sistemi", "tier": 2, "color": "#5B8DD6", "aliases": ["hava & kar sistemi", "hava ve kar sistemi", "hava", "kar sistemi", "weather and snow system", "weather"], "keywords": ["kar", "hava", "yağmur", "fırtına", "erime", "snow", "weather", "rain", "melt"]}, {"name": "Araçlar", "tier": 2, "color": "#6B8E9E", "aliases": ["araçlar", "araç", "vehicles"], "keywords": ["araç", "araba", "sürüş", "kamyonet", "vehicle", "car", "driving"]}, {"name": "Kayıt Sistemi", "tier": 2, "color": "#7A9E6B", "aliases": ["kayıt sistemi", "kayıt", "save system"], "keywords": ["kayıt", "kaydedil", "geri yüklen", "save", "load game"]}, {"name": "Arayüz & Grafik", "tier": 2, "color": "#9E6B8E", "aliases": ["arayüz & grafik", "arayüz", "grafik", "ui", "interface"], "keywords": ["arayüz", "menü", "ayar", "gamepad", "kumanda", "çözünürlük", "grafik", "görüntü modu", "ui", "menu", "settings", "resolution"]}, {"name": "Optimizasyon", "tier": 2, "color": "#C9A227", "aliases": ["optimizasyon", "optimizasyon & motor", "performans", "optimization & engine", "optimization", "performance"], "keywords": ["optimiz", "performans", "fps", "ms", "takılma", "nanite", "tsr", "bellek", "yükleme", "gc", "performance", "stutter", "frame", "triangle", "memory", "loading", "engine"]}, {"name": "Ses & Müzik", "tier": 2, "color": "#3E9C9C", "aliases": ["ses & müzik", "ses", "müzik", "audio", "sound"], "keywords": ["ses", "müzik", "silah sesi", "audio", "sound", "gunshot", "music"]}, {"name": "Çok Oyunculu", "tier": 2, "color": "#5B6FD6", "aliases": ["çok oyunculu", "multiplayer", "co-op"], "keywords": ["multiplayer", "çok oyunculu", "co-op", "client", "host", "senkron", "online"]}, {"name": "Genel", "tier": 4, "color": "#8A8780", "aliases": ["genel", "general"], "keywords": []}, {"name": "Bilinen Sorunlar", "tier": 0, "color": "#D0453A", "aliases": ["bilinen sorunlar", "bilinen hatalar", "known issues"], "keywords": ["bilinen", "henüz", "olabilir", "görülebilir", "known issue", "may", "might", "not yet", "can appear"]}], "ai": {"url": "http://localhost:11434", "model": "qwen2.5-coder:7b", "lang": "Aynen"}, "discord_webhook": "", "goal": {"version": "", "date": ""}, "checklists": {}, "trash": [], "releases": [], "todos": [], "bugs": [], "ideas": [], "press": [], "social": [], "learning": [], "references": []}, "ay_tr": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], "ay_en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]};</script>
+<script>const AYAR0={"repo": "zombiaofficial/zombia-devlog", "ad": "", "surum": "1.0.0", "sabit": {"bolumler": {"releases": {"title": "Sürüm Notları", "icon": "◆", "singular": "sürüm", "main": "version", "subtitle": "Oyunun her sürümünde neler değişti", "filter": null, "fields": [["version", "Sürüm numarası", "entry", null], ["title", "Başlık", "entry", null], ["date", "Tarih", "entry", null], ["kind", "Tür", "choice", ["Major", "Minor", "Yama", "Test"]]]}, "todos": {"title": "Görevler", "icon": "☐", "singular": "görev", "main": "title", "subtitle": "Sırada bekleyen işler", "filter": "status", "fields": [["title", "Görev", "entry", null], ["priority", "Öncelik", "choice", ["Düşük", "Orta", "Yüksek"]], ["status", "Durum", "choice", ["Yapılacak", "Devam ediyor", "Bitti"]], ["category", "Kategori", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["version", "Sürüm  (hangi sürümde çıkacak / kapandı)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Detaylar", "text", null]]}, "bugs": {"title": "Buglar", "icon": "⚑", "singular": "bug", "main": "title", "subtitle": "Bulunan hatalar ve durumları", "filter": "status", "fields": [["title", "Bug başlığı", "entry", null], ["severity", "Önem", "choice", ["Düşük", "Orta", "Yüksek", "Kritik"]], ["status", "Durum", "choice", ["Açık", "İnceleniyor", "Çözüldü"]], ["version", "Sürüm  (görüldüğü / çözüleceği)", "version", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["steps", "Nasıl oluşuyor? (adımlar)", "text", null], ["images", "Ekran görüntüleri", "images", null]]}, "ideas": {"title": "Fikirler", "icon": "✦", "singular": "fikir", "main": "title", "subtitle": "Aklına gelenleri kaybetme", "filter": null, "fields": [["title", "Fikir", "entry", null], ["tag", "Alan", "choice", ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"]], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["details", "Açıklama", "text", null], ["link", "Bağlantı", "entry", null], ["images", "Görseller", "images", null]]}, "press": {"title": "Basın materyali", "icon": "▣", "singular": "materyal", "main": "title", "subtitle": "Ekran görüntüsü, trailer, GIF: hangisi hazır, hangisi eskidi", "filter": "status", "fields": [["title", "Materyal", "entry", null], ["type", "Tür", "choice", ["Ekran görüntüsü", "Trailer", "GIF", "Logo", "Kapak görseli", "Basın bülteni", "Diğer"]], ["status", "Durum", "choice", ["Planlandı", "Hazırlanıyor", "Hazır", "Eskidi"]], ["version", "İlgili sürüm", "version", null], ["link", "Dosya yolu ya da bağlantı", "entry", null], ["notes", "Notlar", "text", null]]}, "social": {"title": "İçerik takvimi", "icon": "◫", "singular": "paylaşım", "main": "title", "subtitle": "Ne zaman, nerede, ne paylaşılacak", "filter": "status", "fields": [["title", "İçerik", "entry", null], ["platform", "Platform", "choice", ["X / Twitter", "Instagram", "TikTok", "YouTube", "Reddit", "Discord", "Steam", "Diğer"]], ["date", "Tarih (YYYY-AA-GG)", "date", null], ["status", "Durum", "choice", ["Planlandı", "Hazır", "Paylaşıldı"]], ["notes", "Metin / notlar", "text", null]]}, "learning": {"title": "Öğrenme günlüğü", "icon": "✎", "singular": "kayıt", "main": "title", "subtitle": "Öğrendiğin teknikler, tutorial'lar ve dokümanlar", "filter": "kind", "fields": [["title", "Konu", "entry", null], ["kind", "Tür", "choice", ["Tutorial", "Doküman", "Video", "Kurs", "Kendi notum"]], ["link", "Bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Ne öğrendim?", "text", null]]}, "references": {"title": "Referans oyunlar", "icon": "★", "singular": "oyun", "main": "title", "subtitle": "İlham aldığın ve analiz ettiğin oyunlar", "filter": null, "fields": [["title", "Oyun", "entry", null], ["genre", "Tür", "entry", null], ["rating", "Puanım", "choice", ["★", "★★", "★★★", "★★★★", "★★★★★"]], ["link", "Steam / bağlantı", "entry", null], ["tags", "Etiketler  (ör. #multiplayer #tutorial)", "entry", null], ["notes", "Neyi beğendim, ne alabilirim?", "text", null]]}}, "sayfalar": {"dashboard": ["⌂", "Panel"], "roadmap": ["➚", "Yol haritası"], "timeline": ["◷", "Zaman çizelgesi"], "stats": ["▤", "İstatistikler"], "checklist": ["☑", "Yayın kontrol listesi"], "discord": ["◎", "Discord"], "imggen": ["✦", "Görsel oluştur"], "trash": ["⌫", "Çöp kutusu"], "settings": ["☰", "Ayarlar"]}, "nav": [[null, ["dashboard"]], ["BÖLÜMLER", ["releases", "todos", "bugs", "ideas"]], ["PLANLAMA", ["roadmap", "timeline", "stats"]], ["YAYIN", ["checklist", "discord", "press", "social", "imggen"]], ["KİŞİSEL", ["learning", "references"]]], "renkler": {"Düşük": "#7A9E6B", "Orta": "#C9A227", "Yüksek": "#D97757", "Kritik": "#D0453A", "Yapılacak": "#8A8780", "Devam ediyor": "#5B8DD6", "Bitti": "#5E9E6E", "Açık": "#D0453A", "İnceleniyor": "#C9A227", "Çözüldü": "#5E9E6E", "Major": "#D97757", "Minor": "#5B8DD6", "Yama": "#5E9E6E", "Test": "#8A8780", "Planlandı": "#8A8780", "Hazırlanıyor": "#5B8DD6", "Hazır": "#5E9E6E", "Eskidi": "#D0453A", "Paylaşıldı": "#5E9E6E", "★★★★★": "#C9A227", "★★★★": "#C9A227", "★★★": "#C9A227", "★★": "#C9A227", "★": "#C9A227"}, "varsayilan_kategoriler": ["Arayüz & Grafik", "Araçlar", "Bilinen Sorunlar", "Düzeltmeler", "Etkileşim Sistemleri", "Genel", "Harita & Yapılar", "Hava & Kar Sistemi", "Kayıt Sistemi", "Optimizasyon", "Ses & Müzik", "Yeni Özellikler", "Zombi Yapay Zekası", "Çok Oyunculu"], "kontrol_listesi": ["Build yüklendi ve test edildi", "Sürüm notları hazır", "Steam sayfası güncel", "Kapak / başlık görseli hazır", "Ekran görüntüleri güncel", "Trailer / GIF hazır", "Fiyat ve çıkış tarihi ayarlandı", "Discord duyurusu atıldı", "Sosyal medya paylaşımları planlandı"], "done": {"todos": ["status", "Bitti", "Yapılacak", "Yapıldı"], "bugs": ["status", "Çözüldü", "Açık", "Çözüldü"]}, "pillow": false, "yedek_secenek": {"Kapalı": 0, "Her gün": 1, "3 günde bir": 3, "Haftada bir": 7}, "kategoriler": ["Oynanış", "Grafik", "Ses", "UI", "Kod", "Diğer"], "varsayilan_secim": {"priority": "Orta", "severity": "Orta", "kind": "Minor"}, "cop_gun": 30}, "yeni_proje": {"project": "Yeni proje", "collapsed": {}, "cat_version": 2, "categories": [{"name": "Düzeltmeler", "tier": 1, "color": "#5E9E6E", "aliases": ["düzeltmeler", "düzeltme", "hata düzeltmeleri", "fixes", "fix", "bug fixes"], "keywords": ["düzelt", "düzeltme", "hata", "giderildi", "çözüldü", "sorun", "fix", "bug", "error", "corrected", "no longer"]}, {"name": "Yeni Özellikler", "tier": 3, "color": "#D97757", "aliases": ["yeni özellikler", "yenilikler", "new features", "features"], "keywords": ["yeni", "eklendi", "eklen", "new", "added", "introduc"]}, {"name": "Harita & Yapılar", "tier": 2, "color": "#B5835A", "aliases": ["harita & yapılar", "harita ve yapılar", "harita", "yapılar", "map", "world"], "keywords": ["harita", "kasaba", "şehir", "ev", "evler", "yapı", "bina", "işyeri", "dükkân", "dükkan", "foundation", "çit", "otopark", "yol", "kaldırım", "map", "town", "building", "house", "road", "sidewalk", "fence"]}, {"name": "Zombi Yapay Zekası", "tier": 2, "color": "#8E6BBF", "aliases": ["zombi yapay zekası", "yapay zeka", "ai", "zombi ai"], "keywords": ["zombi", "sürü", "yapay zeka", "görüş", "duyuyor", "duyma", "kovala", "tırman", "ai", "zombie", "horde", "enemy", "chase", "pursuit", "swarm"]}, {"name": "Etkileşim Sistemleri", "tier": 2, "color": "#C77D4F", "aliases": ["etkileşim sistemleri", "etkileşim", "interaction"], "keywords": ["etkileşim", "kapı", "pencere", "düğme", "ışık", "oturma", "mobilya", "interact", "door", "window", "switch"]}, {"name": "Hava & Kar Sistemi", "tier": 2, "color": "#5B8DD6", "aliases": ["hava & kar sistemi", "hava ve kar sistemi", "hava", "kar sistemi", "weather and snow system", "weather"], "keywords": ["kar", "hava", "yağmur", "fırtına", "erime", "snow", "weather", "rain", "melt"]}, {"name": "Araçlar", "tier": 2, "color": "#6B8E9E", "aliases": ["araçlar", "araç", "vehicles"], "keywords": ["araç", "araba", "sürüş", "kamyonet", "vehicle", "car", "driving"]}, {"name": "Kayıt Sistemi", "tier": 2, "color": "#7A9E6B", "aliases": ["kayıt sistemi", "kayıt", "save system"], "keywords": ["kayıt", "kaydedil", "geri yüklen", "save", "load game"]}, {"name": "Arayüz & Grafik", "tier": 2, "color": "#9E6B8E", "aliases": ["arayüz & grafik", "arayüz", "grafik", "ui", "interface"], "keywords": ["arayüz", "menü", "ayar", "gamepad", "kumanda", "çözünürlük", "grafik", "görüntü modu", "ui", "menu", "settings", "resolution"]}, {"name": "Optimizasyon", "tier": 2, "color": "#C9A227", "aliases": ["optimizasyon", "optimizasyon & motor", "performans", "optimization & engine", "optimization", "performance"], "keywords": ["optimiz", "performans", "fps", "ms", "takılma", "nanite", "tsr", "bellek", "yükleme", "gc", "performance", "stutter", "frame", "triangle", "memory", "loading", "engine"]}, {"name": "Ses & Müzik", "tier": 2, "color": "#3E9C9C", "aliases": ["ses & müzik", "ses", "müzik", "audio", "sound"], "keywords": ["ses", "müzik", "silah sesi", "audio", "sound", "gunshot", "music"]}, {"name": "Çok Oyunculu", "tier": 2, "color": "#5B6FD6", "aliases": ["çok oyunculu", "multiplayer", "co-op"], "keywords": ["multiplayer", "çok oyunculu", "co-op", "client", "host", "senkron", "online"]}, {"name": "Genel", "tier": 4, "color": "#8A8780", "aliases": ["genel", "general"], "keywords": []}, {"name": "Bilinen Sorunlar", "tier": 0, "color": "#D0453A", "aliases": ["bilinen sorunlar", "bilinen hatalar", "known issues"], "keywords": ["bilinen", "henüz", "olabilir", "görülebilir", "known issue", "may", "might", "not yet", "can appear"]}], "ai": {"url": "http://localhost:11434", "model": "qwen2.5-coder:7b", "lang": "Aynen"}, "discord_webhook": "", "goal": {"version": "", "date": ""}, "checklists": {}, "trash": [], "releases": [], "todos": [], "bugs": [], "ideas": [], "press": [], "social": [], "learning": [], "references": []}, "ay_tr": ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"], "ay_en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]};</script>
 <script>
 const $=id=>document.getElementById(id);
 function kacis(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
@@ -1533,6 +1541,7 @@ const DL_IKON={
   karsi:'<path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/>', yildiz:'<path d="m12 3 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9Z"/>',
   pano:'<rect x="3" y="3" width="7" height="18" rx="1.5"/><rect x="14" y="3" width="7" height="11" rx="1.5"/>', liste:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
   discord:'<path d="M8 12h.01M16 12h.01M7.5 17.5 6 20c-1.5-.5-3.2-1.5-4-3 0-4 1-8 3-11 1.5-.7 3-1.2 4.5-1.4L10 6h4l.5-1.4c1.5.2 3 .7 4.5 1.4 2 3 3 7 3 11-.8 1.5-2.5 2.5-4 3l-1.5-2.5"/><path d="M7 16c3 1.3 7 1.3 10 0"/>',
+  imggen:'<path d="M12 3v2M12 19v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M3 12h2M19 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/><circle cx="12" cy="12" r="4"/>',
   resim:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/>',
   yenile:'<path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/>', geri:'<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>'};
 const dlI=(ad,b=16)=>'<svg width="'+b+'" height="'+b+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">'+(DL_IKON[ad]||'')+'</svg>';
@@ -1633,16 +1642,24 @@ function dlCiz(){
   $('dlBaslik').textContent=dlP().project+'  ·  '+dlSayfaAdi(DL.sayfa);
   dlYanCiz(); dlSayfaCiz();
 }
-function dlSayfaAdi(s){ return DL.sabit.bolumler[s]?.title||DL.sabit.sayfalar[s]?.[1]||''; }
+const DL_EN_SAYFA={dashboard:'Dashboard',releases:'Release Notes',todos:'Tasks',bugs:'Bugs',ideas:'Ideas',roadmap:'Roadmap',timeline:'Timeline',stats:'Stats',checklist:'Launch Checklist',discord:'Discord',imggen:'Generate Image',press:'Press Kit',content:'Content Calendar',trash:'Trash',learning:'Learning',references:'References'};
+const DL_EN_GRUP={BÖLÜMLER:'Sections',PLANLAMA:'Planning',YAYIN:'Publishing',KİŞİSEL:'Personal'};
+function dlSayfaAdi(s){
+  if(typeof dilKodu==='function'&&dilKodu()==='en'&&DL_EN_SAYFA[s]) return DL_EN_SAYFA[s];
+  return DL.sabit.bolumler[s]?.title||DL.sabit.sayfalar[s]?.[1]||'';
+}
 function dlYanCiz(){
-  const p=dlP();
+  const p=dlP(), en=typeof dilKodu==='function'&&dilKodu()==='en';
   $('dlProjeKutu').innerHTML='<div class="dl-proje" onclick="dlProjeMenusu(event)"><div class="kare">'+dlK((p.project||'?')[0].toLocaleUpperCase('tr'))+'</div>'+
-    '<div class="ad">'+dlK(p.project)+'<div class="alt">'+(DL.s.projeler.length>1?DL.s.projeler.length+' proje · değiştir':'Proje')+'</div></div>'+dlI('asagi',14)+'</div>';
+    '<div class="ad">'+dlK(p.project)+'<div class="alt">'+(DL.s.projeler.length>1?DL.s.projeler.length+(en?' projects · switch':' proje · değiştir'):(en?'Project':'Proje'))+'</div></div>'+dlI('asagi',14)+'</div>';
   const sayi={todos:p.todos.filter(x=>x.status!=='Bitti').length,bugs:p.bugs.filter(x=>x.status!=='Çözüldü').length,
               ideas:p.ideas.length,releases:p.releases.length,trash:p.trash.length};
   let h='';
   for(const [grup,sayfalar] of DL.sabit.nav){
-    if(grup) h+='<div class="dl-grup">'+dlK(grup[0]+grup.slice(1).toLocaleLowerCase('tr'))+'</div>';
+    if(grup){
+      const gAd=(en&&DL_EN_GRUP[grup.toLocaleUpperCase('tr')])||(grup[0]+grup.slice(1).toLocaleLowerCase('tr'));
+      h+='<div class="dl-grup">'+dlK(gAd)+'</div>';
+    }
     for(const s of sayfalar){
       const n=sayi[s]; const kir=s==='bugs'&&n;
       h+='<div class="nav'+(DL.sayfa===s?' secili':'')+'" onclick="dlSayfaAc(\''+s+'\')">'+dlI(s,17)+dlK(dlSayfaAdi(s))+
@@ -1650,7 +1667,7 @@ function dlYanCiz(){
     }
   }
   h+='<div class="dl-grup"></div>'+
-     '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+'Çöp kutusu'+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>';
+     '<div class="nav'+(DL.sayfa==='trash'?' secili':'')+'" onclick="dlSayfaAc(\'trash\')">'+dlI('trash',17)+(en?'Trash':'Çöp kutusu')+(sayi.trash?'<span class="sayi">'+sayi.trash+'</span>':'')+'</div>';
   $('dlNav').innerHTML=h;
   dlBulutGoster();
 }
@@ -1682,11 +1699,13 @@ function dlSayfaAc(s,gecmistenMi){
 function dlSayfaCiz(){
   const s=DL.sayfa, el=$('dlSayfa'), kay=$('dlAna').scrollTop;
   const odak=document.activeElement?.id==='dlAra'?[document.activeElement.selectionStart]:null;
-  const f={dashboard:dlPanelCiz,discord:dlDiscordCiz,releases:dlSurumlerCiz,roadmap:dlYolCiz,timeline:dlZamanCiz,stats:dlIstatistikCiz,checklist:dlKontrolCiz,trash:dlCopCiz}[s];
+  const f={dashboard:dlPanelCiz,discord:dlDiscordCiz,imggen:dlGorselOlusturCiz,releases:dlSurumlerCiz,roadmap:dlYolCiz,timeline:dlZamanCiz,stats:dlIstatistikCiz,checklist:dlKontrolCiz,trash:dlCopCiz}[s];
   el.innerHTML=f?f():dlBolumCiz(s);
   $('dlAna').scrollTop=kay;
   if(odak&&$('dlAra')){ $('dlAra').focus(); $('dlAra').setSelectionRange(odak[0],odak[0]); }
   if(s==='dashboard'){ dlSteamTazele(); dlSunucuTazele(); }
+  if(s==='social') dlIgTazele();
+  if(s==='imggen') dlGorselModellerYukle();
 }
 
 // ---- Menüler ----
@@ -1738,9 +1757,11 @@ function dlBolumCiz(tur){
   let sag='';
   if(tur==='todos') sag+='<div class="dl-dil" title="Görünüm"><button class="'+(pano?'':'secili')+'" onclick="dl(\'ayar\',{todo_view:\'list\'})">'+dlI('liste',14)+'</button>'+
                          '<button class="'+(pano?'secili':'')+'" onclick="dl(\'ayar\',{todo_view:\'board\'})">'+dlI('pano',14)+'</button></div>';
+  if(tur==='social') sag+='<button class="dl-dugme" onclick="dlSosyalPaylasAc()">'+dlI('paylas',15)+'Gönderi Paylaş</button>';
   sag+='<button class="dl-dugme" onclick="dl(\'disari\',{bicim:\'csv\',tur:\''+tur+'\'}).then(r=>r&&tost(\'CSV kaydedildi\'))" title="Excel\'de açılabilen CSV">'+dlI('disari',15)+'CSV</button>'+
        '<button class="dl-dugme ana" onclick="dlYeni()">'+dlI('arti',15)+'Yeni '+dlK(B.singular)+'</button>';
   let h=dlBaslik(B.title,B.subtitle,sag);
+  if(tur==='social') h+=dlIgOzetCiz();
   // Filtre çipleri, etiket ve arama
   h+='<div class="dl-arac">';
   if(B.filter&&!pano){ const sec=B.fields.find(f=>f[0]===B.filter)[3];
@@ -1779,7 +1800,10 @@ function dlKart(tur,it,kucuk){
   meta+=(it.tags||'').split(/\s+/).filter(Boolean).map(t=>'<span class="dl-etiket" onclick="event.stopPropagation();DL.etiket=\''+dlK(t)+'\';dlSayfaCiz()">'+dlK(t)+'</span>').join(' ');
   const detay=it.details||it.steps||it.notes||'';
   const res=(it.images||[]).map(a=>'<img src="'+dlResimUrl(a)+'" onclick="event.stopPropagation();dlBuyut(this.src)">').join('');
+  const steamId=tur==='references'?(String(it.link||'').match(/store\.steampowered\.com\/app\/(\d+)/i)||[])[1]:'';
+  const steamKapak=steamId?'<img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/'+steamId+'/header.jpg" onerror="this.style.display=\'none\'" style="width:128px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;border:1px solid var(--cizgi)">':'';
   return '<div class="dl-kart tik" draggable="true" data-id="'+it.id+'" onclick="dlDuzenle(\''+tur+'\',\''+it.id+'\')"><div class="dl-satir">'+
+    steamKapak+
     (D?'<button class="dl-kutu'+(tur==='bugs'?' yuvarlak':'')+(bitti?' dolu':'')+'" title="'+(bitti?'Geri al':D[3])+'" onclick="event.stopPropagation();dlTikle(\''+tur+'\',\''+it.id+'\')">'+(bitti?dlI('tik',13):'')+'</button>':'')+
     '<div class="govde"><div class="bas'+(bitti?' bitti':'')+'">'+dlK(it[B.main]||'(başlıksız)')+'</div>'+
     (detay&&!kucuk?'<div class="detay">'+dlK(detay)+'</div>':'')+(meta?'<div class="dl-meta">'+meta+'</div>':'')+
@@ -2298,8 +2322,8 @@ function dlSteamCiz(){
 async function dlSteamTazele(zorla){
   const p=dlP(); if(!p.steam_appid) return;
   const i=p.steam&&p.steam.appid===p.steam_appid?p.steam:null;
-  const eski=!i||(Date.now()-(dlTarih(i.fetched)||0))>36e5;
-  if(!zorla&&(!eski||Date.now()-dlSteamSon<6e5)) return;
+  const ilkAcilis=dlSteamSon===0, eski=!i||(Date.now()-(dlTarih(i.fetched)||0))>36e5;
+  if(!zorla&&!ilkAcilis&&(!eski||Date.now()-dlSteamSon<6e5)) return;
   dlSteamSon=Date.now();
   const r=await dl('steam_yenile',{},{sessiz:!zorla,cizme:true});
   if(r&&DL.sayfa==='dashboard'&&DL.mod==='devlog') dlSayfaCiz();
@@ -2475,6 +2499,255 @@ function dlCopCiz(){
       '<button class="dl-dugme kucuk" style="color:#d0453a" onclick="dl(\'kalici_sil\',{id:\''+i.id+'\'})">Kalıcı sil</button></div></div>'; }).join('');
 }
 
+// ---- Görsel oluştur (ComfyUI) ----
+DL._gorsel=DL._gorsel||{prompt:'',negative:'blurry, low quality, watermark, text',ckpt:'',boyut:'1024x1024',steps:20,calisiyor:false,durum:'',url:'',yol:'',gecmis:[],modeller:[]};
+function dlGorselOlusturCiz(){
+  const g=DL._gorsel, en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  const secBoyut=[['1024x1024','1024 × 1024 (1:1)'],['1024x576','1024 × 576 (16:9)'],['768x1024','768 × 1024 (3:4)'],['512x512','512 × 512']];
+  let h=dlBaslik(L('Görsel oluştur','Generate Image'),L('ComfyUI üzerinden doğrudan görsel üret ve önizle','Generate and preview images directly via ComfyUI'),
+    '<span id="dlImgComfyDurum" class="dl-kucuk" style="padding:5px 10px;border:1px solid var(--cizgi);border-radius:999px">'+L('ComfyUI kontrol ediliyor…','Checking ComfyUI…')+'</span>');
+  h+='<div class="dl-kart" style="padding:18px;display:flex;flex-direction:column;gap:12px">'+
+     '<div><div class="a-baslik" style="margin-bottom:6px">Prompt</div>'+
+     '<textarea id="dlImgPrompt" class="a-girdi" rows="3" placeholder="'+L('Ör: izometrik zombi hayatta kalma oyunu kapak görseli, detaylı ışıklandırma…','E.g. isometric zombie survival game capsule art, moody lighting, detailed…')+'">'+dlK(g.prompt)+'</textarea></div>'+
+     '<div><div class="a-baslik" style="margin-bottom:6px">'+L('Negatif prompt (isteğe bağlı)','Negative prompt (optional)')+'</div>'+
+     '<input id="dlImgNeg" class="a-girdi" value="'+dlK(g.negative)+'"></div>'+
+     '<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:end">'+
+     '<div style="flex:1;min-width:180px"><div class="dl-kucuk" style="margin-bottom:4px">Checkpoint</div>'+
+     '<select id="dlImgCkpt" class="a-secim" style="width:100%">'+(g.modeller.length?g.modeller.map(m=>'<option value="'+dlK(m)+'"'+(g.ckpt===m?' selected':'')+'>'+dlK(m)+'</option>').join(''):'<option value="">'+L('Otomatik (ilk model)','Auto (first model)')+'</option>')+'</select></div>'+
+     '<div><div class="dl-kucuk" style="margin-bottom:4px">'+L('Boyut','Size')+'</div>'+
+     '<select id="dlImgBoyut" class="a-secim">'+secBoyut.map(([v,ad])=>'<option value="'+v+'"'+(g.boyut===v?' selected':'')+'>'+ad+'</option>').join('')+'</select></div>'+
+     '<div><div class="dl-kucuk" style="margin-bottom:4px">'+L('Adım','Steps')+'</div>'+
+     '<input id="dlImgSteps" type="number" min="1" max="60" class="a-girdi" style="width:74px" value="'+g.steps+'"></div>'+
+     '<button id="dlImgBtn" class="dl-dugme ana" onclick="dlGorselUret()"'+(g.calisiyor?' disabled':'')+'>'+(g.calisiyor?L('Üretiliyor…','Generating…'):L('Oluştur','Generate'))+'</button>'+
+     (g.calisiyor?'<button class="dl-dugme tehlike" onclick="dlGorselIptal()">'+L('İptal et','Cancel')+'</button>':'')+
+     '</div></div>';
+  h+='<div id="dlImgOnizleme" class="dl-kart" style="margin-top:14px;padding:18px;text-align:center">';
+  if(g.calisiyor){
+    const pct=g.yuzde||8;
+    h+='<div style="padding:28px 16px"><div style="margin-bottom:10px"><span class="donen" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>'+dlK(g.durum||L('Üretiliyor…','Generating…'))+'</div>'+
+       '<div style="max-width:340px;margin:0 auto;height:6px;background:var(--cizgi);border-radius:999px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:#D97757;transition:width .3s"></div></div>'+
+       '<div style="margin-top:14px"><button class="dl-dugme tehlike" onclick="dlGorselIptal()">'+L('İptal et','Cancel')+'</button></div></div>';
+  } else if(g.url){
+    h+='<img src="'+dlK(g.url)+'" onclick="dlGorselAc()" title="'+L('Tam boyutta aç','Open full size')+'" style="max-width:340px;max-height:260px;border-radius:10px;display:block;margin:0 auto;cursor:pointer">'+
+       '<div style="display:flex;gap:8px;justify-content:center;margin-top:12px">'+
+       '<button class="dl-dugme" onclick="dlGorselGoster()">'+L('Klasörde göster','Reveal in folder')+'</button>'+
+       '<button class="dl-dugme" onclick="dlGorselAc()">'+L('Aç','Open')+'</button>'+
+       '<button class="dl-dugme ana" onclick="dlSosyalPaylasAc(DL._gorsel.yol)">'+L('Sosyal Medyada Paylaş','Share to Social')+'</button></div>';
+  } else if(g.durum){
+    h+='<div class="hata-yazi" style="padding:20px 0">'+dlK(g.durum)+'</div>';
+  } else {
+    h+='<div class="dl-kucuk" style="padding:36px 0">'+L('Yukarıya prompt yazıp Oluştur\'a bastığında ComfyUI otomatik başlatılır ve görsel burada önizlenir.','Enter a prompt above and click Generate to start ComfyUI and preview the image here.')+'</div>';
+  }
+  h+='</div>';
+  if(g.gecmis.length>1){
+    h+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'+g.gecmis.map((x,i)=>
+      '<img src="'+dlK(x.url)+'" onclick="DL._gorsel.url=DL._gorsel.gecmis['+i+'].url;DL._gorsel.yol=DL._gorsel.gecmis['+i+'].yol;dlSayfaCiz()" style="width:84px;height:84px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid '+(x.url===g.url?'var(--yazi)':'var(--cizgi)')+'">').join('')+'</div>';
+  }
+  return h;
+}
+async function dlGorselGoster(){ if(DL._gorsel.yol) await fetch('/api/dosya-goster',{method:'POST',body:JSON.stringify({yol:DL._gorsel.yol})}); }
+async function dlGorselAc(){ if(DL._gorsel.yol) await fetch('/api/dosya-ac',{method:'POST',body:JSON.stringify({yol:DL._gorsel.yol})}); }
+let dlIgSon=0, dlIgHata='';
+async function dlIgTazele(zorla){
+  if(!DL.s?.sosyal?.instagram?.bagli) return;
+  const ig=dlP().instagram_ozet, ilk=dlIgSon===0, eski=!ig||(Date.now()-(dlTarih(ig.fetched)||0))>15*6e4;
+  if(!zorla&&!ilk&&(!eski||Date.now()-dlIgSon<3e5)) return;
+  dlIgSon=Date.now(); dlIgHata='';
+  let r=null;
+  try{ r=await (await fetch('/dl/api',{method:'POST',body:JSON.stringify({islem:'instagram_istatistik'})})).json(); }catch(e){ r={hata:'Bağlantı hatası'}; }
+  if(r&&!r.hata&&r.profil){ dlP().instagram_ozet=r; }
+  else if(r?.hata){ dlIgHata=r.hata; }
+  if(DL.sayfa==='social'&&DL.mod==='devlog') dlSayfaCiz();
+}
+function dlIgOzetCiz(){
+  const bagli=DL.s?.sosyal?.instagram?.bagli, en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  if(!bagli) return '';
+  if(dlIgHata) return '<div class="dl-kart" style="padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;gap:10px;justify-content:space-between"><span class="hata-yazi" style="font-size:12.5px">'+dlK(dlIgHata)+'</span><button class="dl-dugme kucuk" onclick="dlIgTazele(true)">↻</button></div>';
+  const ig=dlP().instagram_ozet;
+  if(!ig||!ig.profil) return '<div class="dl-kart" style="padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between"><span class="dl-kucuk">'+L('Instagram verileri alınıyor…','Loading Instagram stats…')+'</span><button class="dl-dugme kucuk" onclick="dlIgTazele(true)">↻</button></div>';
+  const pr=ig.profil, gs=ig.gonderiler||[];
+  const topBegeni=gs.reduce((a,x)=>a+(x.like_count||0),0), topYorum=gs.reduce((a,x)=>a+(x.comments_count||0),0);
+  const topIzlenme=gs.reduce((a,x)=>a+(x.views||x.reach||0),0);
+  const kisaS=n=>n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?(n/1e3).toFixed(1)+'k':String(n);
+  let h='<div class="dl-kart" style="padding:16px;margin-bottom:14px">'+
+    '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:14px">'+
+      '<b style="font-size:15px;margin-right:4px">Instagram · @'+dlK(pr.username||'')+'</b>'+
+      (pr.followers_count!=null?'<span class="dl-rozet">👥 '+pr.followers_count.toLocaleString()+' '+L('takipçi','followers')+'</span>':'')+
+      (pr.media_count!=null?'<span class="dl-rozet">📷 '+pr.media_count+' '+L('gönderi','posts')+'</span>':'')+
+      (topIzlenme?'<span class="dl-rozet">👁️ '+kisaS(topIzlenme)+' '+L('görüntüleme','views')+'</span>':'')+
+      '<span class="dl-rozet">❤️ '+topBegeni+'</span>'+
+      '<span class="dl-rozet">💬 '+topYorum+'</span>'+
+      '<span style="flex:1"></span>'+
+      '<button class="dl-dugme kucuk" onclick="dlIgTazele(true)">↻ '+L('Yenile','Refresh')+'</button></div>';
+  if(gs.length){
+    h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px">';
+    for(const m of gs.slice(0,8)){
+      const img=m.thumbnail_url||m.media_url||'', v=m.views??m.reach;
+      const turEtik=m.media_type==='VIDEO'?'REELS':m.media_type==='CAROUSEL_ALBUM'?'ALBUM':'';
+      h+='<div class="dl-kart" style="padding:10px;cursor:pointer;display:flex;flex-direction:column;gap:8px;background:var(--bg)" onclick="linkAc(\''+dlK(m.permalink||'')+'\')">'+
+        '<div style="position:relative">'+(img?'<img src="'+dlK(img)+'" style="width:100%;height:124px;object-fit:cover;border-radius:8px;display:block">':'')+
+        (turEtik?'<span style="position:absolute;top:6px;right:6px;background:rgba(0,0,0,.68);color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:5px">'+turEtik+'</span>':'')+'</div>'+
+        '<div style="font-size:12.5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:34px">'+dlK((m.caption||'').replace(/\s+/g,' ')||'('+m.media_type+')')+'</div>'+
+        '<div class="dl-kucuk" style="display:flex;align-items:center;gap:10px;padding-top:4px;border-top:1px solid var(--cizgi)">'+
+          (v!=null?'<span>👁️ '+kisaS(v)+'</span>':'')+'<span>❤️ '+(m.like_count??0)+'</span><span>💬 '+(m.comments_count??0)+'</span>'+
+          '<span style="margin-left:auto;opacity:.75">'+dlK((m.timestamp||'').slice(0,10))+'</span></div></div>';
+    }
+    h+='</div>';
+  }
+  return h+'</div>';
+}
+
+function dlSosyalPaylasAc(resimYol=''){
+  const sa=DL.s?.sosyal||{x:{},reddit:{},webhook:{}}, en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  const wh=Boolean(sa.webhook?.bagli), sec=[];
+  if(sa.x?.bagli||wh) sec.push(['x','X (Twitter)']);
+  if(wh) sec.push(['instagram','Instagram']);
+  if(sa.reddit?.bagli||wh) sec.push(['reddit','Reddit'+(sa.reddit?.subreddit?' (r/'+sa.reddit.subreddit+')':'')]);
+  if(wh) sec.push(['youtube','YouTube']);
+  if(wh) sec.push(['tiktok','TikTok']);
+  let secilenYol=resimYol||'', secilenB64='', secilenAd=resimYol?resimYol.split(/[\\\\/]/).pop():'', secilenOniz='';
+  pencereAc('<h2>'+L('Sosyal Medyada Paylaş','Share to Social Media')+'</h2>'+
+    (sec.length?'<div style="display:flex;gap:10px;flex-wrap:wrap;margin:10px 0">'+sec.map(([k,ad])=>'<label class="kutucuk"><input type="checkbox" name="spPlat" value="'+k+'"'+(k==='youtube'||k==='tiktok'?'':' checked')+'> '+dlK(ad)+'</label>').join('')+'</div>'
+      :'<div class="dl-uyari">'+L('Henüz bağlı sosyal medya hesabı yok.','No connected social media accounts yet.')+' <a class="a-link" onclick="ayarlariAc(\'dl_paylasim\')">'+L('Hesap bağla →','Connect accounts →')+'</a></div>')+
+    '<label>'+L('Başlık (Reddit / YouTube için)','Title (for Reddit / YouTube)')+'</label><input id="spBaslik" class="a-girdi" placeholder="'+dlK(dlP().project)+'">'+
+    '<label>'+L('Gönderi metni','Post text')+'</label><textarea id="spMetin" class="a-girdi" rows="4" placeholder="'+L('Ne paylaşmak istiyorsun?','What do you want to share?')+'"></textarea>'+
+    '<div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">'+
+      '<input type="file" id="spDosya" accept="image/*,video/*" class="gizle">'+
+      '<button class="dl-dugme" type="button" id="spResimBtn">'+dlI('resim',15)+L('Görsel / Video ekle','Attach media')+'</button>'+
+      '<div id="spResimBilgi" class="dl-kucuk" style="display:flex;align-items:center;gap:8px"></div></div>'+
+    '<div id="spSonuc" style="margin-top:12px;display:flex;flex-direction:column;gap:6px"></div>'+
+    '<div class="dugmeler"><button onclick="pencereKapat()">'+L('Kapat','Close')+'</button>'+
+    '<button class="ana" id="spGonder"'+(sec.length?'':' disabled')+'>'+L('Paylaş','Publish')+'</button></div>');
+  const resimCiz=()=>{
+    const b=$('spResimBilgi'); if(!b) return;
+    if(!secilenYol&&!secilenB64){ b.innerHTML=''; return; }
+    b.innerHTML=(secilenOniz?'<img src="'+secilenOniz+'" style="width:36px;height:36px;object-fit:cover;border-radius:6px;border:1px solid var(--cizgi)">':'📎 ')+
+      '<span>'+dlK(secilenAd)+'</span><a style="cursor:pointer;opacity:.7" id="spResimSil" title="'+L('Kaldır','Remove')+'">✕</a>';
+    $('spResimSil').onclick=()=>{ secilenYol=''; secilenB64=''; secilenAd=''; secilenOniz=''; $('spDosya').value=''; resimCiz(); };
+  };
+  resimCiz();
+  $('spResimBtn').onclick=()=>$('spDosya').click();
+  $('spDosya').onchange=e=>{
+    const f=e.target.files?.[0]; if(!f) return;
+    const r=new FileReader();
+    r.onload=()=>{ const res=String(r.result||''); secilenYol=''; secilenB64=res.split(',')[1]||''; secilenAd=f.name; secilenOniz=f.type.startsWith('image/')?res:''; resimCiz(); };
+    r.readAsDataURL(f);
+  };
+  const durumCiz=adimlar=>{
+    const el=$('spSonuc'); if(!el) return;
+    el.innerHTML=Object.values(adimlar||{}).map(x=>{
+      const ik=x.durum==='tamam'?'✅':x.durum==='hata'?'❌':'<span class="donen" style="display:inline-block;vertical-align:-2px;margin-right:4px"></span>';
+      const linkHtml=x.url?' <a class="a-link" onclick="linkAc(\''+dlK(x.url)+'\')">'+L('Aç ↗','Open ↗')+'</a> <a class="a-link" onclick="dlKopyala(\''+dlK(x.url)+'\')">'+L('Kopyala','Copy')+'</a>':'';
+      return '<div class="dl-kart" style="padding:8px 10px;display:flex;align-items:center;gap:8px;font-size:13px">'+
+        '<span>'+ik+'</span><b style="min-width:95px">'+dlK(x.ad)+'</b>'+
+        '<span style="flex:1;'+(x.durum==='hata'?'color:#f06a5e':'')+'">'+dlK(x.mesaj)+'</span>'+linkHtml+'</div>';
+    }).join('');
+  };
+  if($('spGonder')) $('spGonder').onclick=async()=>{
+    const plat=[...document.querySelectorAll('[name=spPlat]:checked')].map(x=>x.value);
+    if(!plat.length) return tost(L('Platform seç.','Select a platform.'));
+    $('spGonder').disabled=true; $('spGonder').textContent=L('Paylaşılıyor…','Publishing…');
+    const bas=await dl('sosyal_paylas_baslat',{platformlar:plat,baslik:$('spBaslik').value,metin:$('spMetin').value,resim_yol:secilenYol,resim_b64:secilenB64,resim_ad:secilenAd},{cizme:true});
+    if(!bas?.id){ $('spGonder').disabled=false; $('spGonder').textContent=L('Paylaş','Publish'); return; }
+    const iv=setInterval(async()=>{
+      if(!$('spSonuc')){ clearInterval(iv); return; }
+      const d=await dl('sosyal_paylas_durum',{id:bas.id},{cizme:true,sessiz:true});
+      if(!d) return;
+      durumCiz(d.adimlar);
+      if(d.durum!=='calisiyor'){ clearInterval(iv); if($('spGonder')){ $('spGonder').disabled=false; $('spGonder').textContent=L('Paylaş','Publish'); } }
+    }, 700);
+  };
+}
+document.addEventListener('click',()=>{ const m=$('dlIndirMenu'); if(m) m.classList.add('gizle'); });
+async function dlIndirilenlerAc(e){
+  if(e) e.stopPropagation();
+  const menu=$('dlIndirMenu'), btn=$('dlIndirBtn'); if(!menu||!btn) return;
+  if(!menu.classList.contains('gizle')){ menu.classList.add('gizle'); return; }
+  const r=btn.getBoundingClientRect();
+  menu.style.top=(r.bottom+6)+'px';
+  menu.style.right=Math.max(12,window.innerWidth-r.right)+'px';
+  menu.classList.remove('gizle');
+  const en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  menu.innerHTML='<div class="di-ust"><span style="flex:1">'+L('İndirilenler','Downloads')+'</span>'+
+    '<button class="dl-dugme kucuk" onclick="fetch(\'/api/indirilenler-ac\',{method:\'POST\',body:\'{}\'})">'+L('Klasörü aç','Open folder')+'</button></div>'+
+    '<div class="di-liste"><div class="dl-kucuk" style="padding:20px;text-align:center">'+L('Yükleniyor…','Loading…')+'</div></div>';
+  let d;
+  try{ d=await (await fetch('/api/indirilenler')).json(); }catch(err){ d=null; }
+  const liste=menu.querySelector('.di-liste'); if(!liste) return;
+  if(!d||!d.ogeler||!d.ogeler.length){
+    liste.innerHTML='<div class="dl-kucuk" style="padding:24px;text-align:center">'+L('Henüz üretilmiş görsel yok.','No generated images yet.')+'</div>';
+    return;
+  }
+  liste.innerHTML=d.ogeler.map((x,i)=>{
+    const dt=new Date(x.zaman*1000).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+    return '<div class="di-satir" data-iac="'+i+'">'+
+      '<img src="'+dlK(x.url)+'">'+
+      '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+dlK(x.ad)+'</div>'+
+      '<div class="dl-kucuk">'+dt+'</div></div>'+
+      '<button class="ikon" style="width:28px;height:28px" data-igos="'+i+'" title="'+L('Klasörde göster','Reveal in folder')+'">'+dlI('disari',14)+'</button></div>';
+  }).join('');
+  liste.querySelectorAll('[data-iac]').forEach(el=>el.onclick=()=>fetch('/api/dosya-ac',{method:'POST',body:JSON.stringify({yol:d.ogeler[+el.dataset.iac].yol})}));
+  liste.querySelectorAll('[data-igos]').forEach(el=>el.onclick=ev=>{ ev.stopPropagation(); fetch('/api/dosya-goster',{method:'POST',body:JSON.stringify({yol:d.ogeler[+el.dataset.igos].yol})}); });
+}
+async function dlGorselModellerYukle(){
+  const en=typeof dilKodu==='function'&&dilKodu()==='en';
+  try{
+    const d=await (await fetch('/api/comfyui/modeller')).json();
+    const el=$('dlImgComfyDurum');
+    if(el) el.textContent=d.acik?(en?'ComfyUI Online':'ComfyUI Çevrimiçi'):d.baslatiliyor?(en?'Starting…':'Başlatılıyor…'):(en?'ComfyUI will auto-start':'ComfyUI otomatik başlatılacak');
+    if(d.modeller&&d.modeller.length){
+      DL._gorsel.modeller=d.modeller;
+      if(!DL._gorsel.ckpt) DL._gorsel.ckpt=d.modeller[0];
+      const sel=$('dlImgCkpt');
+      if(sel) sel.innerHTML=d.modeller.map(m=>'<option value="'+dlK(m)+'"'+(DL._gorsel.ckpt===m?' selected':'')+'>'+dlK(m)+'</option>').join('');
+    }
+  }catch(e){}
+}
+async function dlGorselIptal(){
+  const g=DL._gorsel, en=typeof dilKodu==='function'&&dilKodu()==='en';
+  if(g.iv){ clearInterval(g.iv); g.iv=null; }
+  if(g.jid) await fetch('/api/comfyui/uret-iptal',{method:'POST',body:JSON.stringify({id:g.jid})});
+  g.calisiyor=false; g.durum=en?'Generation cancelled.':'Üretim iptal edildi.';
+  if(DL.sayfa==='imggen') dlSayfaCiz();
+}
+async function dlGorselUret(){
+  const g=DL._gorsel, en=typeof dilKodu==='function'&&dilKodu()==='en';
+  g.prompt=$('dlImgPrompt').value; g.negative=$('dlImgNeg').value;
+  g.ckpt=$('dlImgCkpt').value; g.boyut=$('dlImgBoyut').value; g.steps=+$('dlImgSteps').value||20;
+  if(!g.prompt.trim()) return $('dlImgPrompt').focus();
+  const [w,h]=g.boyut.split('x').map(Number);
+  g.calisiyor=true; g.durum=en?'Sending to ComfyUI…':'ComfyUI\'ye gönderiliyor…'; g.url=''; g.yuzde=5;
+  if(DL.sayfa==='imggen') dlSayfaCiz();
+  const r=await (await fetch('/api/comfyui/uret',{method:'POST',body:JSON.stringify({prompt:g.prompt,negative:g.negative,ckpt:g.ckpt,width:w,height:h,steps:g.steps})})).json();
+  if(r.hata){ g.calisiyor=false; g.durum=r.hata; if(DL.sayfa==='imggen') dlSayfaCiz(); return; }
+  g.jid=r.id;
+  if(g.iv) clearInterval(g.iv);
+  g.iv=setInterval(async()=>{
+    try{
+      const x=await (await fetch('/api/comfyui/uret-durum?id='+encodeURIComponent(r.id))).json();
+      if(x.durum==='tamam'){
+        clearInterval(g.iv); g.iv=null; g.calisiyor=false; g.durum=''; g.url=x.url; g.yol=x.yol;
+        g.gecmis.unshift({url:x.url,yol:x.yol}); if(g.gecmis.length>12) g.gecmis.pop();
+        if(DL.sayfa==='imggen') dlSayfaCiz();
+        dlGorselModellerYukle();
+      } else if(x.durum==='hata'){
+        clearInterval(g.iv); g.iv=null; g.calisiyor=false; g.durum=x.mesaj||'Hata';
+        if(DL.sayfa==='imggen') dlSayfaCiz();
+      } else {
+        g.durum=x.mesaj||'...'; g.yuzde=x.yuzde||8;
+        const on=$('dlImgOnizleme');
+        if(on&&g.calisiyor) on.innerHTML='<div style="padding:28px 16px"><div style="margin-bottom:10px"><span class="donen" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>'+dlK(g.durum)+'</div>'+
+          '<div style="max-width:340px;margin:0 auto;height:6px;background:var(--cizgi);border-radius:999px;overflow:hidden"><div style="height:100%;width:'+g.yuzde+'%;background:#D97757;transition:width .3s"></div></div>'+
+          '<div style="margin-top:14px"><button class="dl-dugme tehlike" onclick="dlGorselIptal()">'+(en?'Cancel':'İptal et')+'</button></div></div>';
+      }
+    }catch(e){}
+  }, 1000);
+}
+
 // =====================================================================
 // AYARLAR: Focus'un Ayarlar penceresine "Devlog" grubu eklenir
 // =====================================================================
@@ -2487,12 +2760,15 @@ ayarBolumuCiz=async function(){
     _focusAyarBolumuCiz();
     // Genel'e: uygulama açılınca hangi bölüm gelsin
     if(ayarBolumu==='genel'&&$('aIcerik')&&DL.s){
-      const v=DL.s.kok.acilis||'devlog';
-      $('aIcerik').querySelector('h3').insertAdjacentHTML('afterend',ayarSatiri('Açılışta','Uygulamayı açınca ilk hangi bölüm gelsin.',
-        '<select id="aAcilis" class="a-secim">'+[['devlog','Devlog'],['focus','Focus'],['son','Son kaldığım yer']].map(([k,a])=>'<option value="'+k+'"'+(v===k?' selected':'')+'>'+a+'</option>').join('')+'</select>'));
-      $('aAcilis').onchange=async e=>{ if(await dl('ayar',{acilis:e.target.value},{cizme:true})) tost('Kaydedildi'); };
+      const v=DL.s.kok.acilis||'devlog', en=typeof dilKodu==='function'&&dilKodu()==='en';
+      $('aIcerik').querySelector('h3').insertAdjacentHTML('afterend',ayarSatiri(en?'On launch':'Açılışta',en?'Which section should open first when the app starts.':'Uygulamayı açınca ilk hangi bölüm gelsin.',
+        '<select id="aAcilis" class="a-secim">'+[['devlog','Devlog'],['focus','Focus'],['son',en?'Last visited':'Son kaldığım yer']].map(([k,a])=>'<option value="'+k+'"'+(v===k?' selected':'')+'>'+a+'</option>').join('')+'</select>'));
+      $('aAcilis').onchange=async e=>{ if(await dl('ayar',{acilis:e.target.value},{cizme:true})) tost(en?'Saved':'Kaydedildi'); };
     }
-    if(ayarBolumu==='hakkinda'&&$('aIcerik')&&DL.s) $('aIcerik').insertAdjacentHTML('beforeend',ayarSatiri('Devlog '+dlK(DL.s.surum),'Sürüm notları, görevler, buglar ve yayın planı. Focus ile birlikte güncellenir.',''));
+    if(ayarBolumu==='hakkinda'&&$('aIcerik')&&DL.s){
+      const en=typeof dilKodu==='function'&&dilKodu()==='en';
+      $('aIcerik').insertAdjacentHTML('beforeend',ayarSatiri('Devlog '+dlK(DL.s.surum),en?'Release notes, tasks, bugs & launch plan. Updates with Focus.':'Sürüm notları, görevler, buglar ve yayın planı. Focus ile birlikte güncellenir.',''));
+    }
     return;
   }
   document.querySelectorAll('.a-oge').forEach(o=>o.classList.toggle('secili',o.dataset.b===ayarBolumu));
@@ -2500,16 +2776,18 @@ ayarBolumuCiz=async function(){
   if(!DL.s) await dl('durum',{},{cizme:true});
   if(!DL.s){ ic.innerHTML='<div class="a-aciklama">Devlog verisi yüklenemedi.</div>'; return; }
   const p=dlP(), B=AYAR_BOLUMLERI.flatMap(g=>g[1]).find(x=>x[0]===ayarBolumu);
-  const yaz=async(d,yenidenCiz)=>{ const r=await dl('ayar',d,{cizme:true}); if(r){ if(DL.mod==='devlog') dlCiz(); if(yenidenCiz) ayarBolumuCiz(); tost('Kaydedildi'); } };
-  let h='<h3>Devlog · '+B[1]+'</h3>';
+  const en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  const yaz=async(d,yenidenCiz)=>{ const r=await dl('ayar',d,{cizme:true}); if(r){ if(DL.mod==='devlog') dlCiz(); if(yenidenCiz) ayarBolumuCiz(); tost(L('Kaydedildi','Saved')); } };
+  let h='<h3>Devlog · '+(typeof t==='function'&&t('bolum')?.[B[0]]?t('bolum')[B[0]]:B[1])+'</h3>';
   if(ayarBolumu==='dl_proje'){
     const hd=dlHedef();
-    h+=ayarSatiri('Proje adı','Panelde, paylaşım görsellerinde ve Discord mesajlarında görünür.','<input type="text" id="adPAd" class="a-girdi" value="'+dlK(p.project)+'">')+
-       ayarSatiri('Hedef sürüm',hd?dlK(dlV(hd.v))+(hd.tarih?' · '+dlK(dlGunYaz(hd.tarih,true))+' ('+dlK(dlGoreli(hd.tarih))+')':' · tarih yok'):'Belirlenmedi. Panelde geri sayım için bir sürüm ve tarih seç.','<button class="a-dugme" id="adHedef">'+(hd?'Değiştir':'Belirle')+'</button>')+
-       '<div class="a-satir dikey"><div class="a-baslik" style="display:flex;align-items:center"><span style="flex:1">Projeler</span><button class="a-dugme birincil" id="adYeni">Yeni proje</button></div>'+
-       '<div class="a-aciklama">Her oyunun verisi ayrı tutulur. Devlog\'da sol üstteki proje kutusundan geçiş yaparsın.</div>'+
-       DL.s.projeler.map(([id,ad])=>'<div class="dl-kategori-satir"><span class="ad">'+dlK(ad)+(id===DL.s.proje_id?' <span class="rozet uygun">Açık</span>':'')+'</span>'+
-         (id!==DL.s.proje_id?'<button class="a-dugme" data-gec="'+id+'">Aç</button>':'')+(DL.s.projeler.length>1?'<button class="a-dugme tehlike" data-sil="'+id+'">Sil</button>':'')+'</div>').join('')+'</div>';
+    h+=ayarSatiri(L('Proje adı','Project name'),L('Panelde, paylaşım görsellerinde ve Discord mesajlarında görünür.','Shown on the dashboard, share cards, and Discord posts.'),'<input type="text" id="adPAd" class="a-girdi" value="'+dlK(p.project)+'">')+
+       ayarSatiri(L('Hedef sürüm','Target version'),hd?dlK(dlV(hd.v))+(hd.tarih?' · '+dlK(dlGunYaz(hd.tarih,true))+' ('+dlK(dlGoreli(hd.tarih))+')':L(' · tarih yok',' · no date')):L('Belirlenmedi. Panelde geri sayım için bir sürüm ve tarih seç.','Not set. Pick a version and date for the dashboard countdown.'),'<button class="a-dugme" id="adHedef">'+(hd?L('Değiştir','Change'):L('Belirle','Set'))+'</button>')+
+       '<div class="a-satir dikey"><div class="a-baslik" style="display:flex;align-items:center"><span style="flex:1">'+L('Projeler','Projects')+'</span><button class="a-dugme birincil" id="adYeni">'+L('Yeni proje','New project')+'</button></div>'+
+       '<div class="a-aciklama">'+L('Her oyunun verisi ayrı tutulur. Devlog\'da sol üstteki proje kutusundan geçiş yaparsın.','Each project keeps its own data. Switch projects from the top-left selector.')+'</div>'+
+       DL.s.projeler.map(([id,ad])=>'<div class="dl-kategori-satir"><span class="ad">'+dlK(ad)+(id===DL.s.proje_id?' <span class="rozet uygun">'+L('Açık','Active')+'</span>':'')+'</span>'+
+         (id!==DL.s.proje_id?'<button class="a-dugme" data-gec="'+id+'">'+L('Aç','Open')+'</button>':'')+(DL.s.projeler.length>1?'<button class="a-dugme tehlike" data-sil="'+id+'">'+L('Sil','Delete')+'</button>':'')+'</div>').join('')+'</div>';
     ic.innerHTML=h;
     $('adPAd').onchange=e=>e.target.value.trim()&&yaz({project:e.target.value.trim()});
     $('adHedef').onclick=()=>dlHedefDuzenle();
@@ -2521,15 +2799,15 @@ ayarBolumuCiz=async function(){
       b.dataset.onay='1'; b.textContent='Emin misin? “'+ad+'” tamamen silinir'; });
   } else if(ayarBolumu==='dl_notlar'){
     const ai=p.ai;
-    h+='<div class="a-aciklama">Notlarını karışık yazınca Devlog her satırı anahtar kelimelere bakarak bu kategorilere ayırır. Satırın başına “## Kategori adı” yazarak elle de seçebilirsin.</div>'+
-       '<div class="a-satir dikey"><div class="a-baslik">Kategoriler</div>'+p.categories.map(c=>'<div class="dl-kategori-satir"><i style="background:'+c.color+'"></i><span class="ad">'+dlK(c.name)+'</span>'+
-         '<span class="s">'+(DL.sabit.varsayilan_kategoriler.includes(c.name)?'hazır':'senin')+'</span>'+(DL.sabit.varsayilan_kategoriler.includes(c.name)?'':'<button class="a-dugme tehlike" data-ksil="'+dlK(c.name)+'">Kaldır</button>')+'</div>').join('')+
-       '<div class="hafiza-ekle" style="display:flex;gap:8px;margin-top:10px"><input id="adKat" class="a-girdi" placeholder="Yeni kategori: ör. Çok Oyunculu"><button class="a-dugme" id="adKatEkle">Ekle</button></div></div>'+
-       '<div class="a-alt-baslik">Yapay zekâ (Ollama)</div><div class="a-aciklama">“Yapay zekâ ile düzenle”, özet ve TR/EN çeviri bilgisayarındaki Ollama ile çalışır; internet ve ücret gerekmez.</div>'+
-       ayarSatiri('Ollama adresi','Genelde değiştirmen gerekmez.','<input type="text" id="adAiU" class="a-girdi" value="'+dlK(ai.url)+'">')+
-       ayarSatiri('Model','Ör. qwen2.5:7b, llama3.1:8b. Türkçe için Qwen iyi sonuç verir.','<input type="text" id="adAiM" class="a-girdi" list="adAiL" value="'+dlK(ai.model)+'"><datalist id="adAiL"></datalist>')+
-       ayarSatiri('Düzenlenen notların dili','“Aynen” = yazdığın dilde bırakır.','<select id="adAiD" class="a-secim">'+['Aynen','Türkçe','English'].map(x=>'<option'+(ai.lang===x?' selected':'')+'>'+x+'</option>').join('')+'</select>')+
-       ayarSatiri('Bağlantıyı dene','<span id="adAiS">Ollama çalışıyor mu, model yüklü mü?</span>','<button class="a-dugme" id="adAiT">Dene</button>');
+    h+='<div class="a-aciklama">'+L('Notlarını karışık yazınca Devlog her satırı anahtar kelimelere bakarak bu kategorilere ayırır. Satırın başına “## Kategori adı” yazarak elle de seçebilirsin.','When writing raw notes, Devlog sorts each line into these categories by keyword. You can also prefix a line with "## Category".')+'</div>'+
+       '<div class="a-satir dikey"><div class="a-baslik">'+L('Kategoriler','Categories')+'</div>'+p.categories.map(c=>'<div class="dl-kategori-satir"><i style="background:'+c.color+'"></i><span class="ad">'+dlK(c.name)+'</span>'+
+         '<span class="s">'+(DL.sabit.varsayilan_kategoriler.includes(c.name)?L('hazır','default'):L('senin','custom'))+'</span>'+(DL.sabit.varsayilan_kategoriler.includes(c.name)?'':'<button class="a-dugme tehlike" data-ksil="'+dlK(c.name)+'">'+L('Kaldır','Remove')+'</button>')+'</div>').join('')+
+       '<div class="hafiza-ekle" style="display:flex;gap:8px;margin-top:10px"><input id="adKat" class="a-girdi" placeholder="'+L('Yeni kategori: ör. Çok Oyunculu','New category: e.g. Multiplayer')+'"><button class="a-dugme" id="adKatEkle">'+L('Ekle','Add')+'</button></div></div>'+
+       '<div class="a-alt-baslik">'+L('Yapay zekâ (Ollama)','AI (Ollama)')+'</div><div class="a-aciklama">'+L('“Yapay zekâ ile düzenle”, özet ve TR/EN çeviri bilgisayarındaki Ollama ile çalışır; internet ve ücret gerekmez.','AI organize, summary, and translation run locally via Ollama with no API cost.')+'</div>'+
+       ayarSatiri(L('Ollama adresi','Ollama URL'),L('Genelde değiştirmen gerekmez.','Usually does not need to be changed.'),'<input type="text" id="adAiU" class="a-girdi" value="'+dlK(ai.url)+'">')+
+       ayarSatiri(L('Model','Model'),L('Ör. qwen2.5:7b, llama3.1:8b.','E.g. qwen2.5:7b, llama3.1:8b.'),'<input type="text" id="adAiM" class="a-girdi" list="adAiL" value="'+dlK(ai.model)+'"><datalist id="adAiL"></datalist>')+
+       ayarSatiri(L('Düzenlenen notların dili','Output language'),L('“Aynen” = yazdığın dilde bırakır.','Keep = keeps your original language.'),'<select id="adAiD" class="a-secim">'+[['Aynen',L('Aynen','Keep')],['Türkçe','Türkçe'],['English','English']].map(([v,lbl])=>'<option value="'+v+'"'+(ai.lang===v?' selected':'')+'>'+lbl+'</option>').join('')+'</select>')+
+       ayarSatiri(L('Bağlantıyı dene','Test connection'),'<span id="adAiS">'+L('Ollama çalışıyor mu, model yüklü mü?','Check if Ollama is running and the model is installed.')+'</span>','<button class="a-dugme" id="adAiT">'+L('Dene','Test')+'</button>');
     ic.innerHTML=h;
     ic.querySelectorAll('[data-ksil]').forEach(b=>b.onclick=async()=>{ await dl('kategori_sil',{ad:b.dataset.ksil},{cizme:true}); ayarBolumuCiz(); });
     const ekle=async()=>{ const v=$('adKat').value.trim(); if(!v) return; if(await dl('kategori_ekle',{ad:v},{cizme:true})) ayarBolumuCiz(); };
@@ -2543,32 +2821,32 @@ ayarBolumuCiz=async function(){
   } else if(ayarBolumu==='dl_discord'){
     const w=p.discord_webhook||'', b=DL.s.bot;
     h+='<div class="a-alt-baslik" style="margin-top:4px">Bot</div>';
-    if(!b.var) h+='<div class="a-aciklama">Bot, senin adına Discord\'da mesaj atan bir hesaptır. Focus açıkken çevrimiçi görünür; gönderileri ve sürüm notlarını istediğin kanala atar, sunucundakiler de <code>/surum</code> gibi komutlarla bilgi alır.</div>'+
-      '<ol class="dl-adim"><li><a class="a-link" onclick="linkAc(\'https://discord.com/developers/applications\')">Discord Developer Portal</a>\'da <b>New Application</b> → bir ad ver (ör. Zombia).</li>'+
-      '<li>Soldaki <b>Bot</b> sekmesi → <b>Reset Token</b> → çıkan token\'ı kopyala. (Token bir şifredir; kimseyle paylaşma.)</li>'+
-      '<li>Aşağıya yapıştır, “Bağla”ya bas. Sonra “Botu sunucuna ekle” ile sunucuna davet et.</li></ol>'+
-      '<div style="display:flex;gap:8px"><input type="password" id="adBt" class="a-girdi" placeholder="Bot token\'ı" autocomplete="off"><button class="a-dugme birincil" id="adBtOk">Bağla</button></div>';
+    if(!b.var) h+='<div class="a-aciklama">'+L('Bot, senin adına Discord\'da mesaj atan bir hesaptır. Focus açıkken çevrimiçi görünür; gönderileri ve sürüm notlarını istediğin kanala atar.','The bot posts release notes and updates to your Discord server and handles slash commands while Focus is open.')+'</div>'+
+      '<ol class="dl-adim"><li><a class="a-link" onclick="linkAc(\'https://discord.com/developers/applications\')">Discord Developer Portal</a> → <b>New Application</b>.</li>'+
+      '<li><b>Bot</b> → <b>Reset Token</b> → '+L('çıkan token\'ı kopyala.','copy the bot token.')+'</li>'+
+      '<li>'+L('Aşağıya yapıştır, “Bağla”ya bas.','Paste it below and click Connect.')+'</li></ol>'+
+      '<div style="display:flex;gap:8px"><input type="password" id="adBt" class="a-girdi" placeholder="'+L('Bot token\'ı','Bot token')+'" autocomplete="off"><button class="a-dugme birincil" id="adBtOk">'+L('Bağla','Connect')+'</button></div>';
     else h+=dlBotSatiri(true)+
-      ayarSatiri('Focus açıkken botu çalıştır','Kapalıysa bot çevrimdışı görünür ve komutlara cevap vermez; gönderi atmaya devam edebilirsin.',anahtarDugme('adBA',b.aktif))+
-      ayarSatiri('Botun durum yazısı','Botun adının altında görünür. Ör: “Zombia geliştiriliyor”.','<input type="text" id="adBD" class="a-girdi" maxlength="128" value="'+dlK(b.durum_metni)+'" placeholder="'+dlK(p.project)+' geliştiriliyor">')+
-      ayarSatiri('Botu sunucuna ekle','Botun olmadığı bir sunucuya eklemek için. Komutlar görünmüyorsa botu bu linkle bir kez daha ekle.','<button class="a-dugme" id="adBI">Davet linkini aç</button>')+
-      ayarSatiri('Token','<span class="kucuk-yol">'+dlK(b.maske)+'</span>','<button class="a-dugme" id="adBT">Değiştir</button> <button class="a-dugme tehlike" id="adBX">Kaldır</button>')+
-      '<div class="a-alt-baslik">Sürüm notları</div>'+
-      ayarSatiri('Varsayılan kanal',b.kanal?(b.kanal.duyuru?'📢 ':'#')+dlK(b.kanal.ad)+' · '+dlK(b.kanal.sunucu):'Sürüm notu paylaşırken önce bu kanal seçili gelir; gönderirken istediğin kanalı seçebilirsin.','<button class="a-dugme" id="adBK">'+(b.kanal?'Değiştir':'Seç')+'</button>')+
-      ayarSatiri('Duyuru kanallarında yayınla','Duyuru (📢) kanalına gönderilenler, kanalı takip eden diğer sunuculara da gider. Gönderirken ayrıca açıp kapatabilirsin.',anahtarDugme('adBY',b.yayinla))+
-      '<div class="a-alt-baslik">Fikir kanalları</div><div class="a-aciklama">Bu kanallara yazılan her mesaj Fikirler\'e eklenir (yazan kişi, görseller ve mesajın linkiyle). Focus kapalıyken yazılanlar da açınca eklenir.</div>'+
-      (b.icerik_uyari?'<div class="dl-uyari">Discord mesajların yazısını göndermiyor. <a class="a-link" onclick="linkAc(\'https://discord.com/developers/applications\')">Developer Portal</a> → uygulaman → <b>Bot</b> → <b>Message Content Intent</b>\'i aç ve kaydet. Bekleyen mesajlar sonra kendiliğinden eklenir.</div>':'')+
+      ayarSatiri(L('Focus açıkken botu çalıştır','Run bot while Focus is open'),L('Kapalıysa bot çevrimdışı görünür ve komutlara cevap vermez.','When off, the bot appears offline and stops answering commands.'),anahtarDugme('adBA',b.aktif))+
+      ayarSatiri(L('Botun durum yazısı','Bot status text'),L('Botun adının altında görünür.','Shown under the bot name.'),'<input type="text" id="adBD" class="a-girdi" maxlength="128" value="'+dlK(b.durum_metni)+'" placeholder="'+dlK(p.project)+'">')+
+      ayarSatiri(L('Botu sunucuna ekle','Invite bot to server'),L('Komutlar görünmüyorsa botu bu linkle bir kez daha ekle.','Use this link to add the bot to your Discord server.'),'<button class="a-dugme" id="adBI">'+L('Davet linkini aç','Open invite link')+'</button>')+
+      ayarSatiri('Token','<span class="kucuk-yol">'+dlK(b.maske)+'</span>','<button class="a-dugme" id="adBT">'+L('Değiştir','Change')+'</button> <button class="a-dugme tehlike" id="adBX">'+L('Kaldır','Remove')+'</button>')+
+      '<div class="a-alt-baslik">'+L('Sürüm notları','Release notes')+'</div>'+
+      ayarSatiri(L('Varsayılan kanal','Default channel'),b.kanal?(b.kanal.duyuru?'📢 ':'#')+dlK(b.kanal.ad)+' · '+dlK(b.kanal.sunucu):L('Sürüm notu paylaşırken önce bu kanal seçili gelir.','Pre-selected channel when sharing release notes.'),'<button class="a-dugme" id="adBK">'+(b.kanal?L('Değiştir','Change'):L('Seç','Select'))+'</button>')+
+      ayarSatiri(L('Duyuru kanallarında yayınla','Publish in announcement channels'),L('Duyuru (📢) kanalına gönderilenler, kanalı takip eden diğer sunuculara da gider.','Cross-posts messages sent to announcement channels.'),anahtarDugme('adBY',b.yayinla))+
+      '<div class="a-alt-baslik">'+L('Fikir kanalları','Idea channels')+'</div><div class="a-aciklama">'+L('Bu kanallara yazılan her mesaj Fikirler\'e eklenir.','Messages posted in these channels are saved to Ideas.')+'</div>'+
+      (b.icerik_uyari?'<div class="dl-uyari">'+L('Developer Portal → Bot → Message Content Intent\'i aç ve kaydet.','Enable Message Content Intent in Discord Developer Portal → Bot.')+'</div>':'')+
       (b.fikir_kanallari||[]).map(k=>'<div class="dl-kategori-satir"><span style="color:var(--soluk)">#</span><span class="ad">'+dlK(k.ad)+' <span class="s">· '+dlK(k.sunucu)+'</span>'+
-        (k.hata?'<div class="hata-yazi" style="font-size:12px">'+dlK(k.hata)+'</div>':'')+'</span><button class="a-dugme tehlike" data-fsil="'+k.id+'">Kaldır</button></div>').join('')+
-      '<div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap"><button class="a-dugme" id="adFE">+ Kanal ekle</button>'+
-      '<button class="a-dugme" id="adFS" title="Yeni mesaj var mı diye şimdi bak">Şimdi kontrol et</button></div>'+
-      ayarSatiri('Eklenen mesaja 💡 tepkisi bırak','Yazan kişi fikrinin kaydedildiğini görür.',anahtarDugme('adFT',b.tepki))+
-      '<div class="a-alt-baslik">Komutlar</div><div class="a-aciklama">Sunucundakiler <code>/</code> yazınca bu komutları görür; bot Focus açıkken projenin güncel bilgisiyle cevap verir. Kapattığın komut sunucudan kaldırılır.</div>'+
-      (b.komut_hatasi?'<div class="hata-yazi" style="margin-top:6px">Komutlar kaydedilemedi: '+dlK(b.komut_hatasi)+'</div>':'')+
-      b.komut_listesi.map(([k,ac])=>ayarSatiri('<code>/'+k+'</code>',dlK(ac)+(k==='buglar'||k==='gorevler'?' <span class="rozet yavas">herkes görür</span>':''),anahtarDugme('adK_'+k,b.komutlar[k]))).join('');
-    h+='<div class="a-alt-baslik">Webhook '+(b.var?'(bot yerine, isteğe bağlı)':'(bot olmadan, daha basit)')+'</div>'+
-       '<div class="a-satir dikey"><div class="a-baslik">Discord webhook '+(w?'<span class="rozet uygun">Bağlı</span>':'')+'</div>'+
-       '<div class="a-aciklama">Tek bir kanala yazabilen basit bağlantı. Kanal ayarları → Entegrasyonlar → Webhook\'lar → Yeni Webhook → “Webhook URL\'sini kopyala”. Bot bağlıysa sürüm notlarını bot gönderir.</div>'+
+        (k.hata?'<div class="hata-yazi" style="font-size:12px">'+dlK(k.hata)+'</div>':'')+'</span><button class="a-dugme tehlike" data-fsil="'+k.id+'">'+L('Kaldır','Remove')+'</button></div>').join('')+
+      '<div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap"><button class="a-dugme" id="adFE">'+L('+ Kanal ekle','+ Add channel')+'</button>'+
+      '<button class="a-dugme" id="adFS">'+L('Şimdi kontrol et','Check now')+'</button></div>'+
+      ayarSatiri(L('Eklenen mesaja 💡 tepkisi bırak','React with 💡 on saved ideas'),L('Yazan kişi fikrinin kaydedildiğini görür.','Lets the author know their idea was saved.'),anahtarDugme('adFT',b.tepki))+
+      '<div class="a-alt-baslik">'+L('Komutlar','Commands')+'</div><div class="a-aciklama">'+L('Sunucundakiler <code>/</code> yazınca bu komutları görür.','Server members see these slash commands when typing <code>/</code>.')+'</div>'+
+      (b.komut_hatasi?'<div class="hata-yazi" style="margin-top:6px">'+dlK(b.komut_hatasi)+'</div>':'')+
+      b.komut_listesi.map(([k,ac])=>ayarSatiri('<code>/'+k+'</code>',dlK(ac)+(k==='buglar'||k==='gorevler'?' <span class="rozet yavas">'+L('herkes görür','public')+'</span>':''),anahtarDugme('adK_'+k,b.komutlar[k]))).join('');
+    h+='<div class="a-alt-baslik">Webhook '+(b.var?L('(bot yerine, isteğe bağlı)','(optional fallback)'):L('(bot olmadan, daha basit)','(simpler, no bot needed)'))+'</div>'+
+       '<div class="a-satir dikey"><div class="a-baslik">Discord webhook '+(w?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
+       '<div class="a-aciklama">'+L('Tek bir kanala yazabilen basit bağlantı. Bot bağlıysa sürüm notlarını bot gönderir.','Simple single-channel webhook URL.')+'</div>'+
        '<input type="password" id="adW" class="a-girdi" placeholder="https://discord.com/api/webhooks/…" value="'+dlK(w)+'" autocomplete="off"></div>';
     ic.innerHTML=h;
     const botYaz=async(d,mesaj)=>{ const r=await dl('bot_ayar',d,{cizme:true}); if(r){ if(mesaj) tost(mesaj); if(DL.mod==='devlog') dlCiz(); ayarBolumuCiz(); } return r; };
@@ -2593,47 +2871,52 @@ ayarBolumuCiz=async function(){
     }
     $('adW').onchange=e=>{ const v=e.target.value.trim(); if(v&&!/^https:\/\/(\w+\.)?discord(app)?\.com\/api\/webhooks\//.test(v)) return alertBilgi('Bu bir Discord webhook adresine benzemiyor. “https://discord.com/api/webhooks/” ile başlamalı.'); yaz({discord_webhook:v},true); };
   } else if(ayarBolumu==='dl_paylasim'){
-    h+=ayarSatiri('Stüdyo adı','Discord kartının ve paylaşım görsellerinin üstünde “Stüdyo · Proje” olarak görünür. Boş bırakabilirsin.','<input type="text" id="adSt" class="a-girdi" value="'+dlK(DL.s.kok.profile?.studio||'')+'">')+
-       ayarSatiri('Steam mağaza sayfası',p.steam_appid?'App ID: '+dlK(p.steam_appid)+(p.steam?.name?' · '+dlK(p.steam.name):''):'Panelde fiyat, değerlendirme ve oyuncu sayısını gösterir.','<button class="a-dugme" id="adSteam">'+(p.steam_appid?'Değiştir':'Bağla')+'</button>');
+    const sa=DL.s.sosyal||{webhook:{}};
+    h+=ayarSatiri(L('Stüdyo adı','Studio name'),L('Discord kartının ve paylaşım görsellerinin üstünde “Stüdyo · Proje” olarak görünür. Boş bırakabilirsin.','Shown as "Studio · Project" on Discord cards and share images. Optional.'),'<input type="text" id="adSt" class="a-girdi" value="'+dlK(DL.s.kok.profile?.studio||'')+'">')+
+       ayarSatiri(L('Steam mağaza sayfası','Steam store page'),p.steam_appid?'App ID: '+dlK(p.steam_appid)+(p.steam?.name?' · '+dlK(p.steam.name):''):L('Panelde fiyat, değerlendirme ve oyuncu sayısını gösterir.','Shows price, reviews, and player count on the dashboard.'),'<button class="a-dugme" id="adSteam">'+(p.steam_appid?L('Değiştir','Change'):L('Bağla','Connect'))+'</button>');
+    h+='<div class="a-alt-baslik">'+L('Sosyal Medya (n8n Webhook)','Social Media (n8n Webhook)')+'</div>'+
+       '<div class="a-satir dikey"><div class="a-baslik">n8n Webhook URL '+(sa.webhook?.bagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
+       '<div class="a-aciklama">'+L('İçerik Takvimi veya Görsel Oluştur ekranından seçtiğin platformlara (X, Instagram, Reddit, YouTube, TikTok) n8n üzerinden paylaşır.','Posts to your selected platforms via n8n from Content Calendar or Generate Image.')+'</div>'+
+       '<input type="password" id="saWUrl" class="a-girdi" placeholder="http://localhost:5678/webhook/…">'+
+       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saWOk">'+L('Kaydet','Save')+'</button>'+(sa.webhook?.bagli?'<button class="a-dugme tehlike" id="saWSil">'+L('Kaldır','Disconnect')+'</button>':'')+'</div></div>';
+    h+='<div class="a-satir dikey"><div class="a-baslik">Instagram İstatistik Token\'ı '+(sa.instagram?.bagli?'<span class="rozet uygun">'+L('Bağlı','Connected')+'</span>':'')+'</div>'+
+       '<div class="a-aciklama">'+L('İçerik Takvimi\'nde Instagram gönderilerini ve beğeni/yorum istatistiklerini görmek için Meta Portal\'dan aldığın IGAA token\'ını gir.','Paste your Meta Instagram token (IGAA…) to display posts & stats in Content Calendar.')+'</div>'+
+       '<input type="password" id="saIgTok" class="a-girdi" placeholder="IGAA…">'+
+       '<div style="display:flex;gap:8px;margin-top:8px"><button class="a-dugme birincil" id="saIgOk">'+L('Kaydet','Save')+'</button>'+(sa.instagram?.bagli?'<button class="a-dugme tehlike" id="saIgSil">'+L('Kaldır','Disconnect')+'</button>':'')+'</div></div>';
     ic.innerHTML=h;
     $('adSt').onchange=e=>yaz({studio:e.target.value.trim()});
     $('adSteam').onclick=()=>dlSteamBagla();
+    $('saWOk').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'webhook',veri:{url:$('saWUrl').value}},{cizme:true}); await dl('durum',{},{cizme:true}); tost(L('Kaydedildi','Saved')); ayarBolumuCiz(); };
+    if($('saWSil')) $('saWSil').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'webhook',veri:null},{cizme:true}); await dl('durum',{},{cizme:true}); ayarBolumuCiz(); };
+    $('saIgOk').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'instagram',veri:{token:$('saIgTok').value}},{cizme:true}); await dl('durum',{},{cizme:true}); tost(L('Kaydedildi','Saved')); ayarBolumuCiz(); };
+    if($('saIgSil')) $('saIgSil').onclick=async()=>{ await dl('sosyal_ayar',{hesap:'instagram',veri:null},{cizme:true}); await dl('durum',{},{cizme:true}); ayarBolumuCiz(); };
   } else if(ayarBolumu==='dl_bulut'){
     const u=DL.s.bulut;
-    h+='<div class="a-aciklama">Devlog verilerin GitHub\'daki <b>gizli</b> bir repoda durur. Bu bilgisayar ve telefonun oradan okur, oraya yazar; birinde yaptığın değişiklik diğerine kendiliğinden gelir. Ekran görüntüleri orijinal kalitesiyle saklanır. Her değişiklik GitHub\'da kayıtlı kalır; istersen eski bir hâle dönebilirsin.</div>';
+    h+='<div class="a-aciklama">'+L('Devlog verilerin GitHub\'daki <b>gizli</b> bir repoda durur. Bu bilgisayar ve telefonun oradan okur, oraya yazar.','Your Devlog data syncs via a <b>private</b> GitHub repository between desktop and mobile.')+'</div>';
     if(!u.token_var||!u.repo){
-      h+='<div class="a-alt-baslik">Kurulum (bir kez)</div><ol class="dl-adim">'+
-        '<li><b>Veri reposu:</b> <a class="a-link" onclick="linkAc(\'https://github.com/new\')">github.com/new</a> → ad: <code>zombia-devlog</code> → <b>Private</b> seç → “Add a README file”ı işaretle → Create.</li>'+
-        '<li><b>Telefon uygulaması reposu:</b> yine <a class="a-link" onclick="linkAc(\'https://github.com/new\')">github.com/new</a> → ad: <code>devlog-mobil</code> → <b>Public</b> → README işaretli → Create. <i>(Ücretsiz GitHub, web sitesini sadece herkese açık repolarda yayınlıyor. Bu repoda sadece uygulamanın kodu olur; verilerin hiçbir zaman buraya gitmez.)</i></li>'+
-        '<li><b>Token</b> (Focus\'un ve telefonun GitHub\'a girmesi için şifre gibi bir anahtar): <a class="a-link" onclick="linkAc(\'https://github.com/settings/personal-access-tokens/new\')">yeni token sayfası</a> → Token name: <code>Devlog</code> → Expiration: 1 yıl → Repository access: <b>Only select repositories</b> → iki repoyu seç → Permissions\'ta <b>Contents: Read and write</b> ve <b>Pages: Read and write</b> → Generate → çıkan <code>github_pat_…</code> anahtarını kopyala.</li>'+
-        '<li>Aşağıya veri reposunu ve token\'ı yapıştır, “Bağla”ya bas.</li></ol>'+
-        ayarSatiri('Veri reposu','kullanıcıadın/repo biçiminde','<input type="text" id="buR" class="a-girdi" placeholder="kemal/zombia-devlog" value="'+dlK(u.repo)+'">')+
-        ayarSatiri('Token','Sadece bu bilgisayarda saklanır. Kimseyle paylaşma.','<input type="password" id="buT" class="a-girdi" placeholder="github_pat_…" autocomplete="off">')+
-        '<div style="margin-top:12px"><button class="a-dugme birincil" id="buOk">Bağla</button></div>';
+      h+='<div class="a-alt-baslik">'+L('Kurulum (bir kez)','Setup (one-time)')+'</div>'+
+        ayarSatiri(L('Veri reposu','Data repository'),L('kullanıcıadın/repo biçiminde','owner/repo format'),'<input type="text" id="buR" class="a-girdi" placeholder="user/devlog-data" value="'+dlK(u.repo)+'">')+
+        ayarSatiri('Token',L('Sadece bu bilgisayarda saklanır. Kimseyle paylaşma.','Stored only on this computer. Keep it private.'),'<input type="password" id="buT" class="a-girdi" placeholder="github_pat_…" autocomplete="off">')+
+        '<div style="margin-top:12px"><button class="a-dugme birincil" id="buOk">'+L('Bağla','Connect')+'</button></div>';
       ic.innerHTML=h;
-      $('buOk').onclick=()=>dlBekle($('buOk'),' Kontrol ediliyor…',async()=>{
-        const r=await dl('bulut_bagla',{repo:$('buR').value,token:$('buT').value},{cizme:true}); if(r){ tost('Bağlandı; ilk eşitleme başladı'); ayarBolumuCiz(); } });
+      $('buOk').onclick=()=>dlBekle($('buOk'),' …',async()=>{
+        const r=await dl('bulut_bagla',{repo:$('buR').value,token:$('buT').value},{cizme:true}); if(r){ tost(L('Bağlandı; ilk eşitleme başladı','Connected; initial sync started')); ayarBolumuCiz(); } });
       return;
     }
     const kb=u.boyut_kb, gb=kb==null?null:kb/1048576;
-    h+='<div class="a-alt-baslik">Eşitleme</div>'+
-      ayarSatiri('Durum',(u.durum==='hata'?'<span class="rozet yavas">Sorun var</span> <span class="hata-yazi">'+dlK(u.hata)+'</span>':u.durum==='kapali'?'Kapalı':
-        '<span class="rozet uygun">Açık</span> Son eşitleme: '+dlK(u.son||'henüz yok'))+(u.bekleyen_gorsel?'<br>'+u.bekleyen_gorsel+' görsel daha yüklenecek (birkaç dakika sürebilir)':''),'<button class="a-dugme" id="buS">Şimdi eşitle</button>')+
-      ayarSatiri('Eşitleme açık','Kapatırsan veriler sadece bu bilgisayarda kalır (GitHub\'dakiler silinmez).',anahtarDugme('buA',u.aktif))+
-      ayarSatiri('Veri reposu','<span class="kucuk-yol">'+dlK(u.repo)+'</span>','<button class="a-dugme" onclick="linkAc(\'https://github.com/'+dlK(u.repo)+'\')">GitHub\'da aç ↗</button>')+
-      (gb!=null?'<div class="a-satir dikey"><div class="a-baslik">Repo boyutu: '+(gb<1?Math.round(kb/1024)+' MB':gb.toFixed(2)+' GB')+'</div>'+
-        '<div class="dl-cubuk" style="margin:4px 0"><span style="width:'+Math.min(100,gb/5*100)+'%;background:'+(gb<1?'#5E9E6E':gb<4?'#C9A227':'#D0453A')+'"></span></div>'+
-        '<div class="a-aciklama">GitHub repoların ideal olarak 1 GB\'ın, kesinlikle 5 GB\'ın altında kalmasını öneriyor. Çoğunu ekran görüntüleri doldurur; 5 GB\'a yaklaşınca görseller için ikinci bir repoya geçmenin yolunu ekleriz.</div></div>':'')+
-      ayarSatiri('Token','<span class="kucuk-yol">'+dlK(u.maske)+'</span> · süresi dolunca GitHub\'dan yenisini alıp buraya gir.','<button class="a-dugme" id="buTk">Değiştir</button> <button class="a-dugme tehlike" id="buX">Bağlantıyı kes</button>')+
-      '<div class="a-alt-baslik">Telefon uygulaması (iPhone)</div>'+
-      '<div class="a-aciklama">Aynı Devlog ekranı telefonda, ana ekrana eklenen bir uygulama olarak açılır. Focus onu herkese açık reponda GitHub Pages ile yayınlar.</div>'+
-      ayarSatiri('Uygulama reposu','Public olan ikinci repo','<input type="text" id="buM" class="a-girdi" placeholder="kemal/devlog-mobil" value="'+dlK(u.site)+'">')+
-      '<div style="margin:10px 0"><button class="a-dugme birincil" id="buY">'+(u.site_url?'Telefon uygulamasını güncelle':'Telefon uygulamasını yayınla')+'</button></div>'+
-      (u.site_url?'<div class="a-satir dikey"><div class="a-baslik">Adres</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><code style="font-size:14px">'+dlK(u.site_url)+'</code>'+
-        '<button class="a-dugme" onclick="dlKopyala(\''+dlK(u.site_url)+'\')">Kopyala</button><button class="a-dugme" onclick="linkAc(\''+dlK(u.site_url)+'\')">Aç ↗</button></div>'+
-        '<ol class="dl-adim"><li>iPhone\'da <b>Safari</b> ile bu adresi aç (ilk yayında GitHub\'ın siteyi hazırlaması 1-2 dakika sürebilir).</li>'+
-        '<li>Alttaki <b>Paylaş</b> düğmesi → <b>Ana Ekrana Ekle</b> → Ekle.</li>'+
-        '<li>Ana ekrandaki Devlog ikonundan aç, token\'ı bir kez gir. Bundan sonra uygulama gibi açılır.</li></ol></div>':'');
+    h+='<div class="a-alt-baslik">'+L('Eşitleme','Sync')+'</div>'+
+      ayarSatiri(L('Durum','Status'),(u.durum==='hata'?'<span class="rozet yavas">'+L('Sorun var','Error')+'</span> <span class="hata-yazi">'+dlK(u.hata)+'</span>':u.durum==='kapali'?L('Kapalı','Off'):
+        '<span class="rozet uygun">'+L('Açık','On')+'</span> '+L('Son eşitleme:','Last sync:')+' '+dlK(u.son||L('henüz yok','never')))+(u.bekleyen_gorsel?'<br>'+u.bekleyen_gorsel+L(' görsel daha yüklenecek',' images pending'):''),'<button class="a-dugme" id="buS">'+L('Şimdi eşitle','Sync now')+'</button>')+
+      ayarSatiri(L('Eşitleme açık','Sync enabled'),L('Kapatırsan veriler sadece bu bilgisayarda kalır.','When off, data stays local only.'),anahtarDugme('buA',u.aktif))+
+      ayarSatiri(L('Veri reposu','Data repository'),'<span class="kucuk-yol">'+dlK(u.repo)+'</span>','<button class="a-dugme" onclick="linkAc(\'https://github.com/'+dlK(u.repo)+'\')">'+L('GitHub\'da aç ↗','Open on GitHub ↗')+'</button>')+
+      (gb!=null?'<div class="a-satir dikey"><div class="a-baslik">'+L('Repo boyutu:','Repo size:')+' '+(gb<1?Math.round(kb/1024)+' MB':gb.toFixed(2)+' GB')+'</div>'+
+        '<div class="dl-cubuk" style="margin:4px 0"><span style="width:'+Math.min(100,gb/5*100)+'%;background:'+(gb<1?'#5E9E6E':gb<4?'#C9A227':'#D0453A')+'"></span></div></div>':'')+
+      ayarSatiri('Token','<span class="kucuk-yol">'+dlK(u.maske)+'</span>','<button class="a-dugme" id="buTk">'+L('Değiştir','Change')+'</button> <button class="a-dugme tehlike" id="buX">'+L('Bağlantıyı kes','Disconnect')+'</button>')+
+      '<div class="a-alt-baslik">'+L('Telefon uygulaması (iPhone)','Mobile app (iPhone)')+'</div>'+
+      ayarSatiri(L('Uygulama reposu','App repository'),L('Public olan ikinci repo','Public GitHub Pages repo'),'<input type="text" id="buM" class="a-girdi" placeholder="user/devlog-mobile" value="'+dlK(u.site)+'">')+
+      '<div style="margin:10px 0"><button class="a-dugme birincil" id="buY">'+(u.site_url?L('Telefon uygulamasını güncelle','Update mobile app'):L('Telefon uygulamasını yayınla','Publish mobile app'))+'</button></div>'+
+      (u.site_url?'<div class="a-satir dikey"><div class="a-baslik">URL</div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><code style="font-size:14px">'+dlK(u.site_url)+'</code>'+
+        '<button class="a-dugme" onclick="dlKopyala(\''+dlK(u.site_url)+'\')">'+L('Kopyala','Copy')+'</button><button class="a-dugme" onclick="linkAc(\''+dlK(u.site_url)+'\')">'+L('Aç ↗','Open ↗')+'</button></div></div>':'');
     ic.innerHTML=h;
     $('buS').onclick=async()=>{ await dl('bulut_simdi',{},{cizme:true}); tost('Eşitleniyor…'); setTimeout(()=>{ dl('durum',{},{cizme:true}).then(()=>{ if(ayarBolumu==='dl_bulut') ayarBolumuCiz(); }); },4000); };
     $('buA').onchange=e=>dl('bulut_ayar',{aktif:e.target.checked},{cizme:true}).then(()=>ayarBolumuCiz());
@@ -2643,23 +2926,24 @@ ayarBolumuCiz=async function(){
     $('buY').onclick=()=>dlBekle($('buY'),' Yükleniyor…',async()=>{ const r=await dl('mobil_yayinla',{site:$('buM').value},{cizme:true}); if(r){ tost('Telefon uygulaması yayınlandı'); ayarBolumuCiz(); } });
   } else if(ayarBolumu==='dl_veri'){
     const gun=DL.s.kok.backup?.every_days??1;
-    h+=ayarSatiri('Veri dosyası','<span class="kucuk-yol">'+dlK(DL.s.veri_dosyasi)+'</span><br>Bütün projeler tek bir JSON dosyasında. Belgeler klasöründe olduğu için Focus\'u kaldırsan da silinmez.','<button class="a-dugme" id="adKl">Klasörü aç</button>')+
-       ayarSatiri('Otomatik yedek','Devlog açılırken belirtilen sıklıkta yedek alır; son 30 yedek saklanır.','<select id="adYs" class="a-secim">'+Object.entries(DL.sabit.yedek_secenek).map(([a,n])=>'<option value="'+n+'"'+(n==gun?' selected':'')+'>'+a+'</option>').join('')+'</select>')+
-       ayarSatiri('Şimdi yedek al','','<button class="a-dugme" id="adYa">Yedek al</button>')+
-       '<div class="a-satir dikey"><div class="a-baslik">Yedekten geri yükle</div><div class="a-aciklama">Geri yüklemeden önce şimdiki durumun da yedeklenir, yani bu işlem geri alınabilir.</div><div id="adYl" style="margin-top:6px">Yükleniyor…</div></div>'+
-       ayarSatiri('Dışa aktar','Bütün projeler JSON olarak, sürüm notları CHANGELOG.md olarak.','<button class="a-dugme" id="adDj">JSON</button> <button class="a-dugme" id="adDm">CHANGELOG.md</button>');
+    const yedekAd={'Her gün':L('Her gün','Every day'),'3 günde bir':L('3 günde bir','Every 3 days'),'Haftada bir':L('Haftada bir','Weekly'),'Kapalı':L('Kapalı','Off')};
+    h+=ayarSatiri(L('Veri dosyası','Data file'),'<span class="kucuk-yol">'+dlK(DL.s.veri_dosyasi)+'</span><br>'+L('Bütün projeler tek bir JSON dosyasında. Belgeler klasöründe olduğu için Focus\'u kaldırsan da silinmez.','All projects are stored in a single JSON file in Documents.'),'<button class="a-dugme" id="adKl">'+L('Klasörü aç','Open folder')+'</button>')+
+       ayarSatiri(L('Otomatik yedek','Auto backup'),L('Devlog açılırken belirtilen sıklıkta yedek alır; son 30 yedek saklanır.','Creates backups on launch; keeps the last 30.'),'<select id="adYs" class="a-secim">'+Object.entries(DL.sabit.yedek_secenek).map(([a,n])=>'<option value="'+n+'"'+(n==gun?' selected':'')+'>'+(yedekAd[a]||a)+'</option>').join('')+'</select>')+
+       ayarSatiri(L('Şimdi yedek al','Backup now'),'', '<button class="a-dugme" id="adYa">'+L('Yedek al','Back up')+'</button>')+
+       '<div class="a-satir dikey"><div class="a-baslik">'+L('Yedekten geri yükle','Restore from backup')+'</div><div class="a-aciklama">'+L('Geri yüklemeden önce şimdiki durumun da yedeklenir, yani bu işlem geri alınabilir.','Current state is backed up before restoring.')+'</div><div id="adYl" style="margin-top:6px">'+L('Yükleniyor…','Loading…')+'</div></div>'+
+       ayarSatiri(L('Dışa aktar','Export'),L('Bütün projeler JSON olarak, sürüm notları CHANGELOG.md olarak.','Export all projects as JSON or release notes as CHANGELOG.md.'),'<button class="a-dugme" id="adDj">JSON</button> <button class="a-dugme" id="adDm">CHANGELOG.md</button>');
     ic.innerHTML=h;
     $('adKl').onclick=()=>dl('klasor_ac',{hangi:'veri'},{cizme:true});
     $('adYs').onchange=e=>yaz({every_days:+e.target.value});
-    $('adYa').onclick=async()=>{ const r=await dl('yedek_al',{},{cizme:true}); if(r){ tost('Yedek alındı'); ayarBolumuCiz(); } };
+    $('adYa').onclick=async()=>{ const r=await dl('yedek_al',{},{cizme:true}); if(r){ tost(L('Yedek alındı','Backup created')); ayarBolumuCiz(); } };
     $('adDj').onclick=()=>dl('disari',{bicim:'json'},{cizme:true});
     $('adDm').onclick=()=>dl('disari',{bicim:'md'},{cizme:true});
     const r=await dl('yedekler',{},{cizme:true});
-    if($('adYl')) $('adYl').innerHTML=r&&r.yedekler.length?r.yedekler.map(([f,a])=>'<div class="dl-kategori-satir"><span class="ad">'+dlK(a)+'</span><button class="a-dugme" data-y="'+dlK(f)+'">Geri yükle</button></div>').join('')
-      :'<span class="a-aciklama">Henüz yedek yok.</span>';
+    if($('adYl')) $('adYl').innerHTML=r&&r.yedekler.length?r.yedekler.map(([f,a])=>'<div class="dl-kategori-satir"><span class="ad">'+dlK(a)+'</span><button class="a-dugme" data-y="'+dlK(f)+'">'+L('Geri yükle','Restore')+'</button></div>').join('')
+      :'<span class="a-aciklama">'+L('Henüz yedek yok.','No backups yet.')+'</span>';
     ic.querySelectorAll('[data-y]').forEach(b=>b.onclick=async()=>{
-      if(!b.dataset.onay){ b.dataset.onay='1'; b.textContent='Emin misin?'; return; }
-      if(await dl('yedek_geri',{ad:b.dataset.y},{cizme:true})){ tost('Yedek geri yüklendi'); if(DL.mod==='devlog') dlCiz(); ayarBolumuCiz(); } });
+      if(!b.dataset.onay){ b.dataset.onay='1'; b.textContent=L('Emin misin?','Are you sure?'); return; }
+      if(await dl('yedek_geri',{ad:b.dataset.y},{cizme:true})){ tost(L('Yedek geri yüklendi','Backup restored')); if(DL.mod==='devlog') dlCiz(); ayarBolumuCiz(); } });
   }
 };
 // Profil menüsüne Devlog kısayolları
@@ -2735,8 +3019,8 @@ async function dlFikirKanaliEkle(){
 let dlSunucuSon=0;
 async function dlSunucuTazele(zorla){
   const b=DL.s.bot; if(!b.var) return;
-  const s=dlP().discord_sunucu, eski=!s||(Date.now()-(dlTarih(s.fetched)||0))>15*6e4;
-  if(!zorla&&(!eski||Date.now()-dlSunucuSon<3e5)) return;
+  const s=dlP().discord_sunucu, ilkAcilis=dlSunucuSon===0, eski=!s||(Date.now()-(dlTarih(s.fetched)||0))>15*6e4;
+  if(!zorla&&!ilkAcilis&&(!eski||Date.now()-dlSunucuSon<3e5)) return;
   dlSunucuSon=Date.now();
   const r=await dl('discord_sunucu',{},{sessiz:!zorla,cizme:true});
   if(r&&DL.sayfa==='dashboard'&&DL.mod==='devlog') dlSayfaCiz();
@@ -2753,14 +3037,97 @@ function dlSunucuCiz(){
   if(uyeler.length>2&&new Set(uyeler).size>1){ const mn=Math.min(...uyeler), mx=Math.max(...uyeler), W=220, H=46;
     const nk=uyeler.map((v,i)=>[(W*i/(uyeler.length-1)).toFixed(1),(H-4-(mx===mn?H/2:(H-8)*(v-mn)/(mx-mn))).toFixed(1)]);
     grafik='<svg viewBox="0 0 '+W+' '+H+'" class="dc-grafik"><path d="M'+nk.map(n=>n.join(',')).join(' L')+' L'+W+','+H+' L0,'+H+'Z" fill="#5865F233"/><polyline points="'+nk.map(n=>n.join(',')).join(' ')+'" fill="none" stroke="#5865F2" stroke-width="2"/></svg>'; }
-  const kutu=(e,d,a)=>'<div class="dc-sayi"><div class="e">'+e+'</div><div class="d">'+d+'</div>'+(a?'<div class="a">'+a+'</div>':'')+'</div>';
+  const kutu=(e,d,a,click='')=>'<div class="dc-sayi"'+(click?' style="cursor:pointer" onclick="'+click+'"':'')+'><div class="e">'+e+'</div><div class="d">'+d+'</div>'+(a?'<div class="a">'+a+'</div>':'')+'</div>';
+  const yeni7=s.yeni_7_gun;
+  const uyeAlt=yeni7!=null
+    ? '<b class="art">+'+yeni7+'</b> son 7 günde · Yönet ↗'
+    : (gun.length>1?(fark>=0?'<b class="art">+'+fark+'</b>':'<b class="az">'+fark+'</b>')+' son '+gun.length+' günde · Yönet ↗':'Yönet ↗');
   return '<div class="dl-dc"><div class="ust"><span>DISCORD · SUNUCU</span><span>güncellendi: '+dlK((s.fetched||'').slice(11,16))+' · <a onclick="dlSunucuTazele(true)">↻</a></span></div>'+
     '<div class="govde"><div class="ikon'+(s.ikon?' resimli':'')+'">'+(s.ikon?'<img src="'+dlK(s.ikon)+'" onerror="this.parentNode.classList.remove(\'resimli\');this.replaceWith(\''+dlK((s.ad||'?')[0])+'\')">':dlK((s.ad||'?')[0]))+'</div>'+
     '<div class="bilgi"><div class="ad">'+dlK(s.ad)+'</div><div class="alt">'+(s.seviye?'Boost seviyesi '+s.seviye+' · ':'')+s.kanal+' metin, '+s.ses+' ses kanalı · '+s.rol+' rol</div></div>'+grafik+'</div>'+
-    '<div class="sayilar">'+kutu('Üyeler',(s.uye??'—').toLocaleString('tr-TR'),gun.length>1?(fark>=0?'<b class="art">+'+fark+'</b>':'<b class="az">'+fark+'</b>')+' son '+gun.length+' günde':'')+
+    '<div class="sayilar">'+kutu('Üyeler',(s.uye??'—').toLocaleString('tr-TR'),uyeAlt,'dlUyelerAc()')+
     kutu('<i class="cv"></i>Çevrimiçi',(s.cevrimici??'—').toLocaleString('tr-TR'),s.uye?'%'+Math.round(100*(s.cevrimici||0)/s.uye)+' üye':'')+
     kutu('Boost',s.boost,s.seviye?'Seviye '+s.seviye:'')+
     kutu('Discord fikirleri',dcFikir.length,fk.length?'bu hafta '+haftalik+' · '+fk.map(k=>'#'+dlK(k.ad)).join(' '):'<a onclick="ayarlariAc(\'dl_discord\')">fikir kanalı seç</a>')+'</div></div>';
+}
+
+// ---- Discord Üyeler Paneli (tüm üyeler + yeni katılanlar + tekli/toplu rol verme) ----
+async function dlUyelerAc(){
+  const en=typeof dilKodu==='function'&&dilKodu()==='en';
+  const L=(trS,enS)=>en?enS:trS;
+  pencereAc('<div style="display:flex;flex-direction:column;width:100%;height:100%;padding:22px;box-sizing:border-box;gap:10px">'+
+    '<h2 style="margin:0">'+L('Discord Üyeler & Roller','Discord Members & Roles')+'</h2>'+
+    '<div id="duIc" style="flex:1;min-height:0;display:flex;flex-direction:column"><div class="p-not" style="padding:30px 0"><span class="donen" style="display:inline-block;vertical-align:-2px;margin-right:8px"></span>'+L('Üyeler alınıyor…','Loading members…')+'</div></div>'+
+    '<div class="dugmeler" style="margin-top:auto"><button onclick="pencereKapat()">'+L('Kapat','Close')+'</button></div></div>');
+  $('pencere').classList.add('genis');
+  let r;
+  try{ r=await (await fetch('/dl/api',{method:'POST',body:JSON.stringify({islem:'discord_uyeler'})})).json(); }catch(e){ r=null; }
+  const ic=$('duIc'); if(!ic) return;
+  if(!r||r.hata){ ic.innerHTML='<div class="hata-yazi" style="padding:18px 0;line-height:1.6">'+dlK(r?.hata||L('Üyeler alınamadı.','Could not load members.'))+'</div>'; return; }
+  const roller=r.roller.filter(x=>!x.yonetilen);
+  const rolMap=Object.fromEntries(r.roller.map(x=>[x.id,x]));
+  const esik=new Date(Date.now()-7*864e5).toISOString().slice(0,10);
+  let sekme='tumu', ara='', secili=new Set();
+  const ciz=()=>{
+    const q=ara.trim().toLowerCase();
+    const liste=r.uyeler.filter(u=>{
+      if(sekme==='yeni'&&(u.bot||(u.katildi||'').slice(0,10)<esik)) return false;
+      if(q&&!(u.ad+' '+u.kullanici).toLowerCase().includes(q)) return false;
+      return true;
+    });
+    const yeniSay=r.uyeler.filter(u=>!u.bot&&(u.katildi||'').slice(0,10)>=esik).length;
+    const rolSec=roller.map(x=>'<option value="'+x.id+'">'+dlK(x.ad)+'</option>').join('');
+    let h='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px">'+
+      '<button class="dl-dugme'+(sekme==='tumu'?' ana':'')+'" id="duSTum">'+L('Tüm üyeler','All members')+' ('+r.uyeler.length+')</button>'+
+      '<button class="dl-dugme'+(sekme==='yeni'?' ana':'')+'" id="duSYeni">'+L('Yeni katılanlar (7 gün)','New joins (7d)')+' ('+yeniSay+')</button>'+
+      '<input id="duAra" class="a-girdi" style="flex:1;min-width:150px" placeholder="'+L('Üye ara…','Search member…')+'" value="'+dlK(ara)+'"></div>';
+    h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:8px 10px;border:1px solid var(--cizgi);border-radius:10px;margin-bottom:10px;background:var(--kart)">'+
+      '<label style="display:flex;align-items:center;gap:6px;margin:0;cursor:pointer;font-size:13px"><input type="checkbox" id="duHepsi"'+(liste.length&&liste.every(u=>secili.has(u.id))?' checked':'')+'> '+L('Tümünü seç','Select all')+' ('+secili.size+')</label>'+
+      '<select id="duTopluRol" class="a-secim" style="flex:1;min-width:140px">'+rolSec+'</select>'+
+      '<button class="dl-dugme ana" id="duTopluVer">'+L('Seçilenlere Rol Ver','Assign Role')+'</button>'+
+      '<button class="dl-dugme" id="duTopluAl">'+L('Seçilenlerden Kaldır','Remove Role')+'</button></div>';
+    h+='<div style="max-height:360px;overflow:auto;display:flex;flex-direction:column;gap:6px">';
+    for(const u of liste){
+      const yeniMi=!u.bot&&(u.katildi||'').slice(0,10)>=esik;
+      const rolEtiket=u.roller.map(rid=>{ const ro=rolMap[rid]; if(!ro) return '';
+        return '<span class="rozet" style="border:1px solid '+(ro.renk||'var(--cizgi)')+';color:'+(ro.renk||'var(--yazi)')+';display:inline-flex;align-items:center;gap:4px">'+dlK(ro.ad)+
+          (!ro.yonetilen?' <a style="cursor:pointer;opacity:.7" data-rkaldir="'+u.id+':'+rid+'" title="'+L('Rolü kaldır','Remove role')+'">×</a>':'')+'</span>'; }).join(' ');
+      const eklenebilir=roller.filter(x=>!u.roller.includes(x.id));
+      h+='<div style="display:flex;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--cizgi);border-radius:10px">'+
+        '<input type="checkbox" data-usec="'+u.id+'"'+(secili.has(u.id)?' checked':'')+'>'+
+        (u.avatar?'<img src="'+dlK(u.avatar)+'" style="width:28px;height:28px;border-radius:50%;flex-shrink:0">':'<div style="width:28px;height:28px;border-radius:50%;background:var(--cizgi);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0">'+dlK(u.ad[0]||'?')+'</div>')+
+        '<div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:500;display:flex;align-items:center;gap:6px;flex-wrap:wrap">'+dlK(u.ad)+' <span class="dl-kucuk">@'+dlK(u.kullanici)+'</span>'+
+          (yeniMi?'<span class="rozet uygun">'+L('Yeni','New')+'</span>':'')+(u.bot?'<span class="rozet">BOT</span>':'')+'</div>'+
+          '<div class="dl-kucuk" style="margin-top:2px">'+L('Katıldı:','Joined:')+' '+dlK((u.katildi||'').slice(0,10))+'</div>'+
+          (rolEtiket?'<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5px">'+rolEtiket+'</div>':'')+'</div>'+
+        (eklenebilir.length?'<select class="a-secim" style="max-width:135px;font-size:12px" data-rver="'+u.id+'"><option value="">+ '+L('Rol ver','Add role')+'</option>'+eklenebilir.map(x=>'<option value="'+x.id+'">'+dlK(x.ad)+'</option>').join('')+'</select>':'')+
+        '</div>';
+    }
+    if(!liste.length) h+='<div class="dl-kucuk" style="padding:24px;text-align:center">'+L('Üye bulunamadı.','No members found.')+'</div>';
+    h+='</div>';
+    ic.innerHTML=h;
+    $('duSTum').onclick=()=>{ sekme='tumu'; ciz(); };
+    $('duSYeni').onclick=()=>{ sekme='yeni'; ciz(); };
+    $('duAra').oninput=e=>{ const pos=e.target.selectionStart; ara=e.target.value; ciz(); const el=$('duAra'); if(el){ el.focus(); el.setSelectionRange(pos,pos); } };
+    $('duHepsi').onchange=e=>{ if(e.target.checked) liste.forEach(u=>secili.add(u.id)); else liste.forEach(u=>secili.delete(u.id)); ciz(); };
+    ic.querySelectorAll('[data-usec]').forEach(cb=>cb.onchange=e=>{ if(e.target.checked) secili.add(cb.dataset.usec); else secili.delete(cb.dataset.usec); ciz(); });
+    const rolIslem=async(uidList,rid,ekle)=>{
+      if(!uidList.length||!rid) return tost(L('Üye ve rol seç.','Select member(s) and role.'));
+      const res=await dl('discord_rol_ver',{uye_idler:uidList,rol_id:rid,ekle},{cizme:true});
+      if(!res) return;
+      for(const u of r.uyeler) if(uidList.includes(u.id)){
+        if(ekle&&!u.roller.includes(rid)) u.roller.push(rid);
+        if(!ekle) u.roller=u.roller.filter(x=>x!==rid);
+      }
+      tost(ekle?L('Rol verildi ('+res.tamam+')','Role assigned ('+res.tamam+')'):L('Rol kaldırıldı ('+res.tamam+')','Role removed ('+res.tamam+')'));
+      ciz();
+    };
+    $('duTopluVer').onclick=()=>rolIslem([...secili],$('duTopluRol').value,true);
+    $('duTopluAl').onclick=()=>rolIslem([...secili],$('duTopluRol').value,false);
+    ic.querySelectorAll('[data-rver]').forEach(sel=>sel.onchange=e=>{ if(e.target.value) rolIslem([sel.dataset.rver],e.target.value,true); });
+    ic.querySelectorAll('[data-rkaldir]').forEach(a=>a.onclick=()=>{ const [uid,rid]=a.dataset.rkaldir.split(':'); rolIslem([uid],rid,false); });
+  };
+  ciz();
 }
 
 // ---- Bulut: başka cihazdan (telefon) gelen değişiklikleri ekrana yansıt ----
