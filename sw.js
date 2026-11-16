@@ -1,5 +1,5 @@
 // Uygulamanın kendisini önbellekte tutar: internet yokken de açılır.
-const AD='devlog-1.0.0';
+const AD='devlog-1.0.1';
 self.addEventListener('install',e=>{ e.waitUntil(caches.open(AD).then(c=>c.addAll(['./','manifest.webmanifest','ikon-192.png']))); self.skipWaiting(); });
 self.addEventListener('activate',e=>{ e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==AD).map(x=>caches.delete(x)))).then(()=>self.clients.claim())); });
 self.addEventListener('fetch',e=>{
